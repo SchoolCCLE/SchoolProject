@@ -16,18 +16,82 @@ void Users::setDatabase(QSqlDatabase dataBase)
     qDebug () << "Created table users" << createTables();
 }
 
+datamap Users::getUsers()
+{
+    datamap data;
+    QList<QVariant> value;
+    sqlQuery_->exec("SELECT * FROM Users");
+    while (sqlQuery_->next())
+    {
+        value.clear();
+        value << QVariant(sqlQuery_->value(1).toString()) <<
+                 QVariant(sqlQuery_->value(2).toString()) <<
+                 QVariant(sqlQuery_->value(3).toString());
+        data.insert(sqlQuery_->value(0).toInt(),value);
+
+        qDebug() << "User " << sqlQuery_->value(0).toInt() <<
+                    "Name " << QVariant(sqlQuery_->value(1).toString()) <<
+                    "Full Name" << QVariant(sqlQuery_->value(2).toString()) <<
+                    "Passwd" << QVariant(sqlQuery_->value(3).toString());
+    }
+    return data;
+}
+
 bool Users::setUser(QList<QVariant> data)
 {
-    bool result = sqlQuery_->exec(QString("INSERT OR REPLACE INTO Users VALUES (%1,'%2','%3','%4')") \
-                           .arg(data.at(0).toInt()) \
-                           .arg(data.at(1).toString()) \
-                           .arg(data.at(2).toString()) \
-                           .arg(data.at(3).toString()));
-    if(result)
+    return sqlQuery_->exec(QString("INSERT OR REPLACE INTO Users VALUES (%1,'%2','%3','%4')") \
+                                  .arg(data.at(0).toInt()) \
+                                  .arg(data.at(1).toString()) \
+                                  .arg(data.at(2).toString()) \
+                                  .arg(data.at(3).toString()));
+}
+
+datamap Users::getAceesLevels()
+{
+    datamap data;
+    QList<QVariant> value;
+    sqlQuery_->exec("SELECT * FROM AccessLevel");
+    while (sqlQuery_->next())
     {
-        emit userDataChanged();
+        value.clear();
+        value << QVariant(sqlQuery_->value(1).toString());
+        data.insert(sqlQuery_->value(0).toInt(),value);
+
+        qDebug() << "Level Id" << sqlQuery_->value(0).toInt() <<
+                    "Name " << QVariant(sqlQuery_->value(1).toString());
     }
-    return result;
+    return data;
+}
+
+bool Users::setAccesLevel(QList<QVariant> data)
+{
+   return sqlQuery_->exec(QString("INSERT OR REPLACE INTO AccessLevel VALUES (%1,'%2')") \
+                                  .arg(data.at(0).toInt()) \
+                                  .arg(data.at(1).toString()));
+}
+
+datamap Users::getUserAccess()
+{
+    datamap data;
+    QList<QVariant> value;
+    sqlQuery_->exec("SELECT * FROM UserAccess");
+    while (sqlQuery_->next())
+    {
+        value.clear();
+        value << QVariant(sqlQuery_->value(1).toInt());
+        data.insert(sqlQuery_->value(0).toInt(),value);
+
+        qDebug() << "User Id" << sqlQuery_->value(0).toInt() <<
+                    "Level Id" << QVariant(sqlQuery_->value(1).toInt());
+    }
+    return data;
+}
+
+bool Users::setUserAcces(QList<QVariant> data)
+{
+    return sqlQuery_->exec(QString("INSERT OR REPLACE INTO UserAccess VALUES (%1,'%2')") \
+                                  .arg(data.at(0).toInt()) \
+                                  .arg(data.at(1).toInt()));
 }
 
 Users::Users(QObject *parent):QObject(parent),sqlQuery_(NULL)
@@ -49,26 +113,15 @@ bool Users::createTables()
                               "'FullName' TEXT,"
                               "'Passwd'   TEXT)");
 
-    QList<QVariant> data;
-    data << QVariant(1) << QVariant("rootben") << QVariant("Super User") << QVariant("PASS");
-
-    result |= setUser(data);
-
-
-
     result |= sqlQuery_->exec("CREATE TABLE IF NOT EXISTS 'AccessLevel'"
                               "('LevelId' INTEGER PRIMARY KEY,"
                               "'LevelName' TEX T NOT NULL UNIQUE)");
-    result |= sqlQuery_->exec(QString("INSERT OR REPLACE INTO AccessLevel VALUES (1,'Admin')"));
-    result |= sqlQuery_->exec(QString("INSERT OR REPLACE INTO AccessLevel VALUES (2,'User')"));
 
 
     result |= sqlQuery_->exec("CREATE TABLE IF NOT EXISTS 'UserAccess'"
                               "('UserId' INTEGER ,"
                               "'LevelId' INTEGER ,"
                               "PRIMARY KEY ('UserId', 'LevelId'))");
-    result |= sqlQuery_->exec(QString("INSERT OR REPLACE INTO UserAccess VALUES (1,1)"));
-
     return result;
 }
 
@@ -89,6 +142,52 @@ bool DatabaseEngine::closeDB()
     dataBase_.close();
     return !dataBase_.isOpen();
 
+}
+
+datamap DatabaseEngine::getUsers()
+{
+    return users_->getUsers();
+}
+
+bool DatabaseEngine::setUser(QList<QVariant> data)
+{
+    bool result =  users_->setUser(data);
+    if(result)
+    {
+        emit userChanged();
+    }
+    return result;
+}
+
+datamap DatabaseEngine::getAceesLevels()
+{
+    return users_->getAceesLevels();
+}
+
+bool DatabaseEngine::setAccesLevel(QList<QVariant> data)
+{
+    bool result = users_->setAccesLevel(data);
+
+    if(result)
+    {
+        emit accessLevelChanged();
+    }
+    return result;
+}
+
+datamap DatabaseEngine::getUserAccess()
+{
+    return users_->getUserAccess();
+}
+
+bool DatabaseEngine::setUserAcces(QList<QVariant> data)
+{
+    bool result =  users_->setUserAcces(data);
+    if(result)
+    {
+        emit userAccessChanged();
+    }
+    return result;
 }
 
 DatabaseEngine::DatabaseEngine(QObject *parent) :

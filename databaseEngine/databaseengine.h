@@ -14,7 +14,6 @@
 typedef QMap<int, QList<QVariant> > datamap;
 
 
-
 /**
  * @brief The Users class provide information about the users
  */
@@ -38,6 +37,12 @@ public:
     datamap getUsers();
     bool setUser(QList<QVariant> data);
 
+    datamap getAceesLevels();
+    bool setAccesLevel(QList<QVariant> data);
+
+    datamap getUserAccess();
+    bool setUserAcces(QList<QVariant> data);
+
     virtual ~Users() {}
 private:
     Users(QObject* parent=0);
@@ -47,7 +52,6 @@ private:
 
     bool createTables();
 signals:
-    void userDataChanged();
 
 };
 
@@ -61,7 +65,22 @@ public:
     static DatabaseEngine * getInstance();
     virtual ~DatabaseEngine();
     bool closeDB();
+
+    datamap getUsers();
+    bool setUser(QList<QVariant> data);
+
+    datamap getAceesLevels();
+    bool setAccesLevel(QList<QVariant> data);
+
+    datamap getUserAccess();
+    bool setUserAcces(QList<QVariant> data);
+
+
+
 signals:
+    void userChanged();
+    void accessLevelChanged();
+    void userAccessChanged();
 
 public slots:
 private:
