@@ -40,10 +40,16 @@ datamap Users::getUsers()
 bool Users::setUser(QList<QVariant> data)
 {
     return sqlQuery_->exec(QString("INSERT OR REPLACE INTO Users VALUES (%1,'%2','%3','%4')") \
-                                  .arg(data.at(0).toInt()) \
-                                  .arg(data.at(1).toString()) \
-                                  .arg(data.at(2).toString()) \
-                                  .arg(data.at(3).toString()));
+                           .arg(data.at(0).toInt()) \
+                           .arg(data.at(1).toString()) \
+                           .arg(data.at(2).toString()) \
+                           .arg(data.at(3).toString()));
+}
+
+bool Users::deleteUser(QList<QVariant> data)
+{
+    QString d = QString("DELETE FROM Users WHERE UserId = %1").arg(data.at(0).toInt());
+    return sqlQuery_->exec(d);
 }
 
 datamap Users::getAceesLevels()
@@ -65,9 +71,9 @@ datamap Users::getAceesLevels()
 
 bool Users::setAccesLevel(QList<QVariant> data)
 {
-   return sqlQuery_->exec(QString("INSERT OR REPLACE INTO AccessLevel VALUES (%1,'%2')") \
-                                  .arg(data.at(0).toInt()) \
-                                  .arg(data.at(1).toString()));
+    return sqlQuery_->exec(QString("INSERT OR REPLACE INTO AccessLevel VALUES (%1,'%2')") \
+                           .arg(data.at(0).toInt()) \
+                           .arg(data.at(1).toString()));
 }
 
 datamap Users::getUserAccess()
@@ -78,8 +84,16 @@ datamap Users::getUserAccess()
     while (sqlQuery_->next())
     {
         value.clear();
+
+        if(data.find(sqlQuery_->value(0).toInt()) != data.end())
+        {
+            value = data[sqlQuery_->value(0).toInt()];
+        }
+
         value << QVariant(sqlQuery_->value(1).toInt());
+
         data.insert(sqlQuery_->value(0).toInt(),value);
+
 
         qDebug() << "User Id" << sqlQuery_->value(0).toInt() <<
                     "Level Id" << QVariant(sqlQuery_->value(1).toInt());
@@ -89,9 +103,16 @@ datamap Users::getUserAccess()
 
 bool Users::setUserAcces(QList<QVariant> data)
 {
-    return sqlQuery_->exec(QString("INSERT OR REPLACE INTO UserAccess VALUES (%1,'%2')") \
-                                  .arg(data.at(0).toInt()) \
-                                  .arg(data.at(1).toInt()));
+    return sqlQuery_->exec(QString("INSERT OR REPLACE INTO UserAccess VALUES (%1,%2)") \
+                           .arg(data.at(0).toInt()) \
+                           .arg(data.at(1).toInt()));
+}
+
+bool Users::deleteUserAcces(QList<QVariant> data)
+{
+    return sqlQuery_->exec(QString("DELETE FROM UserAccess WHERE UserId = %1 AND LevelId = %2") \
+                           .arg(data.at(0).toInt()) \
+                           .arg(data.at(1).toInt()));
 }
 
 Users::Users(QObject *parent):QObject(parent),sqlQuery_(NULL)
@@ -159,6 +180,11 @@ bool DatabaseEngine::setUser(QList<QVariant> data)
     return result;
 }
 
+bool DatabaseEngine::deleteUser(QList<QVariant> data)
+{
+    return users_->deleteUser(data);
+}
+
 datamap DatabaseEngine::getAceesLevels()
 {
     return users_->getAceesLevels();
@@ -178,6 +204,11 @@ bool DatabaseEngine::setAccesLevel(QList<QVariant> data)
 datamap DatabaseEngine::getUserAccess()
 {
     return users_->getUserAccess();
+}
+
+bool DatabaseEngine::deleteUserAcces(QList<QVariant> data)
+{
+    return users_->deleteUserAcces(data);
 }
 
 bool DatabaseEngine::setUserAcces(QList<QVariant> data)
