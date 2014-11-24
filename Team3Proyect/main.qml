@@ -3,11 +3,13 @@ import QtQuick.Controls 1.2
 import QtQuick.Layouts 1.1
 
 ApplicationWindow {
+    id: root;
     visible: true
     width: 640
     height: 480
     title: qsTr("School Proyect")
     color: "#CCCCB2";
+    signal login(string nickname, string password);
 
     ColumnLayout{
         anchors.fill: parent;
@@ -64,6 +66,7 @@ ApplicationWindow {
 
                 TextField
                 {
+                    id: loginNickName;
                     Layout.row: 1;
                     Layout.column: 1;
                     Layout.fillWidth: true;
@@ -79,6 +82,7 @@ ApplicationWindow {
 
                 TextField
                 {
+                    id: loginPassword;
                     Layout.row: 3;
                     Layout.column: 1;
                     Layout.fillWidth: true;
@@ -91,6 +95,10 @@ ApplicationWindow {
                     Layout.row: 6;
                     Layout.column: 1;
                     text: "Login";
+                    onClicked: {
+                        root.login(loginNickName.text, loginPassword.text);
+                        console.log(loginNickName.text, loginPassword.text)
+                    }
                 }
 
                 // Second Column
