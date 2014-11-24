@@ -12,7 +12,7 @@ LoginControler::LoginControler(QObject *parent) :
 bool LoginControler::comprobarDatos(QString _nick, QString _pass)
 {
     datamap myListOfUsers;
-    myListOfUsers = myBBDD->users_->getUsers();
+    myListOfUsers = myBBDD->getUsers();
 
     for(int i=0; i<myListOfUsers.size();++i){
 
@@ -43,7 +43,7 @@ QString LoginControler::passwordToHash(QString pass)
 bool LoginControler::estaVaciaBBDD()
 {
     datamap myListOfUsers;
-    myListOfUsers = myBBDD->users_->getUsers();
+    myListOfUsers = myBBDD->getUsers();
     if (myListOfUsers.empty()){
         return true;
     }

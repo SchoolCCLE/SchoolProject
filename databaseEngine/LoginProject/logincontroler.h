@@ -21,44 +21,45 @@ class LoginControler : public QObject
 public:
     explicit LoginControler(QObject *parent = 0);
 
-QString getPassword() const
-{
-    return m_password;
-}
+    QString getPassword() const
+    {
+        return m_password;
+    }
 
-QString getNickName() const
-{
-    return m_nickName;
-}
+    QString getNickName() const
+    {
+        return m_nickName;
+    }
 
-    Q_INVOKABLE bool comprobarDatos(QString _nick, QString _pass);
     QString passwordToHash(QString pass);
     bool estaVaciaBBDD();
 
 signals:
 
-void paswordChanged(QString arg);
+    void paswordChanged(QString arg);
 
-void nickNameChanged(QString arg);
+    void nickNameChanged(QString arg);
 
 public slots:
 
-void setPassword(QString arg)
-{
-    if (m_password == arg)
-        return;
+    Q_INVOKABLE bool comprobarDatos(QString _nick, QString _pass);
 
-    m_password = arg;
-    emit paswordChanged(arg);
-}
-void setNickName(QString arg)
-{
-    if (m_nickName == arg)
-        return;
+    void setPassword(QString arg)
+    {
+        if (m_password == arg)
+            return;
 
-    m_nickName = arg;
-    emit nickNameChanged(arg);
-}
+        m_password = arg;
+        emit paswordChanged(arg);
+    }
+    void setNickName(QString arg)
+    {
+        if (m_nickName == arg)
+            return;
+
+        m_nickName = arg;
+        emit nickNameChanged(arg);
+    }
 };
 
 #endif // LOGINCONTROLER_H

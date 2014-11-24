@@ -53,7 +53,7 @@ Window {
                     width:150;
                     height:20;
 
-                    text: "Password"
+                    text: "Password";
 
                 }
 
@@ -87,13 +87,18 @@ Window {
                 Layout.fillWidth: true;
                 Layout.fillHeight: true;
 
+                Label {
+                    id: titleRegLbl;
+                    text: qsTr("Register:");
+                }
+
                 TextEdit {
                     id: fullNameRegFld;
 
                     width:150;
                     height:20;
 
-                    text: "Full Name"
+                    text: "Full Name";
 
                 }
 
@@ -113,18 +118,18 @@ Window {
                     width:150;
                     height:20;
 
-                    text: "Password"
+                    text: "Password";
 
                 }
 
                 Label {
-                    id: label1
+                    id: rollsLbl;
                     text: qsTr("Rolls:");
                 }
 
                 ExclusiveGroup { id: rollsGroup }
 
-                RadioButton {
+                CheckBox {
                     id: userRole;
 
                     text: qsTr("User");
@@ -132,7 +137,7 @@ Window {
                     exclusiveGroup: rollsGroup;
                 }
 
-                RadioButton {
+                CheckBox {
                     id: adminRole;
 
                     text: qsTr("Admin");
@@ -150,6 +155,9 @@ Window {
                     text: "Register";
 
                     onClicked: {
+                        //Llamar a DataBaseController añadirUser()
+                        //var rolls = rolls
+                        //_dbmodel.addUser(fullNameRegFld.text, nickRegFld.text, passRegFld.toString(), rolls );
 
                     }
                 }
