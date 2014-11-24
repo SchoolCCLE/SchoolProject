@@ -12,9 +12,12 @@ Dialog {
     contentItem: Rectangle {
         color: "#00000000";
 
+
         ColumnLayout{
             id: columnLog;
-            anchors.fill: parent;
+            anchors.top: parent.top;
+            anchors.right: parent.right;
+            anchors.left: parent.left;
 
             RowLayout{
                 width: 300;
@@ -23,13 +26,13 @@ Dialog {
                     anchors.left: parent.left;
                     width: 50;
 
-                    text: "User";
+                    text: "User         ";
 
 
                 }
                 TextField{
                     id: userInput;
-                    anchors.right: parent.right;
+//                    anchors.right: parent.right;
                     width: 200;
 
                 }
