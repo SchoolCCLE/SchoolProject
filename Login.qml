@@ -25,14 +25,12 @@ Dialog {
                 Label{
                     anchors.left: parent.left;
                     width: 50;
-
                     text: "User         ";
 
 
                 }
                 TextField{
                     id: userInput;
-//                    anchors.right: parent.right;
                     width: 200;
 
                 }
@@ -61,7 +59,7 @@ Dialog {
                     anchors.bottom: parent.bottom;
                     text: "Log in";
                     onClicked: {
-
+                        _model
                     }
                 }
                 Button{
@@ -70,6 +68,7 @@ Dialog {
                     anchors.bottom: parent.bottom;
                     text: "Sign in";
                     onClicked: {
+
 
                     }
                 }
