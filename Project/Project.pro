@@ -3,7 +3,9 @@ TEMPLATE = app
 QT += qml quick widgets sql network
 
 SOURCES += main.cpp \
-    databaseEngine/databaseengine.cpp
+    databaseEngine/databaseengine.cpp \
+    controler.cpp \
+    storeUser.cpp
 
 RESOURCES += qml.qrc
 
@@ -14,4 +16,6 @@ QML_IMPORT_PATH =
 include(deployment.pri)
 
 HEADERS += \
-    databaseEngine/databaseengine.h
+    databaseEngine/databaseengine.h \
+    controler.h \
+    storeUser.h

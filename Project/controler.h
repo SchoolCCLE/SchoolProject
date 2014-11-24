@@ -5,14 +5,14 @@
 #include <QList>
 #include <QCryptographicHash>
 #include <QDebug>
-#include "user.h"
-#include "databaseengine.h"
+#include "storeUser.h"
+#include "databaseEngine/databaseengine.h"
 
 class Controler : public QObject
 {
     Q_OBJECT
 
-    Q_PROPERTY(User usuario READ getUsuario WRITE setUsuario NOTIFY usuarioChanged)
+    Q_PROPERTY(StoreUser usuario READ getUsuario WRITE setUsuario NOTIFY usuarioChanged)
 
 public:
     DatabaseEngine *dababaseEngine_;
@@ -21,7 +21,7 @@ public:
 
     ~Controler(){}
 
-    User getUsuario() const { return m_usuario; }
+    StoreUser getUsuario() const { return m_usuario; }
 
     void encode(QString cad);
 
@@ -29,7 +29,7 @@ public slots:
 
     void recibeUserIdentification(QString nickName, QString password);
 
-    void setUsuario(User arg) {
+    void setUsuario(StoreUser arg) {
         if ( (m_usuario.getFullName() == arg.getFullName()) && (m_usuario.getPassword() == arg.getPassword()) )
             return;
 
@@ -38,7 +38,7 @@ public slots:
     }
 
 signals:
-    void usuarioChanged(User arg);
+    void usuarioChanged(StoreUser arg);
 
 private:
     Controler();
@@ -46,7 +46,7 @@ private:
     static Controler* controler_;
 
     datamap usersList_;
-    User m_usuario;
+    StoreUser m_usuario;
 };
 
 #endif // CONTROLER_H

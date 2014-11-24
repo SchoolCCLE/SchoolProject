@@ -4,7 +4,7 @@ Controler* Controler::controler_ = 0;
 
 Controler::Controler()
 {
-    *dababaseEngine_ = DatabaseEngine::getInstance();
+    dababaseEngine_ = DatabaseEngine::getInstance();
 }
 
 Controler *Controler::getInstance()
@@ -18,7 +18,6 @@ Controler *Controler::getInstance()
 void Controler::encode(QString cad)
 {
     const char *pass = cad.toStdString().c_str();
-
 
     QCryptographicHash md5Generator(QCryptographicHash::Md5);
     md5Generator.addData( pass );

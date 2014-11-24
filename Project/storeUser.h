@@ -1,16 +1,16 @@
-#ifndef USER_H
-#define USER_H
+#ifndef STOREUSER_H
+#define STOREUSER_H
 
 #include <QString>
 
-class User
+class StoreUser
 {
 
 public:
-    User(){}
-    User(QString nickName, QString fullName, QString password, short level);
+    StoreUser(){}
+    StoreUser(QString nickName, QString fullName, QString password, short level);
 
-    ~User(){}
+    ~StoreUser(){}
 
     QString getNickName() { return nickName_; }
     void setNickName(QString nickName) { nickName_ = nickName; }
@@ -31,4 +31,4 @@ private:
     short level_;
 };
 
-#endif // USER_H
+#endif // StoreUser_H
