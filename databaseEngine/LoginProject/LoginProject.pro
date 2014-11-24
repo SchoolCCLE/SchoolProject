@@ -3,9 +3,11 @@ TEMPLATE = app
 QT += qml quick
 
 SOURCES += main.cpp \
-            databaseengine.cpp
+            databaseengine.cpp \
+    logincontroler.cpp
 
-HEADERS += databaseengine.h
+HEADERS += databaseengine.h \
+    logincontroler.h
 
 RESOURCES += qml.qrc
 
