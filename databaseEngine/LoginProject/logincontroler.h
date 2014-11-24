@@ -31,7 +31,7 @@ QString getNickName() const
     return m_nickName;
 }
 
-    bool comprobarDatos(QString _nick, QString _pass);
+    Q_INVOKABLE bool comprobarDatos(QString _nick, QString _pass);
     QString passwordToHash(QString pass);
     bool estaVaciaBBDD();
 

@@ -12,13 +12,13 @@ MAKEFILE      = Makefile
 
 CC            = gcc
 CXX           = g++
-DEFINES       = -DQT_QML_DEBUG -DQT_DECLARATIVE_DEBUG -DQT_QUICK_LIB -DQT_QML_LIB -DQT_NETWORK_LIB -DQT_GUI_LIB -DQT_CORE_LIB
+DEFINES       = -DQT_QML_DEBUG -DQT_DECLARATIVE_DEBUG -DQT_QUICK_LIB -DQT_QML_LIB -DQT_SQL_LIB -DQT_NETWORK_LIB -DQT_GUI_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -g -Wall -W -D_REENTRANT -fPIE $(DEFINES)
 CXXFLAGS      = -pipe -g -Wall -W -D_REENTRANT -fPIE $(DEFINES)
-INCPATH       = -I../../../../Qt5.3.2/5.3/gcc_64/mkspecs/linux-g++ -I../LoginProject -I../../../../Qt5.3.2/5.3/gcc_64/include -I../../../../Qt5.3.2/5.3/gcc_64/include/QtQuick -I../../../../Qt5.3.2/5.3/gcc_64/include/QtQml -I../../../../Qt5.3.2/5.3/gcc_64/include/QtNetwork -I../../../../Qt5.3.2/5.3/gcc_64/include/QtGui -I../../../../Qt5.3.2/5.3/gcc_64/include/QtCore -I. -I.
+INCPATH       = -I../../../../Qt5.3.2/5.3/gcc_64/mkspecs/linux-g++ -I../LoginProject -I../../../../Qt5.3.2/5.3/gcc_64/include -I../../../../Qt5.3.2/5.3/gcc_64/include/QtQuick -I../../../../Qt5.3.2/5.3/gcc_64/include/QtQml -I../../../../Qt5.3.2/5.3/gcc_64/include/QtSql -I../../../../Qt5.3.2/5.3/gcc_64/include/QtNetwork -I../../../../Qt5.3.2/5.3/gcc_64/include/QtGui -I../../../../Qt5.3.2/5.3/gcc_64/include/QtCore -I. -I.
 LINK          = g++
 LFLAGS        = -Wl,-rpath,/home/rober/Qt5.3.2/5.3/gcc_64 -Wl,-rpath,/home/rober/Qt5.3.2/5.3/gcc_64/lib
-LIBS          = $(SUBLIBS) -L/home/rober/Qt5.3.2/5.3/gcc_64/lib -lQt5Quick -lQt5Qml -lQt5Network -lQt5Gui -lQt5Core -lGL -lpthread 
+LIBS          = $(SUBLIBS) -L/home/rober/Qt5.3.2/5.3/gcc_64/lib -lQt5Quick -lQt5Qml -lQt5Sql -lQt5Network -lQt5Gui -lQt5Core -lGL -lpthread 
 AR            = ar cqs
 RANLIB        = 
 QMAKE         = /home/rober/Qt5.3.2/5.3/gcc_64/bin/qmake
@@ -46,12 +46,18 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = ../LoginProject/main.cpp \
-		../LoginProject/databaseengine.cpp qrc_qml.cpp \
-		moc_databaseengine.cpp
+		../LoginProject/databaseengine.cpp \
+		../LoginProject/logincontroler.cpp \
+		../LoginProject/usuario.cpp qrc_qml.cpp \
+		moc_databaseengine.cpp \
+		moc_logincontroler.cpp
 OBJECTS       = main.o \
 		databaseengine.o \
+		logincontroler.o \
+		usuario.o \
 		qrc_qml.o \
-		moc_databaseengine.o
+		moc_databaseengine.o \
+		moc_logincontroler.o
 DIST          = ../../../../Qt5.3.2/5.3/gcc_64/mkspecs/features/spec_pre.prf \
 		../../../../Qt5.3.2/5.3/gcc_64/mkspecs/common/shell-unix.conf \
 		../../../../Qt5.3.2/5.3/gcc_64/mkspecs/common/unix.conf \
@@ -162,7 +168,9 @@ DIST          = ../../../../Qt5.3.2/5.3/gcc_64/mkspecs/features/spec_pre.prf \
 		../../../../Qt5.3.2/5.3/gcc_64/mkspecs/features/yacc.prf \
 		../../../../Qt5.3.2/5.3/gcc_64/mkspecs/features/lex.prf \
 		../LoginProject/LoginProject.pro ../LoginProject/main.cpp \
-		../LoginProject/databaseengine.cpp
+		../LoginProject/databaseengine.cpp \
+		../LoginProject/logincontroler.cpp \
+		../LoginProject/usuario.cpp
 QMAKE_TARGET  = LoginProject
 DESTDIR       = #avoid trailing-slash linebreak
 TARGET        = LoginProject
@@ -310,7 +318,8 @@ Makefile: ../LoginProject/LoginProject.pro ../../../../Qt5.3.2/5.3/gcc_64/mkspec
 		/home/rober/Qt5.3.2/5.3/gcc_64/lib/libQt5Qml.prl \
 		/home/rober/Qt5.3.2/5.3/gcc_64/lib/libQt5Network.prl \
 		/home/rober/Qt5.3.2/5.3/gcc_64/lib/libQt5Core.prl \
-		/home/rober/Qt5.3.2/5.3/gcc_64/lib/libQt5Gui.prl
+		/home/rober/Qt5.3.2/5.3/gcc_64/lib/libQt5Gui.prl \
+		/home/rober/Qt5.3.2/5.3/gcc_64/lib/libQt5Sql.prl
 	$(QMAKE) -spec linux-g++ CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ../LoginProject/LoginProject.pro
 ../../../../Qt5.3.2/5.3/gcc_64/mkspecs/features/spec_pre.prf:
 ../../../../Qt5.3.2/5.3/gcc_64/mkspecs/common/shell-unix.conf:
@@ -428,6 +437,7 @@ Makefile: ../LoginProject/LoginProject.pro ../../../../Qt5.3.2/5.3/gcc_64/mkspec
 /home/rober/Qt5.3.2/5.3/gcc_64/lib/libQt5Network.prl:
 /home/rober/Qt5.3.2/5.3/gcc_64/lib/libQt5Core.prl:
 /home/rober/Qt5.3.2/5.3/gcc_64/lib/libQt5Gui.prl:
+/home/rober/Qt5.3.2/5.3/gcc_64/lib/libQt5Sql.prl:
 qmake: FORCE
 	@$(QMAKE) -spec linux-g++ CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile ../LoginProject/LoginProject.pro
 
@@ -435,7 +445,7 @@ qmake_all: FORCE
 
 dist: 
 	@test -d .tmp/LoginProject1.0.0 || mkdir -p .tmp/LoginProject1.0.0
-	$(COPY_FILE) --parents $(DIST) .tmp/LoginProject1.0.0/ && $(COPY_FILE) --parents ../LoginProject/qml.qrc .tmp/LoginProject1.0.0/ && $(COPY_FILE) --parents ../LoginProject/databaseengine.h .tmp/LoginProject1.0.0/ && $(COPY_FILE) --parents ../LoginProject/main.cpp ../LoginProject/databaseengine.cpp .tmp/LoginProject1.0.0/ && (cd `dirname .tmp/LoginProject1.0.0` && $(TAR) LoginProject1.0.0.tar LoginProject1.0.0 && $(COMPRESS) LoginProject1.0.0.tar) && $(MOVE) `dirname .tmp/LoginProject1.0.0`/LoginProject1.0.0.tar.gz . && $(DEL_FILE) -r .tmp/LoginProject1.0.0
+	$(COPY_FILE) --parents $(DIST) .tmp/LoginProject1.0.0/ && $(COPY_FILE) --parents ../LoginProject/qml.qrc .tmp/LoginProject1.0.0/ && $(COPY_FILE) --parents ../LoginProject/databaseengine.h ../LoginProject/logincontroler.h ../LoginProject/usuario.h .tmp/LoginProject1.0.0/ && $(COPY_FILE) --parents ../LoginProject/main.cpp ../LoginProject/databaseengine.cpp ../LoginProject/logincontroler.cpp ../LoginProject/usuario.cpp .tmp/LoginProject1.0.0/ && (cd `dirname .tmp/LoginProject1.0.0` && $(TAR) LoginProject1.0.0.tar LoginProject1.0.0 && $(COMPRESS) LoginProject1.0.0.tar) && $(MOVE) `dirname .tmp/LoginProject1.0.0`/LoginProject1.0.0.tar.gz . && $(DEL_FILE) -r .tmp/LoginProject1.0.0
 
 
 clean:compiler_clean 
@@ -463,9 +473,9 @@ qrc_qml.cpp: ../LoginProject/qml.qrc \
 		../LoginProject/main.qml
 	/home/rober/Qt5.3.2/5.3/gcc_64/bin/rcc -name qml ../LoginProject/qml.qrc -o qrc_qml.cpp
 
-compiler_moc_header_make_all: moc_databaseengine.cpp
+compiler_moc_header_make_all: moc_databaseengine.cpp moc_logincontroler.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_databaseengine.cpp
+	-$(DEL_FILE) moc_databaseengine.cpp moc_logincontroler.cpp
 moc_databaseengine.cpp: ../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/QObject \
 		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qobject.h \
 		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qobjectdefs.h \
@@ -535,6 +545,11 @@ moc_databaseengine.cpp: ../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/QObject \
 		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qcontiguouscache.h \
 		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/QVariant \
 		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/QList \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtSql/QSqlDatabase \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtSql/qsqldatabase.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtSql/qsql.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtSql/QSqlError \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtSql/qsqlerror.h \
 		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/QFile \
 		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qfile.h \
 		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qfiledevice.h \
@@ -543,7 +558,94 @@ moc_databaseengine.cpp: ../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/QObject \
 		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qfileinfo.h \
 		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/QString \
 		../LoginProject/databaseengine.h
-	/home/rober/Qt5.3.2/5.3/gcc_64/bin/moc $(DEFINES) -I/home/rober/Qt5.3.2/5.3/gcc_64/mkspecs/linux-g++ -I/home/rober/FinalProject/SchoolProject/databaseEngine/LoginProject -I/home/rober/Qt5.3.2/5.3/gcc_64/include -I/home/rober/Qt5.3.2/5.3/gcc_64/include/QtQuick -I/home/rober/Qt5.3.2/5.3/gcc_64/include/QtQml -I/home/rober/Qt5.3.2/5.3/gcc_64/include/QtNetwork -I/home/rober/Qt5.3.2/5.3/gcc_64/include/QtGui -I/home/rober/Qt5.3.2/5.3/gcc_64/include/QtCore -I. ../LoginProject/databaseengine.h -o moc_databaseengine.cpp
+	/home/rober/Qt5.3.2/5.3/gcc_64/bin/moc $(DEFINES) -I/home/rober/Qt5.3.2/5.3/gcc_64/mkspecs/linux-g++ -I/home/rober/FinalProject/SchoolProject/databaseEngine/LoginProject -I/home/rober/Qt5.3.2/5.3/gcc_64/include -I/home/rober/Qt5.3.2/5.3/gcc_64/include/QtQuick -I/home/rober/Qt5.3.2/5.3/gcc_64/include/QtQml -I/home/rober/Qt5.3.2/5.3/gcc_64/include/QtSql -I/home/rober/Qt5.3.2/5.3/gcc_64/include/QtNetwork -I/home/rober/Qt5.3.2/5.3/gcc_64/include/QtGui -I/home/rober/Qt5.3.2/5.3/gcc_64/include/QtCore -I. ../LoginProject/databaseengine.h -o moc_databaseengine.cpp
+
+moc_logincontroler.cpp: ../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/QObject \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qobject.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qobjectdefs.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qnamespace.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qglobal.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qconfig.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qfeatures.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qsystemdetection.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qprocessordetection.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qcompilerdetection.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qtypeinfo.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qtypetraits.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qsysinfo.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qlogging.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qflags.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qatomic.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qbasicatomic.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qgenericatomic.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qatomic_msvc.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qatomic_armv7.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qatomic_armv6.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qatomic_armv5.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qatomic_ia64.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qatomic_mips.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qatomic_x86.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qatomic_cxx11.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qatomic_gcc.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qatomic_unix.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qglobalstatic.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qmutex.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qnumeric.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qstring.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qchar.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qbytearray.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qrefcount.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qarraydata.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qstringbuilder.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qlist.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qalgorithms.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qiterator.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qcoreevent.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qscopedpointer.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qmetatype.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qvarlengtharray.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qcontainerfwd.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qisenum.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qobject_impl.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/QString \
+		../LoginProject/databaseengine.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/QMap \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qmap.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qpair.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qdebug.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qhash.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qtextstream.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qiodevice.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qlocale.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qvariant.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qstringlist.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qdatastream.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qregexp.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qstringmatcher.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qshareddata.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qvector.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qpoint.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qset.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qcontiguouscache.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/QVariant \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/QList \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtSql/QSqlDatabase \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtSql/qsqldatabase.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtSql/qsql.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtSql/QSqlError \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtSql/qsqlerror.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/QFile \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qfile.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qfiledevice.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/QDir \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qdir.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qfileinfo.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/QCryptographicHash \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qcryptographichash.h \
+		../LoginProject/logincontroler.h
+	/home/rober/Qt5.3.2/5.3/gcc_64/bin/moc $(DEFINES) -I/home/rober/Qt5.3.2/5.3/gcc_64/mkspecs/linux-g++ -I/home/rober/FinalProject/SchoolProject/databaseEngine/LoginProject -I/home/rober/Qt5.3.2/5.3/gcc_64/include -I/home/rober/Qt5.3.2/5.3/gcc_64/include/QtQuick -I/home/rober/Qt5.3.2/5.3/gcc_64/include/QtQml -I/home/rober/Qt5.3.2/5.3/gcc_64/include/QtSql -I/home/rober/Qt5.3.2/5.3/gcc_64/include/QtNetwork -I/home/rober/Qt5.3.2/5.3/gcc_64/include/QtGui -I/home/rober/Qt5.3.2/5.3/gcc_64/include/QtCore -I. ../LoginProject/logincontroler.h -o moc_logincontroler.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -641,7 +743,27 @@ main.o: ../LoginProject/main.cpp ../../../../Qt5.3.2/5.3/gcc_64/include/QtGui/QG
 		../../../../Qt5.3.2/5.3/gcc_64/include/QtQml/qjsvalue.h \
 		../../../../Qt5.3.2/5.3/gcc_64/include/QtQml/qtqmlglobal.h \
 		../../../../Qt5.3.2/5.3/gcc_64/include/QtQml/qqmlerror.h \
-		../../../../Qt5.3.2/5.3/gcc_64/include/QtQml/qqmldebug.h
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtQml/qqmldebug.h \
+		../LoginProject/logincontroler.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/QObject \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/QString \
+		../LoginProject/databaseengine.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/QMap \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/QVariant \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/QList \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtSql/QSqlDatabase \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtSql/qsqldatabase.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtSql/qsql.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtSql/QSqlError \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtSql/qsqlerror.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/QFile \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qfile.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qfiledevice.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/QDir \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qdir.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qfileinfo.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/QCryptographicHash \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qcryptographichash.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../LoginProject/main.cpp
 
 databaseengine.o: ../LoginProject/databaseengine.cpp ../LoginProject/databaseengine.h \
@@ -714,6 +836,11 @@ databaseengine.o: ../LoginProject/databaseengine.cpp ../LoginProject/databaseeng
 		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qcontiguouscache.h \
 		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/QVariant \
 		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/QList \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtSql/QSqlDatabase \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtSql/qsqldatabase.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtSql/qsql.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtSql/QSqlError \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtSql/qsqlerror.h \
 		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/QFile \
 		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qfile.h \
 		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qfiledevice.h \
@@ -721,14 +848,151 @@ databaseengine.o: ../LoginProject/databaseengine.cpp ../LoginProject/databaseeng
 		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qdir.h \
 		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qfileinfo.h \
 		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/QString \
-		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/QDebug
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/QDebug \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtSql/QSqlQuery \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtSql/qsqlquery.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o databaseengine.o ../LoginProject/databaseengine.cpp
+
+logincontroler.o: ../LoginProject/logincontroler.cpp ../LoginProject/logincontroler.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/QObject \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qobject.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qobjectdefs.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qnamespace.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qglobal.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qconfig.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qfeatures.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qsystemdetection.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qprocessordetection.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qcompilerdetection.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qtypeinfo.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qtypetraits.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qsysinfo.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qlogging.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qflags.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qatomic.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qbasicatomic.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qgenericatomic.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qatomic_msvc.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qatomic_armv7.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qatomic_armv6.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qatomic_armv5.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qatomic_ia64.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qatomic_mips.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qatomic_x86.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qatomic_cxx11.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qatomic_gcc.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qatomic_unix.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qglobalstatic.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qmutex.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qnumeric.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qstring.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qchar.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qbytearray.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qrefcount.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qarraydata.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qstringbuilder.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qlist.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qalgorithms.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qiterator.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qcoreevent.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qscopedpointer.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qmetatype.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qvarlengtharray.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qcontainerfwd.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qisenum.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qobject_impl.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/QString \
+		../LoginProject/databaseengine.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/QMap \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qmap.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qpair.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qdebug.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qhash.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qtextstream.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qiodevice.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qlocale.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qvariant.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qstringlist.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qdatastream.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qregexp.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qstringmatcher.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qshareddata.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qvector.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qpoint.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qset.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qcontiguouscache.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/QVariant \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/QList \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtSql/QSqlDatabase \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtSql/qsqldatabase.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtSql/qsql.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtSql/QSqlError \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtSql/qsqlerror.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/QFile \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qfile.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qfiledevice.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/QDir \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qdir.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qfileinfo.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/QCryptographicHash \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qcryptographichash.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o logincontroler.o ../LoginProject/logincontroler.cpp
+
+usuario.o: ../LoginProject/usuario.cpp ../LoginProject/usuario.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/QString \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qstring.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qchar.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qglobal.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qconfig.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qfeatures.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qsystemdetection.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qprocessordetection.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qcompilerdetection.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qtypeinfo.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qtypetraits.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qsysinfo.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qlogging.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qflags.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qatomic.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qbasicatomic.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qgenericatomic.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qatomic_msvc.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qatomic_armv7.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qatomic_armv6.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qatomic_armv5.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qatomic_ia64.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qatomic_mips.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qatomic_x86.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qatomic_cxx11.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qatomic_gcc.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qatomic_unix.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qglobalstatic.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qmutex.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qnumeric.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qbytearray.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qrefcount.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qnamespace.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qarraydata.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qstringbuilder.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/QList \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qlist.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qalgorithms.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qiterator.h \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/QCryptographicHash \
+		../../../../Qt5.3.2/5.3/gcc_64/include/QtCore/qcryptographichash.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o usuario.o ../LoginProject/usuario.cpp
 
 qrc_qml.o: qrc_qml.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_qml.o qrc_qml.cpp
 
 moc_databaseengine.o: moc_databaseengine.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_databaseengine.o moc_databaseengine.cpp
+
+moc_logincontroler.o: moc_logincontroler.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_logincontroler.o moc_logincontroler.cpp
 
 ####### Install
 
