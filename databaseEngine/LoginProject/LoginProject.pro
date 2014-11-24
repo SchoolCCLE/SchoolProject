@@ -1,11 +1,13 @@
 TEMPLATE = app
 
-QT += qml quick
+QT += qml quick sql network
 
 SOURCES += main.cpp \
-            databaseengine.cpp
+            databaseengine.cpp \
+    usuario.cpp
 
-HEADERS += databaseengine.h
+HEADERS += databaseengine.h \
+    usuario.h
 
 RESOURCES += qml.qrc
 
