@@ -3,7 +3,7 @@
 LoginControler::LoginControler(QObject *parent) :
     QObject(parent)
 {
-    myUsers = Users::getInstance();
+    myBBDD = DatabaseEngine::getInstance();
 
 
 
@@ -12,16 +12,43 @@ LoginControler::LoginControler(QObject *parent) :
 bool LoginControler::comprobarDatos(QString _nick, QString _pass)
 {
     datamap myListOfUsers;
-    myListOfUsers = myUsers->getUsers();
+    myListOfUsers = myBBDD->users_->getUsers();
 
     for(int i=0; i<myListOfUsers.size();++i){
 
         if (_nick == myListOfUsers[i].at(1)){
             if (passwordToHash(_pass)==myListOfUsers[i].at(3)){
-                //emitir señal para cambiar de pantalla
+
+                return true;
+            }
+            else{
+                return false;
             }
         }
     }
 
+    return false;
+
+
+}
+
+QString LoginControler::passwordToHash(QString pass)
+{
+    QCryptographicHash hash(QCryptographicHash::Sha1);
+    hash.addData(pass.toUtf8());
+    return hash.result().toHex();
+
+}
+
+bool LoginControler::estaVaciaBBDD()
+{
+    datamap myListOfUsers;
+    myListOfUsers = myBBDD->users_->getUsers();
+    if (myListOfUsers.empty()){
+        return true;
+    }
+    else {
+        return false;
+    }
 
 }

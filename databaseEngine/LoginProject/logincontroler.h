@@ -4,6 +4,8 @@
 #include <QObject>
 #include <QString>
 #include <databaseengine.h>
+#include <QCryptographicHash>
+
 
 class LoginControler : public QObject
 {
@@ -13,7 +15,7 @@ class LoginControler : public QObject
     QString m_password;
 
     QString m_nickName;
-    Users *myUsers;
+    DatabaseEngine *myBBDD;
 
 
 public:
@@ -30,6 +32,8 @@ QString getNickName() const
 }
 
     bool comprobarDatos(QString _nick, QString _pass);
+    QString passwordToHash(QString pass);
+    bool estaVaciaBBDD();
 
 signals:
 
