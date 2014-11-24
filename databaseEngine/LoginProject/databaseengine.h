@@ -172,7 +172,7 @@ public:
      * @param data QList of QVariant
      *
      * List Values order
-     *  [1] int User Level Id
+     *  [1] int User Id
      *  [2] int Access Level Id
      *
      * delete a user access
