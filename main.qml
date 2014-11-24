@@ -25,4 +25,8 @@ ApplicationWindow {
         text: qsTr("Hello World")
         anchors.centerIn: parent
     }
+
+    CrearUsuario{
+
+    }
 }
