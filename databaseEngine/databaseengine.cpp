@@ -2,6 +2,7 @@
 #include <assert.h>
 #include <QDebug>
 #include <QSqlQuery>
+#include <QDateTime>
 
 Users *Users::getInstance()
 {
@@ -141,7 +142,7 @@ bool Users::createTables()
 
     result |= sqlQuery_->exec("CREATE TABLE IF NOT EXISTS 'AccessLevel'"
                               "('LevelId' INTEGER PRIMARY KEY,"
-                              "'LevelName' TEX T NOT NULL UNIQUE)");
+                              "'LevelName' TEXT NOT NULL UNIQUE)");
 
 
     result |= sqlQuery_->exec("CREATE TABLE IF NOT EXISTS 'UserAccess'"
@@ -238,7 +239,22 @@ bool DatabaseEngine::deleteUserAccess(QList<QVariant> data)
 
 }
 
-bool DatabaseEngine::setUserAccess(QList<QVariant> data)
+datamap DatabaseEngine::getPrintheads()
+{
+    return printheads_->getPrintheads();
+}
+
+bool DatabaseEngine::setPrinthead(Printheads::BBDDPrinthead p)
+{
+    bool result = printheads_->setPrinthead(p);
+    if (result)
+    {
+        emit printheadChanged();
+    }
+    return result;
+}
+
+ bool DatabaseEngine::setUserAccess(QList<QVariant> data)
 {
     bool result =  users_->setUserAccess(data);
     if(result)
@@ -259,6 +275,10 @@ DatabaseEngine::DatabaseEngine(QObject *parent) :
     users_ = Users::getInstance();
     users_->setParent(this);
     users_->setDatabase(dataBase_);
+
+    printheads_ = Printheads::getInstance();
+    printheads_->setParent(this);
+    printheads_->setDatabase(dataBase_);
 
 }
 
@@ -288,5 +308,71 @@ QSqlError DatabaseEngine::lastError()
     return dataBase_.lastError();
 }
 
+Printheads *Printheads::getInstance()
+{
+    static Printheads *instance = new Printheads();
+    return instance;
+}
 
+datamap Printheads::getPrintheads()
+{
+    datamap data;
+    QList<QVariant> value;
+    sqlQuery_->exec("SELECT * FROM Printheads");
+    while (sqlQuery_->next())
+    {
+        value.clear();
+        value << QVariant(sqlQuery_->value(1).toInt()) <<
+                 QVariant(sqlQuery_->value(2).toInt()) <<
+                 QVariant(sqlQuery_->value(3).toInt()) <<
+                 QVariant(sqlQuery_->value(4).toDateTime());
 
+        data.insert(sqlQuery_->value(0).toInt(),value);
+
+        qDebug() << "PrintheadID " << sqlQuery_->value(0).toInt() <<
+                    "color " << QVariant(sqlQuery_->value(1).toInt()) <<
+                    "health " << QVariant(sqlQuery_->value(2).toInt()) <<
+                    "warranty " << QVariant(sqlQuery_->value(3).toInt()) <<
+                    "installation " << QVariant(sqlQuery_->value(4).toDateTime());
+    }
+    return data;
+}
+
+bool Printheads::setPrinthead(Printheads::BBDDPrinthead data)
+{
+    return sqlQuery_->exec(QString("INSERT OR REPLACE INTO Printheads VALUES (%1,'%2','%3','%4','%5')") \
+                           .arg(data.at(0).toInt()) \
+                           .arg(data.at(1).toInt()) \
+                           .arg(data.at(2).toInt()) \
+                           .arg(data.at(3).toInt()) \
+                           .arg(data.at(4).toString()));
+}
+
+Printheads::Printheads(QObject *parent) : QObject(parent),sqlQuery_(NULL)
+{
+
+}
+
+void Printheads::setDatabase(QSqlDatabase dataBase)
+{
+    dataBase_ = dataBase;
+    sqlQuery_ = new QSqlQuery(dataBase_);
+    qDebug () << "Created table users" << createTables();
+}
+
+bool Printheads::createTables()
+{
+    assert( dataBase_.isOpen() );
+    assert(sqlQuery_);
+
+    bool result = true;
+
+    result |= sqlQuery_->exec("CREATE TABLE IF NOT EXISTS 'Printheads'"
+                              "('PrintheadID'  INTEGER PRIMARY KEY,"
+                              "'color' INTEGER,"
+                              "'health' INTEGER,"
+                              "'warranty' INTEGER,"
+                              "'installation' TEXT)");
+
+    return result;
+}

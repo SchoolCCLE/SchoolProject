@@ -58,6 +58,31 @@ signals:
 
 };
 
+class Printheads : public QObject
+{
+    Q_OBJECT
+    friend class DatabaseEngine;
+
+public:
+    typedef QList<QVariant> BBDDPrinthead;
+
+    static Printheads *getInstance();
+    datamap getPrintheads();
+    bool setPrinthead(BBDDPrinthead p);
+
+
+    //void deletePrinthead(int printheadID); //ONly for superhumans.
+
+private:
+    Printheads(QObject* parent = 0);
+    void setDatabase(QSqlDatabase dataBase);
+    QSqlDatabase dataBase_;
+    QSqlQuery* sqlQuery_;
+
+    bool createTables();
+
+};
+
 
 /**
  * @brief The DatabaseEngine class used to encapsulate action from a sqlite database.
@@ -66,6 +91,7 @@ class DatabaseEngine : public QObject
 {
     Q_OBJECT
 public:
+    enum {COLOR_CYAN = 1, COLOR_MAGENTA, COLOR_YELLOW, COLOR_BLACK};
 
 
     /**
@@ -194,10 +220,40 @@ public:
      */
     bool deleteUserAccess(QList<QVariant> data);
 
+    /**
+     * @brief getPrintheads Get Current getPrintheads list.
+     * Is  Map with integer as key, and QList of QVariant for value
+     * The Key f the map is the printhead id
+     *
+     * List Values order
+     *  [1] int color
+     *  [2] int printheadHealth (% of working noozles)
+     *  [3] bool warrantyStatus
+     *  [4] QDateTime installation date.
+     *
+     * @return QMap<int, QList<QVariant> >
+     */
+    datamap getPrintheads();
+
+    /**
+     * @brief setPrinthead set printhead data to BBDD.
+     *
+     * List Values order
+     *  [1] int printhead ID
+     *  [2] int color
+     *  [3] int printheadHealth (% of working noozles)
+     *  [4] bool warrantyStatus
+     *  [5] QDateTime installation date.
+     *
+     * @return QMap<int, QList<QVariant> >
+     */
+    bool setPrinthead(Printheads::BBDDPrinthead p);
+
 signals:
     void userChanged();
     void accessLevelChanged();
     void userAccessChanged();
+    void printheadChanged();
 
 public slots:
 private:
@@ -205,6 +261,7 @@ private:
     QString databaseName_;
 
     Users* users_;
+    Printheads* printheads_;
     QSqlDatabase dataBase_;
 
     bool openDB();
