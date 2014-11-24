@@ -215,7 +215,10 @@ bool DatabaseEngine::deleteUserAcces(QList<QVariant> data)
 void DatabaseEngine::slotSetUsers(QString nick, QString fullname, QString pass)
 {
     QList<QVariant> datos;
-    datos.append(1, nick, fullname, pass);
+    datos.append(1);
+    datos.append(nick);
+    datos.append(fullname);
+    datos.append(pass);
     setUser(datos);
 }
 
