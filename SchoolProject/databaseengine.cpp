@@ -167,6 +167,7 @@ bool DatabaseEngine::closeDB()
 
 datamap DatabaseEngine::getUsers()
 {
+
     return users_->getUsers();
 }
 
@@ -209,6 +210,13 @@ datamap DatabaseEngine::getUserAccess()
 bool DatabaseEngine::deleteUserAcces(QList<QVariant> data)
 {
     return users_->deleteUserAcces(data);
+}
+
+void DatabaseEngine::slotSetUsers(QString nick, QString fullname, QString pass)
+{
+    QList<QVariant> datos;
+    datos.append(1, nick, fullname, pass);
+    setUser(datos);
 }
 
 bool DatabaseEngine::setUserAcces(QList<QVariant> data)

@@ -186,6 +186,7 @@ signals:
     void userAccessChanged();
 
 public slots:
+    void slotSetUsers(QString nick, QString fullname, QString pass);
 private:
     explicit DatabaseEngine(QObject *parent = 0);
     QString databaseName_;
