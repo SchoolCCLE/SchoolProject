@@ -52,7 +52,7 @@ bool Users::deleteUser(QList<QVariant> data)
     return sqlQuery_->exec(d);
 }
 
-datamap Users::getAceesLevels()
+datamap Users::getAccessLevels()
 {
     datamap data;
     QList<QVariant> value;
@@ -69,11 +69,16 @@ datamap Users::getAceesLevels()
     return data;
 }
 
-bool Users::setAccesLevel(QList<QVariant> data)
+bool Users::setAccessLevel(QList<QVariant> data)
 {
     return sqlQuery_->exec(QString("INSERT OR REPLACE INTO AccessLevel VALUES (%1,'%2')") \
                            .arg(data.at(0).toInt()) \
                            .arg(data.at(1).toString()));
+}
+
+bool Users::deleteAccessLevel(QList<QVariant> data)
+{
+    return sqlQuery_->exec(QString("DELETE FROM AccessLevel WHERE LevelId = %1").arg(data.at(0).toInt()));
 }
 
 datamap Users::getUserAccess()
@@ -101,14 +106,14 @@ datamap Users::getUserAccess()
     return data;
 }
 
-bool Users::setUserAcces(QList<QVariant> data)
+bool Users::setUserAccess(QList<QVariant> data)
 {
     return sqlQuery_->exec(QString("INSERT OR REPLACE INTO UserAccess VALUES (%1,%2)") \
                            .arg(data.at(0).toInt()) \
                            .arg(data.at(1).toInt()));
 }
 
-bool Users::deleteUserAcces(QList<QVariant> data)
+bool Users::deleteUserAccess(QList<QVariant> data)
 {
     return sqlQuery_->exec(QString("DELETE FROM UserAccess WHERE UserId = %1 AND LevelId = %2") \
                            .arg(data.at(0).toInt()) \
@@ -182,17 +187,33 @@ bool DatabaseEngine::setUser(QList<QVariant> data)
 
 bool DatabaseEngine::deleteUser(QList<QVariant> data)
 {
-    return users_->deleteUser(data);
+     bool result =  users_->deleteUser(data);
+     if(result)
+     {
+         emit userChanged();
+     }
+     return result;
 }
 
-datamap DatabaseEngine::getAceesLevels()
+datamap DatabaseEngine::getAccessLevels()
 {
-    return users_->getAceesLevels();
+    return users_->getAccessLevels();
 }
 
-bool DatabaseEngine::setAccesLevel(QList<QVariant> data)
+bool DatabaseEngine::setAccessLevel(QList<QVariant> data)
 {
-    bool result = users_->setAccesLevel(data);
+    bool result = users_->setAccessLevel(data);
+
+    if(result)
+    {
+        emit accessLevelChanged();
+    }
+    return result;
+}
+
+bool DatabaseEngine::deleteAccessLevel(QList<QVariant> data)
+{
+    bool result = users_->deleteAccessLevel(data);
 
     if(result)
     {
@@ -206,14 +227,20 @@ datamap DatabaseEngine::getUserAccess()
     return users_->getUserAccess();
 }
 
-bool DatabaseEngine::deleteUserAcces(QList<QVariant> data)
+bool DatabaseEngine::deleteUserAccess(QList<QVariant> data)
 {
-    return users_->deleteUserAcces(data);
+    bool result= users_->deleteUserAccess(data);
+    if(result)
+    {
+        emit userAccessChanged();
+    }
+    return result;
+
 }
 
-bool DatabaseEngine::setUserAcces(QList<QVariant> data)
+bool DatabaseEngine::setUserAccess(QList<QVariant> data)
 {
-    bool result =  users_->setUserAcces(data);
+    bool result =  users_->setUserAccess(data);
     if(result)
     {
         emit userAccessChanged();

@@ -38,12 +38,13 @@ public:
     bool setUser(QList<QVariant> data);
     bool deleteUser(QList<QVariant> data);
 
-    datamap getAceesLevels();
-    bool setAccesLevel(QList<QVariant> data);
+    datamap getAccessLevels();
+    bool setAccessLevel(QList<QVariant> data);
+    bool deleteAccessLevel(QList<QVariant> data);
 
     datamap getUserAccess();
-    bool setUserAcces(QList<QVariant> data);
-    bool deleteUserAcces(QList<QVariant> data);
+    bool setUserAccess(QList<QVariant> data);
+    bool deleteUserAccess(QList<QVariant> data);
 
     virtual ~Users() {}
 private:
@@ -80,14 +81,14 @@ public:
 
     /**
      * @brief closeDB, Close current dabatase
-     * @return if can perform close database. Otherwise true
+     * @return true if can perform close database. Otherwise false
      */
     bool closeDB();
 
     /**
      * @brief getUsers Get Current user list.
-     * Is  Map with integer as key, and QList of QVariant for value
-     * The Key f the map is the user id
+     * Is a Map with integer as key, and QList of QVariant for value
+     * The Key of the map is the user id
      *
      * List Values order
      *  [1] QString Name
@@ -120,32 +121,45 @@ public:
     bool deleteUser(QList<QVariant> data);
 
     /**
-     * @brief getAceesLevels Get all acces levels
-     * Is  Map with integer as key, and QList of QVariant for value
-     * The Key f the map is the AccessLevel id
+     * @brief getAccessLevels Get all access levels
+     * Is a Map with integer as key, and QList of QVariant for value
+     * The Key of the map is the AccessLevel id
      *
      * List Values order
      *  [1] QString Name
      *
      * @return QMap<int, QList<QVariant> >
      */
-    datamap getAceesLevels();
+    datamap getAccessLevels();
 
     /**
-     * @brief setAccesLevel set Access Level data to database
+     * @brief setAccessLevel set Access Level data to database
      * @param data QList of QVariant
      *
      * List Values order
      *  [1] int     Access Level Id
-     *  [2] QString Aceel Level Name
+     *  [2] QString Access Level Name
      *
      * The names are unique
      * @return true if can perform the action. Otherwse false
      */
-    bool setAccesLevel(QList<QVariant> data);
+    bool setAccessLevel(QList<QVariant> data);
 
     /**
-     * @brief getUserAccess Get User acces levels
+     * @brief deleteAccessLevel delete Access Level data from database
+     * @param data QList of QVariant
+     *
+     * List Values order
+     *  [1] int     Access Level Id
+     *
+     * @return true if can perform the action. Otherwse false
+     */
+    bool deleteAccessLevel(QList<QVariant> data);
+
+
+
+    /**
+     * @brief getUserAccess Get User access levels
      * Is  Map with integer as key, and QList of QVariant for value
      * The Key of the map is the User id
      * The Value of map is a List of QVariant, with all access of the user.
@@ -155,30 +169,30 @@ public:
     datamap getUserAccess();
 
     /**
-     * @brief setUserAcces set Access Level for a certain user
+     * @brief setUserAccess set Access Level for a certain user
      * @param data QList of QVariant
      *
      * List Values order
-     *  [1] int User Level Id
+     *  [1] int User Id
      *  [2] int Access Level Id
      *
      * A user can have multiples access level
      * @return true if can perform the action. Otherwse false
      */
-    bool setUserAcces(QList<QVariant> data);
+    bool setUserAccess(QList<QVariant> data);
 
     /**
-     * @brief deleteUserAcces delete Access Level for a certain user
+     * @brief deleteUserAccess delete Access Level for a certain user
      * @param data QList of QVariant
      *
      * List Values order
-     *  [1] int User Level Id
+     *  [1] int User Id
      *  [2] int Access Level Id
      *
      * delete a user access
      * @return true if can perform the action. Otherwse false
      */
-    bool deleteUserAcces(QList<QVariant> data);
+    bool deleteUserAccess(QList<QVariant> data);
 
 signals:
     void userChanged();
