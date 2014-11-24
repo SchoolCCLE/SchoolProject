@@ -43,7 +43,7 @@ QString Usuario::getPassword() const
 QString Usuario::getPasswordHash() const
 {
      QCryptographicHash hash(QCryptographicHash::Sha1);
-     hash.addData(aOriginalText.toUtf8());
+     hash.addData(password.toUtf8());
      return hash.result().toHex();
 }
 
