@@ -1,4 +1,5 @@
 #include "printerengine.h"
+#include "QDateTime"
 
 PrinterEngine::PrinterEngine(QObject *parent) :
     QObject(parent)
@@ -24,12 +25,16 @@ PrinterEngine::PrinterEngine(QObject *parent) :
 
     QList<PrinterHeads> myListOfPH;
     myListOfPH.clear();
-    setTimeStarted(QTime::currentTime());
+
+    //setTimeStarted(QDateTime::currentDateTime().toString());
+
     setPrinterType(1);
+
     datamap phDDBB;
     phDDBB = DatabaseEngine::getPrintheads();
     for (int i=0;i<4;++i){
         myListOfPH.append(PrinterHeads::PrinterHeads(i,phDDBB[i]));
+
 
     }
 

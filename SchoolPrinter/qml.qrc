@@ -2,5 +2,13 @@
     <qresource prefix="/">
         <file>login.qml</file>
         <file>main.qml</file>
+        <file>Header.qml</file>
+        <file>Stop.png</file>
+        <file>CuerpoBotones.qml</file>
+        <file>error.png</file>
+        <file>idle.png</file>
+        <file>printing.jpg</file>
+        <file>warning.jpg</file>
+        <file>Printer.qml</file>
     </qresource>
 </RCC>

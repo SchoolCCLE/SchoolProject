@@ -14,7 +14,8 @@ class PrinterEngine : public QObject
     Q_PROPERTY(int stateNumber READ getStateNumber WRITE setStateNumber NOTIFY stateNumberChanged)
     Q_PROPERTY(QString stateText READ getStateText WRITE setStateText NOTIFY stateTextChanged)
     Q_PROPERTY(int printerType READ getPrinterType WRITE setPrinterType NOTIFY printerTypeChanged)//Entero que nos dice el tipo de impresora 1=Alta Capacidad 0=Baja Capacidad
-    Q_PROPERTY(QTime timeStarted READ getTimeStarted WRITE setTimeStarted NOTIFY timeStartedChanged)
+//    Q_PROPERTY(QTime timeStarted READ getTimeStarted WRITE setTimeStarted NOTIFY timeStartedChanged)
+//    Q_PROPERTY(QString timeStarted READ getTimeStarted WRITE setTimeStarted NOTIFY timeStartedChanged)
     Q_PROPERTY(QList<PrinterHeads> cabezales READ getCabezales WRITE setCabezales NOTIFY cabezalesChanged)
 
 public:
@@ -37,15 +38,20 @@ public:
 
 
 
-    QTime getTimeStarted() const
-    {
-        return m_timeStarted;
-    }
+//    QTime getTimeStarted() const
+//    {
+//        return m_timeStarted;
+//    }
 
     QList<PrinterHeads> getCabezales() const
     {
         return m_cabezales;
     }
+
+//    QString getTimeStarted() const
+//    {
+//        return m_timeStarted;
+//    }
 
 signals:
 
@@ -57,9 +63,11 @@ signals:
 
 
 
-    void timeStartedChanged(QTime arg);
+//    void timeStartedChanged(QTime arg);
 
     void cabezalesChanged(QList<PrinterHeads> arg);
+
+//    void timeStartedChanged(QString arg);
 
 public slots:
 
@@ -92,14 +100,14 @@ void setPrinterType(int arg)
 
 
 
-void setTimeStarted(QTime arg)
-{
-    if (m_timeStarted == arg)
-        return;
+//void setTimeStarted(QTime arg)
+//{
+//    if (m_timeStarted == arg)
+//        return;
 
-    m_timeStarted = arg;
-    emit timeStartedChanged(arg);
-}
+//    m_timeStarted = arg;
+//    emit timeStartedChanged(arg);
+//}
 
 void setCabezales(QList<PrinterHeads> arg)
 {
@@ -109,6 +117,15 @@ void setCabezales(QList<PrinterHeads> arg)
     m_cabezales = arg;
     emit cabezalesChanged(arg);
 }
+
+//void setTimeStarted(QString arg)
+//{
+//    if (m_timeStarted == arg)
+//        return;
+
+//    m_timeStarted = arg;
+//    emit timeStartedChanged(arg);
+//}
 
 private:
 

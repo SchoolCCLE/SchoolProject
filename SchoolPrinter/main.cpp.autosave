@@ -43,6 +43,8 @@ int main(int argc, char *argv[])
     QObject::connect(qmlView->getRootItem() ,SIGNAL(cancel()),&app,SLOT(quit()));
     QObject::connect(uc ,SIGNAL(accessGranted(bool)),qmlView,SLOT(accessGranted(bool)));
 
+    QObject::connect(engine.rootObjects().value(0), SIGNAL(buttonClose()),
+                     &app, SLOT(quit()));
 
     qmlView->show();
 
