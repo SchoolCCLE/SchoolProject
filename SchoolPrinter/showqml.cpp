@@ -39,6 +39,6 @@ void ShowQml::accessGranted(bool access)
 {
     if(access)
     {
-        setQml("main.qml");
+        setQml("HomeScreen.qml");
     }
 }

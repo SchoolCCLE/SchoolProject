@@ -16,7 +16,7 @@ class PrinterEngine : public QObject
     QString tipo;
 
 public:
-    explicit PrinterEngine(QObject *parent, QString tipoImpresora);
+    explicit PrinterEngine(int tipoImpresora, QObject* parent=0);
 
 int getStateNum() const
 {
@@ -33,6 +33,10 @@ int getTiempo() const
     return m_tiempo;
 }
 
+QString getTipo()
+{
+    return tipo;
+}
 
 signals:
 

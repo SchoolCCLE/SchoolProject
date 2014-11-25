@@ -1,8 +1,10 @@
 #include "printerengine.h"
 
-PrinterEngine::PrinterEngine(QObject *parent, QString tipoImpresora) :
-    QObject(parent)
+PrinterEngine::PrinterEngine(int tipoImpresora, QObject* parent) : QObject(parent)
 {
-    tipo = tipoImpresora;
+    if(tipoImpresora == 0)
+        tipo = "Baja Calidad";
+    if(tipoImpresora == 1)
+        tipo = "Alta Calidad";
 }
 

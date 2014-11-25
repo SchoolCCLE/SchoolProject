@@ -7,7 +7,7 @@ Rectangle
     id: rootHS;
     width: 300;
     height: 200;
-    signal close();
+    //signal close();
 
     RowLayout
     {
@@ -22,7 +22,29 @@ Rectangle
             Layout.maximumHeight: 40
             Layout.maximumWidth: 40
             anchors.left: header.left;
-            source:"ok-icon.png"
+            source:
+            {
+                if(pe_.stateNum == 0)
+                {
+                    source = "ok-icon.png"
+                    console.log("0")
+                }
+                else if(pe_.stateNum == 1)
+                {
+                    source = "printing-icon.png"
+                    console.log("1")
+                }
+                else if(pe_.stateNum == 2)
+                {
+                    source = "warning-icon.png"
+                    console.log("2")
+                }
+                else if(pe_.stateNum == 3)
+                {
+                    source = "error-icon.png"
+                    console.log("3")
+                }
+            }
             fillMode: Image.PreserveAspectFit
         }
 
@@ -30,7 +52,7 @@ Rectangle
         {
             id: status;
             Layout.fillWidth: true;
-            text: "Printer status"; //get text by signals
+            text: pe_.stateText
         }
 
 
@@ -42,7 +64,7 @@ Rectangle
             text: "X";
             onClicked:
             {
-                rootHS.close(); //close window by signals
+                Qt.quit();
             }
         }
     }

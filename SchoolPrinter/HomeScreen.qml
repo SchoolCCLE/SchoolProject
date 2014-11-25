@@ -6,12 +6,9 @@ Rectangle
 {
     width: 400
     height: 300
-    color:"transparent"
 
     ColumnLayout
     {
-        //Layout.fillHeight: true
-        //Layout.fillWidth: true
         anchors.fill: parent
         anchors.margins: 10
 
@@ -32,9 +29,18 @@ Rectangle
 
             Button
             {
+                Loader
+                {
+                    id:printerLoader
+                }
+
                 id:botonEstado
                 anchors.left: parent.left
-                text:"Estado"
+                text:"Detalles"
+                onClicked:
+                {
+                    printerLoader.source = "Printer.qml"
+                }
             }
 
             Button
