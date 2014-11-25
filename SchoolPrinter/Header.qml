@@ -19,6 +19,7 @@ Rectangle {
             id: printerStatusContainer;
             height: 60;
             width: 60;
+            color:"transparent";
             Image
             {
                 id: statusOk;
@@ -48,9 +49,13 @@ Rectangle {
             id: titleContainer;
             Layout.fillHeight: true;
             Layout.fillWidth: true;
+            color:"transparent";
             Text{
                 id: textPrinterStatus;
+                anchors.centerIn: parent;
+                color: "White";
                 text: "Printer status";
+
             }
 
         }
@@ -60,6 +65,7 @@ Rectangle {
             id: buttonContainer;
             height: 60;
             width: 60;
+            color:"transparent";
             Image
             {
                 id: buttonClose;
