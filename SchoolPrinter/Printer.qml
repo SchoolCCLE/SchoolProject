@@ -7,6 +7,7 @@ Rectangle {
     width: 500;
     height: 250;
     anchors.centerIn: parent;
+    property bool printerScreen: true;
 
     ColumnLayout
     {

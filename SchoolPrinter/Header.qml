@@ -21,7 +21,18 @@ Rectangle {
             asynchronous: true;
             smooth: true;
             fillMode: Image.PreserveAspectFit;
-            source: "okIcon.png";
+            source: {
+                if(_model.status == 0){
+                    source = "okIcon.png";
+                } else if(_model.status == 1){
+                    source = "printerIcon.png";
+                } else if(_model.status == 2){
+                    source = "warningIcon.png";
+                } else if(_model.status == 3){
+                    source = "errorIcon.png";
+                }
+            }
+
         }
 
         Rectangle
@@ -31,7 +42,21 @@ Rectangle {
             Text {
                 id: statusText;
                 anchors.centerIn: parent;
-                text: qsTr("Estado de la impresora");
+                text:{
+                    if(printerScreen){
+
+                    }else{
+                        if(_model.status == 0){
+                            text = "Idle";
+                        } else if(_model.status == 1){
+                            text = "Printing";
+                        } else if(_model.status == 2){
+                            text = "Warning";
+                        } else if(_model.status == 3){
+                            text = "Error";
+                        }
+                    }
+                }
             }
         }
 

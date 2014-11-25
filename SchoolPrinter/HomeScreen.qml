@@ -4,9 +4,12 @@ import QtQuick.Layouts 1.1
 
 Rectangle {
 
+    id: homeScreenRoot;
     width: 500;
     height: 250;
     anchors.centerIn: parent;
+    signal loadPrinter();
+    property bool printerScreen: false;
 
     ColumnLayout
     {
@@ -40,6 +43,9 @@ Rectangle {
                         id: printerButton;
                         anchors.centerIn: parent;
                         text: "Printer";
+                        onClicked: {
+                            homeScreenRoot.loadPrinter();
+                        }
                     }
                 }
 
