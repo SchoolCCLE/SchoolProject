@@ -13,21 +13,27 @@ public:
     QString getState() const;
     void setState(const QString &value);
 
-    QString getTimeWorking() const;
-    void setTimeWorking(const QString &value);
-
     QString getPrinterType() const;
     void setPrinterType(const QString &value);
+
+    int getTimeWorking() const;
+    void setTimeWorking(int value);
+
+    QString formatTimeWorking();
 
 private:
 
     QString state;
-    QString timeWorking;
+    int timeWorking; // seconds
     QString printerType;
+    static int counterEvent;
 
 signals:
 
 public slots:
+
+protected:
+   void timerEvent(QTimerEvent *evt);
 
 };
 
