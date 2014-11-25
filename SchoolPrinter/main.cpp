@@ -20,6 +20,19 @@ int main(int argc, char *argv[])
 
     qmlView->getContext()->setContextProperty("userModel_",uc);
 
+    QList<QString> usersData;
+    QString uData;
+    datamap users = uc->dataBase_->getUsers();
+    for (datamap::iterator it = users.begin() ; it != users.end(); ++it)
+    {
+        uData.append(it.value().at(1).toString());
+        uData.append(" : ");
+        uData.append(it.value().at(2).toString());
+        usersData.push_back(uData);
+    }
+    qmlView->getContext()->setContextProperty("usersData_",usersData);
+
+
     QObject::connect(qmlView->getEngine(),SIGNAL(quit()),&app,SLOT(quit()));
     qmlView->setQml("login.qml");
 

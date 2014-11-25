@@ -19,7 +19,9 @@ Rectangle {
         TextArea
         {
             id: textUserInfo;
-
+            text:{
+                usersData_[0];
+            }
         }
     }
 }
