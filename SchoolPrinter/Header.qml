@@ -6,14 +6,10 @@ Rectangle {
 
     id: header;
 
-    signal exit();
-
-    anchors.top: parent.top;
-    anchors.left: parent.left;
-    anchors.right: parent.right;
-
-    width: parent.width;
+    width: 800;
     height: 200;
+
+    color: "steelblue";
 
     RowLayout {
 
@@ -49,23 +45,23 @@ Rectangle {
             text: "EXIT";
 
             onClicked:
-                root.exit();
+                Qt.quit();
         }
     }
 
     function pathImage( num )
     {
-        if ( num == 1 )
-            return "/home/jcoque/Downloads/ldle.png";
+        if ( num == 0 )
+            return "/home/jcoque/Desktop/Project 1/SchoolProject/SchoolPrinter/ldle.png";
+
+        else if ( num == 1 )
+            return "/home/jcoque/Desktop/Project 1/SchoolProject/SchoolPrinter/printing.png";
 
         else if ( num == 2 )
-            return "/home/jcoque/Downloads/printing.png";
+            return "/home/jcoque/Desktop/Project 1/SchoolProject/SchoolPrinter/warning.png";
 
-        else if ( num == 3 )
-            return "/home/jcoque/Downloads/warning.png";
-
-        else
-            return "/home/jcoque/Downloads/error.png";
+        else if ( num == 3)
+            return "/home/jcoque/Desktop/Project 1/SchoolProject/SchoolPrinter/error.png";
     }
 
 }
