@@ -9,7 +9,7 @@
 #include "printerheadcontroller.h"
 #include "showqml.h"
 
-
+typedef QMap<int, QList<QVariant> > datamap;
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
     QList<QString> usersData;
     QString uData;
     datamap users = uc->dataBase_->getUsers();
-    printerHeadcontroller printerHead;
+    printerHeadcontroller* printerHead = printerHeadcontroller::getInstance();
 
     for (datamap::iterator it = users.begin() ; it != users.end(); ++it)
     {
