@@ -7,6 +7,7 @@
 #include <QQmlComponent>
 #include <QQuickItem>
 #include <QSize>
+#include <QObject>
 
 
 class ShowQml : public QQuickView

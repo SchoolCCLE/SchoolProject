@@ -48,7 +48,9 @@ void setStatus(int arg)
 
 void setLoadPrinter()
 {
-    ShowQml::setQml("Printer.qml");
+    ShowQml showQml;
+    showQml.setQml("Printer.qml");
+
 }
 
 private:

@@ -2,5 +2,12 @@
     <qresource prefix="/">
         <file>login.qml</file>
         <file>main.qml</file>
+        <file>HomeScreen.qml</file>
+        <file>Header.qml</file>
+        <file>errorIcon.png</file>
+        <file>okIcon.png</file>
+        <file>warningIcon.png</file>
+        <file>Printer.qml</file>
+        <file>printerIcon.png</file>
     </qresource>
 </RCC>

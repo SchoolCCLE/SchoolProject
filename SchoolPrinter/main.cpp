@@ -47,8 +47,8 @@ int main(int argc, char *argv[])
 
     qmlView->getContext()->setContextProperty("_model", p);
 
-    qmlView->setQml("HomeScreen.qml");
-    QObject::connect(qmlView->getRootItem() ,SIGNAL(loadPrinter()),p,SLOT(setLoadPrinter()));
+//    qmlView->setQml("HomeScreen.qml");
+//    QObject::connect(qmlView->getRootItem() ,SIGNAL(loadPrinter()),p,SLOT(setLoadPrinter()));
 //    qmlView->setQml("login.qml");
 
 
