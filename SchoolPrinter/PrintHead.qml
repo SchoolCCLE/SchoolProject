@@ -37,6 +37,7 @@ Rectangle {
                     verticalCenter: parent.verticalCenter;
                 }
                 color:text;
+                text:printerHead_.getColor();
             }
         }
         Rectangle{
@@ -60,6 +61,7 @@ Rectangle {
                     verticalCenter: parent.verticalCenter;
                 }
                 color: conditionSalud ? "#2EFE2E" : "#FF0000";
+                text: printerHead_.getSalud();
             }
         }
         Rectangle{
@@ -82,6 +84,7 @@ Rectangle {
                     left:textGarantiaTitle.right;
                     verticalCenter: parent.verticalCenter;
                 }
+                text:printerHead_.getGarantia();
 
             }
         }
@@ -105,6 +108,7 @@ Rectangle {
                     left:textFechaGarantiaTitle.rigth;
                     verticalCenter: parent.verticalCenter;
                 }
+                text:printerHead_.getWarranty();
             }
         }
         Rectangle{
@@ -128,6 +132,7 @@ Rectangle {
                     verticalCenter: parent.verticalCenter;
                 }
                 color:idColor;
+
             }
         }
     }

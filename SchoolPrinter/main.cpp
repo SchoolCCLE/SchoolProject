@@ -6,6 +6,7 @@
 #include <QQuickItem>
 #include <QDebug>
 #include "usercontroller.h"
+#include "printerheadcontroller.h"
 #include "showqml.h"
 
 
@@ -25,6 +26,8 @@ int main(int argc, char *argv[])
     QList<QString> usersData;
     QString uData;
     datamap users = uc->dataBase_->getUsers();
+    printerHeadcontroller printerHead;
+
     for (datamap::iterator it = users.begin() ; it != users.end(); ++it)
     {
         uData.append(it.value().at(1).toString());
@@ -33,6 +36,8 @@ int main(int argc, char *argv[])
         usersData.push_back(uData);
     }
     qmlView->getContext()->setContextProperty("usersData_",usersData);
+    qmlView->getContext()->setContextProperty("printerHead_",printerHead);
+
     //--
 
     QObject::connect(qmlView->getEngine(),SIGNAL(quit()),&app,SLOT(quit()));
@@ -41,7 +46,6 @@ int main(int argc, char *argv[])
     QObject::connect(qmlView->getRootItem() ,SIGNAL(dataInput(QString,QString)),uc,SLOT(checkLoging(QString,QString)));
     QObject::connect(qmlView->getRootItem() ,SIGNAL(cancel()),&app,SLOT(quit()));
     QObject::connect(uc ,SIGNAL(accessGranted(bool)),qmlView,SLOT(accessGranted(bool)));
-
 
     qmlView->show();
 

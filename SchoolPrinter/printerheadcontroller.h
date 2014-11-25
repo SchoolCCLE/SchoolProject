@@ -3,11 +3,16 @@
 
 #include <QObject>
 #include "../databaseEngine/databaseengine.h"
+#include <QTime>
 
 
 class printerHeadcontroller: public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(QString Color READ getColor WRITE setColor NOTIFY colorChanged)
+    Q_PROPERTY(QString Salud READ getSalud WRITE setSalud NOTIFY saludChanged)
+    Q_PROPERTY(QString Warranty READ getWarranty WRITE setWarranty NOTIFY warrrantyChanged)
+
 public:
     static printerHeadcontroller* getInstance();
     QString getSalud(QString id);
