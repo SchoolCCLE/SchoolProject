@@ -6,7 +6,7 @@
 class PrinterEngine : public QObject
 {
     Q_PROPERTY(int status READ getStatus WRITE setStatus NOTIFY statusChanged)
-    Q_PROPERTY(QString loadPrinter READ getLoadPrinter WRITE setLoadPrinter NOTIFY loadPrinterScreen)
+
     Q_OBJECT
 public:
     enum Type {HIGH_CAPACITY=0, LOW_CAPACITY};
