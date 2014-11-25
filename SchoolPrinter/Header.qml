@@ -2,42 +2,52 @@ import QtQuick 2.0
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 1.2
 
-Rectangle {
+Rectangle
+{
     id: rootHS;
-    width: 200;
+    width: 300;
     height: 200;
     signal close();
 
-    RowLayout {
+    RowLayout
+    {
         id: header;
         anchors.top: parent.top;
         anchors.left: parent.left;
         anchors.right: parent.right;
-        height: 50;
-        Image {
-            id: image;
-            anchors.left: header.left;
-            //image here (visible condition?)
 
+        Image
+        {
+            id: image;
+            Layout.maximumHeight: 40
+            Layout.maximumWidth: 40
+            anchors.left: header.left;
+            source:"ok-icon.png"
+            fillMode: Image.PreserveAspectFit
         }
-        Text{
+
+        Text
+        {
             id: status;
             Layout.fillWidth: true;
             text: "Printer status"; //get text by signals
         }
 
 
-        Button {
+        Button
+        {
             id: close;
             anchors.right: header.right;
             width: 50;
             text: "X";
-            onClicked: {
+            onClicked:
+            {
                 rootHS.close(); //close window by signals
             }
         }
     }
-    Rectangle {
+    Rectangle
+    {
         id: footerHeader;
         anchors.bottom: header.bottom;
         height: 5;
