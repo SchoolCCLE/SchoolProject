@@ -20,6 +20,8 @@ int main(int argc, char *argv[])
 
     qmlView->getContext()->setContextProperty("userModel_",uc);
 
+
+    // Send to Printer.qml the users' data
     QList<QString> usersData;
     QString uData;
     datamap users = uc->dataBase_->getUsers();
@@ -31,7 +33,7 @@ int main(int argc, char *argv[])
         usersData.push_back(uData);
     }
     qmlView->getContext()->setContextProperty("usersData_",usersData);
-
+    //--
 
     QObject::connect(qmlView->getEngine(),SIGNAL(quit()),&app,SLOT(quit()));
     qmlView->setQml("login.qml");
