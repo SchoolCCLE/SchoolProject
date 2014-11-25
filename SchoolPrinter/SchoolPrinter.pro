@@ -5,7 +5,9 @@ QT += qml quick sql
 SOURCES += main.cpp \
     usercontroller.cpp \
     showqml.cpp \
-    ../databaseEngine/databaseengine.cpp
+    ../databaseEngine/databaseengine.cpp \
+    Printheads/PrintheadModel.cpp \
+    Printheads/PrintheadsController.cpp
 
 RESOURCES += qml.qrc
 
@@ -18,4 +20,6 @@ include(deployment.pri)
 HEADERS += \
     usercontroller.h \
     showqml.h \
-    ../databaseEngine/databaseengine.h
+    ../databaseEngine/databaseengine.h \
+    Printheads/PrintheadModel.h \
+    Printheads/PrintheadsController.h
