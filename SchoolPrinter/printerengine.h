@@ -2,10 +2,11 @@
 #define PRINTERENGINE_H
 #include <QObject>
 #include <QTime>
-
+#include <showqml.h>
 class PrinterEngine : public QObject
 {
     Q_PROPERTY(int status READ getStatus WRITE setStatus NOTIFY statusChanged)
+    Q_PROPERTY(QString loadPrinter READ getLoadPrinter WRITE setLoadPrinter NOTIFY loadPrinterScreen)
     Q_OBJECT
 public:
     enum Type {HIGH_CAPACITY=0, LOW_CAPACITY};
@@ -24,9 +25,15 @@ public:
         return m_status;
     }
 
+    QString getLoadPrinter() const
+    {
+        return m_loadPrinter;
+    }
+
 signals:
 
     void statusChanged(int arg);
+
 
 public slots:
 
@@ -39,6 +46,11 @@ void setStatus(int arg)
     emit statusChanged(arg);
 }
 
+void setLoadPrinter()
+{
+    ShowQml::setQml("Printer.qml");
+}
+
 private:
 
     int printerStatus =0;
@@ -47,6 +59,7 @@ private:
     QString stringStatus;
     Type printerCapacity;
     int m_status;
+    QString m_loadPrinter;
 };
 
 #endif // PRINTERENGINE_H
