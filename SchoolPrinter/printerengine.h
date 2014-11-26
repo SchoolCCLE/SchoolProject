@@ -24,7 +24,7 @@ int m_timeStarted;
 QList<QObject*> m_cartridges;
 
 public:
-    explicit PrinterEngine(int type, QObject *parent = 0);
+    explicit PrinterEngine(QObject *parent = 0);
 
 int getStateNumber() const
 {

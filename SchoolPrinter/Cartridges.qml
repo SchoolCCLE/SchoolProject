@@ -10,12 +10,13 @@ Rectangle {
         anchors.centerIn: parent
         spacing: 10
         Repeater{
-            model: printheads
+            model: _myModel.cartridges
             delegate: Cartridge{
-                model: modelData
-                inkLevel: levelInkMock[index];
-                text:colorList[index];
-                cColor: colorList[index];
+                //model: modelData
+                inkLevel: _myModel.cartridges[index].levelcc*4;
+                text:_myModel.cartridges[index].color;
+                capacity:"Ink Level: "+ _myModel.cartridges[index].capacity;
+                cColor: _myModel.cartridges[index].color;
                 onInfoClicked: root.infoClicked(index);
             }
         }

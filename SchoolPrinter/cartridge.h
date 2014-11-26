@@ -7,7 +7,7 @@
 class Cartridge : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(int level READ getLevel WRITE setLevel NOTIFY levelChanged)
+    Q_PROPERTY(int levelcc READ getLevel WRITE setLevel NOTIFY levelChanged)
     Q_PROPERTY(int capacity READ getCapacity WRITE setCapacity NOTIFY capacityChanged)
     Q_PROPERTY(QString color READ getColor WRITE setColor NOTIFY colorChanged)
     Q_PROPERTY(int cartridgeStatus READ getCartridgeStatus WRITE setCartridgeStatus NOTIFY cartridgeStatusChanged)

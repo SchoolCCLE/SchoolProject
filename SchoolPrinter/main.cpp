@@ -20,7 +20,7 @@ int main(int argc, char *argv[])
 
     UserController* uc = UserController::getInstance();
     uc->setParent(&app);
-    PrinterEngine* pe = new PrinterEngine(1);
+    PrinterEngine* pe = new PrinterEngine();
     pe->setParent(&app);
 
     PrintheadsController* phController = new PrintheadsController();
@@ -31,6 +31,6 @@ int main(int argc, char *argv[])
 
     engine.load(QUrl(QStringLiteral("qrc:///main.qml")));
 
-
+    QObject::connect(pe, SIGNAL(cartridgeStatusChanged(int)), pe , SLOT(changeState(int)));
     return app.exec();
 }

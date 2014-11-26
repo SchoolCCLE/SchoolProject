@@ -8,6 +8,11 @@ Rectangle {
     signal infoClicked;
     property alias cColor: cartridgeRect.color;
     property alias inkLevel: cartridgeRect.height;
+    property alias capacity: textLevel.text;
+    onInkLevelChanged: {
+        console.log("inkLevel" + inkLevel);
+    }
+
     property var levelInkMock: [100,400,300,200];
     property alias text: cartridgeText.text;
     property QtObject model;

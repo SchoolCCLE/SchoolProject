@@ -1,10 +1,10 @@
 #include "printerengine.h"
 
-PrinterEngine::PrinterEngine(int type, QObject *parent) :
+PrinterEngine::PrinterEngine(QObject *parent) :
     QObject(parent)
 {
 
-    m_printerType = type;
+    m_printerType = 1;
     if (m_printerType == 0){
     m_cartridges.append(new Cartridge("Cyan",30,200));
     m_cartridges.append(new Cartridge("Magenta",30,200));
