@@ -11,7 +11,6 @@ class Cartridge : public QObject
     Q_PROPERTY(bool warrantyCart READ getWarrantyCart WRITE setWarrantyCart NOTIFY warrantyCartChanged)
     Q_PROPERTY(QDateTime installDateCart READ getDateCart WRITE setDateCart NOTIFY dateCartChanged)
 
-
 public:
 
 
