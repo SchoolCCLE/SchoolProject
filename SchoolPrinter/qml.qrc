@@ -4,5 +4,10 @@
         <file>main.qml</file>
         <file>Printheads/Printheads.qml</file>
         <file>Printheads/Printhead.qml</file>
+        <file>error.png</file>
+        <file>idle.png</file>
+        <file>printing.jpg</file>
+        <file>Stop.png</file>
+        <file>Cartucho.qml</file>
     </qresource>
 </RCC>

@@ -46,8 +46,17 @@ Window {
             height: 100
             border.color: "black"
             border.width: 1
+            Image{
+                id:imageHeader;
+                Layout.fillHeight: true;
+                height: 100;
+                source: printer_.image;
+                fillMode:Image.PreserveAspectFit;
+
+            }
+
             Text{
-                text: "Printer Status"
+                text: printer_.status;
                 anchors.centerIn: parent
                 font.pixelSize: 20
             }
@@ -178,8 +187,8 @@ Window {
     }
 
     property Component white :
-        Rectangle{
-        color: "white"
+        Cartucho{
+        //color: "white"
 
         MouseArea
         {

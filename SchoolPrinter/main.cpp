@@ -10,7 +10,7 @@
 #include "showqml.h"
 
 #include "Printheads/PrintheadsController.h"
-
+#include "printerengine.h"
 
 int main(int argc, char *argv[])
 {
@@ -20,10 +20,12 @@ int main(int argc, char *argv[])
     UserController* uc = UserController::getInstance();
     uc->setParent(&app);
 
+    PrinterEngine* pe = new PrinterEngine(PrinterEngine::LowCapacity);
+
     PrintheadsController* phController = new PrintheadsController();
 
     engine.rootContext()->setContextProperty("printheads", QVariant::fromValue(phController->printheads()));
-
+    engine.rootContext()->setContextProperty("printer_", pe);
     engine.rootContext()->setContextProperty("userModel_", uc);
 
     engine.load(QUrl(QStringLiteral("qrc:///main.qml")));
