@@ -1,4 +1,6 @@
 #include "PrintheadsController.h"
+#include "PrintheadModel.h"
+
 
 PrintheadsController::PrintheadsController(QObject *parent) :
     QObject(parent)

@@ -3,7 +3,7 @@
 
 #include <QObject>
 #include <QList>
-#include "PrintheadModel.h"
+
 
 class PrintheadsController : public QObject
 {

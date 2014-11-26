@@ -7,7 +7,9 @@ SOURCES += main.cpp \
     showqml.cpp \
     ../databaseEngine/databaseengine.cpp \
     Printheads/PrintheadModel.cpp \
-    Printheads/PrintheadsController.cpp
+    Printheads/PrintheadsController.cpp \
+    printerengine.cpp \
+    cartridge.cpp
 
 RESOURCES += qml.qrc
 
@@ -22,4 +24,10 @@ HEADERS += \
     showqml.h \
     ../databaseEngine/databaseengine.h \
     Printheads/PrintheadModel.h \
-    Printheads/PrintheadsController.h
+    Printheads/PrintheadsController.h \
+    printerengine.h \
+    cartridge.h
+
+OTHER_FILES += \
+    Cartridge.qml \
+    Cartridges.qml
