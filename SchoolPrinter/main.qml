@@ -46,8 +46,45 @@ Window {
             height: 100
             border.color: "black"
             border.width: 1
+            Image {
+                id: headerImageView;
+                width:50
+                height:50
+                anchors.verticalCenter: parent.verticalCenter;
+                Layout.minimumHeight: 30;
+                Layout.minimumWidth: 30;
+                Layout.maximumHeight: 30;
+                Layout.maximumWidth: 30;
+                asynchronous: true;
+                smooth: true;
+                fillMode: Image.PreserveAspectFit;
+                source: {
+                    if(_model.status == 0){
+                        source = "okIcon.png";
+                    } else if(_model.status == 1){
+                        source = "printerIcon.png";
+                    } else if(_model.status == 2){
+                        source = "warningIcon.png";
+                    } else if(_model.status == 3){
+                        source = "errorIcon.png";
+                    }
+                }
+            }
             Text{
-                text: "Printer Status"
+                text:
+                {
+                    if(_model.status == 0){
+                    text = "OK";
+                    } else if(_model.status == 1){
+                    text= "PRINTING";
+                    } else if(_model.status == 2){
+                    text= "WARNING";
+                    } else if(_model.status == 3){
+                    text= "ERROR";
+                    }
+                }
+
+
                 anchors.centerIn: parent
                 font.pixelSize: 20
             }
