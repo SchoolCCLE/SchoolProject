@@ -11,6 +11,8 @@
 #include "showqml.h"
 #include "printerengine.h"
 #include "Printheads/PrintheadsController.h"
+#include "Printheads/Cartridgecontroller.h"
+#include "cartridgemodel.h"
 
 
 int main(int argc, char *argv[])
@@ -28,20 +30,23 @@ int main(int argc, char *argv[])
 
     engine.rootContext()->setContextProperty("printheads", QVariant::fromValue(phController->printheads()));
 
-    engine.rootContext()->setContextProperty("userModel_", uc);
-
-    engine.load(QUrl(QStringLiteral("qrc:///main.qml")));
-
     PrinterEngine* pe = new PrinterEngine(0);
-    pe->setStateNum(1);
-    pe->setStateText("Printing");
-    pe->setTiempo(time.elapsed());
+
+    pe->setStateNum(2);
+    pe->setStateText("Warning");
+    pe->setTiempo( time.elapsed() );
 
     qDebug() << "Tipo de impresora:" << pe->getTipo() << endl
              << "Estado de la impresora" << pe->getStateText() << endl
              << "Tiempo activa:" << pe->getTiempo() << endl;
 
+    CartridgeController* cc = new CartridgeController();
+
     engine.rootContext()->setContextProperty("pe_",pe);
+
+    engine.rootContext()->setContextProperty("userModel_", uc);
+
+    engine.load(QUrl(QStringLiteral("qrc:///main.qml")));
 
     return app.exec();
 }
