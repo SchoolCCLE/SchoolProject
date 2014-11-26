@@ -11,6 +11,7 @@
 #include "printerengine.h"
 
 #include "Printheads/PrintheadsController.h"
+#include <Cartridges/cartridgescontroller.h>
 
 
 int main(int argc, char *argv[])
@@ -29,6 +30,11 @@ int main(int argc, char *argv[])
 
     PrinterEngine *printerOne = new PrinterEngine(PrinterEngine::HIGH_CAPACITY);
     engine.rootContext()->setContextProperty("printerOne_", printerOne);
+
+    CartridgesController* caController = new CartridgesController(printerOne->getPrinterType());
+
+    engine.rootContext()->setContextProperty("cartridgesNumber", printerOne->getPrinterType());
+    engine.rootContext()->setContextProperty("cartridges", QVariant::fromValue(caController->cartridges()));
 
     engine.load(QUrl(QStringLiteral("qrc:///main.qml")));
 

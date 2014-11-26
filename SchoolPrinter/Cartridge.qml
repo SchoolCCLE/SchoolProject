@@ -3,8 +3,8 @@ import QtQuick.Layouts 1.1
 
 Rectangle {
     id: cartridge;
-
-    width: 100;
+    property QtObject model;
+    width: 80;
     height: 400;
     color: "black";
 
@@ -23,15 +23,18 @@ Rectangle {
             smooth: true;
             fillMode: Image.PreserveAspectFit;
             Layout.alignment: Qt.AlignCenter;
-            source: "okIcon.png"
+            source: {
+                console.log(model.inkLevel);
+                source = "okIcon.png";
+            }
         }
 
         Rectangle
         {
             Layout.minimumHeight: 120;
-            Layout.minimumWidth: 80;
+            Layout.minimumWidth: 60;
             Layout.maximumHeight: 120;
-            Layout.maximumWidth: 80;
+            Layout.maximumWidth: 60;
             Layout.alignment: Qt.AlignCenter;
             color: "white";
         }
@@ -39,9 +42,9 @@ Rectangle {
         Rectangle
         {
             Layout.minimumHeight: 150;
-            Layout.minimumWidth: 80;
+            Layout.minimumWidth: 60;
             Layout.maximumHeight: 150;
-            Layout.maximumWidth: 80;
+            Layout.maximumWidth: 60;
             Layout.alignment: Qt.AlignCenter;
             color: "white";
         }

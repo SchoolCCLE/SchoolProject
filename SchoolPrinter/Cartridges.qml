@@ -9,9 +9,9 @@ Rectangle {
         anchors.centerIn: parent
         spacing: 10
         Repeater{
-            model: 8;
+            model: cartridges;
             delegate: Cartridge{
-
+                model: modelData;
             }
         }
     }
