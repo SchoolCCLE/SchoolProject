@@ -72,3 +72,26 @@ A partir del projecto ya creado se requiere
   
   Enjoy
   
+  
+  Day 3
+  Crearemos de nuevo los branch, ahora los llamaremos Day3_TeamX
+
+A partir del projecto ya creado se requiere
+  1) Crear una clase PrinterEngine que sea capaz de emitir señales y contener slots
+    Contendra el stado actual de la impresora[Idle,printing,warnig,error], en modo numerico y en modo texto, con el mensaje       que se crea oportuno.
+    Un campo que nos diga el tiempo que lleva funcionando la impresora(desde el arranque del programa)
+    Un campo que nos diga el tipo de impresora que es(Alta capacidad o baja capacidad)
+    Los setters y getters necesarios para setear estos campos(El de tipo de impresora se hara obligatoriamente en el              constructor)
+    2) Crear una pantalla llamada Cartridges.qml que contendra una lista(en modo grafico) de los cartridges de la impresora, la       de alta capacidad tendra 8 cartridges,(2 para cada color CMYK) y la de baja capacidad solo 1 cartridges por color.
+      Los cartridges tendran los siguientes campos.
+        Id
+        Color, un color de CMYK
+        Nivel Tinta
+        Cpacidad de tinta
+        Fecha de instalacion
+      El Estado del Cartridges puede ser ok, warning, o error, y se tiene que representar con un icono dentro del printhead
+      Sera Warning cuando la tinta este a menos de 5%
+      Sera error cuando la tinta esta al 0%
+      El resto de los casos sera ok
+      El estado del cartridge, modifica el estado de la impresora.
+  
