@@ -46,8 +46,39 @@ Window {
             height: 100
             border.color: "black"
             border.width: 1
+            Image
+            {
+                anchors.left: parent.left
+                height: parent.height
+                width: 100
+                source:
+                {
+                    if(pe_.stateNum == 0)
+                    {
+                        source = "ok-icon.png"
+                        console.log("0")
+                    }
+                    else if(pe_.stateNum == 1)
+                    {
+                        source = "printing-icon.png"
+                        console.log("1")
+                    }
+                    else if(pe_.stateNum == 2)
+                    {
+                        source = "warning-icon.png"
+                        console.log("2")
+                    }
+                    else if(pe_.stateNum == 3)
+                    {
+                        source = "error-icon.png"
+                        console.log("3")
+                    }
+                }
+                fillMode: Image.PreserveAspectFit
+            }
+
             Text{
-                text: "Printer Status"
+                text: pe_.stateText
                 anchors.centerIn: parent
                 font.pixelSize: 20
             }
