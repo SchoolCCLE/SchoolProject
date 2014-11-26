@@ -9,7 +9,8 @@ SOURCES += main.cpp \
     Printheads/PrintheadModel.cpp \
     Printheads/PrintheadsController.cpp \
     printerengine.cpp \
-    cartuchomodel.cpp
+    cartuchomodel.cpp \
+    cartuchocontroller.cpp
 
 RESOURCES += qml.qrc
 
@@ -26,7 +27,8 @@ HEADERS += \
     Printheads/PrintheadModel.h \
     Printheads/PrintheadsController.h \
     printerengine.h \
-    cartuchomodel.h
+    cartuchomodel.h \
+    cartuchocontroller.h
 
 OTHER_FILES += \
     printing.jpg \

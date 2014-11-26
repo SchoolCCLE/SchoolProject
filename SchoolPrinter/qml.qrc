@@ -9,5 +9,6 @@
         <file>printing.jpg</file>
         <file>Stop.png</file>
         <file>Cartucho.qml</file>
+        <file>InfoCartuchos.qml</file>
     </qresource>
 </RCC>

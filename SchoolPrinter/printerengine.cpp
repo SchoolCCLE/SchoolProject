@@ -6,7 +6,7 @@ PrinterEngine::PrinterEngine(PrinterType type, QObject *parent) : QObject(parent
         this->setType("High Capacity");
     else
         this->setType("Low Capacity");
-    this->setStatus("ERROR");
+    this->setStatus("IDLE");
     this->setStatusNumber(0);
     this->timeStr = QDateTime::currentDateTime();
 
