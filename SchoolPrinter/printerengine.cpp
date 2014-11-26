@@ -15,25 +15,6 @@ int PrinterEngine::getTimeWorking() const
     return startTime.time().msecsTo(timeWorking.time());
 }
 
-QString PrinterEngine::getPrinterStateText()
-{
-    switch (m_printerState) {
-    case IDLE:
-        return "IDLE";
-
-    case PRINTING:
-        return "PRINTING";
-
-    case WARNING:
-        return "WARNING";
-
-    case ERROR:
-        return "ERROR";
-
-    default:
-        break;
-    }
-}
 
 PrinterEngine::PrinterType PrinterEngine::getPrinterType() const
 {

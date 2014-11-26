@@ -46,10 +46,34 @@ Window {
             height: 100
             border.color: "black"
             border.width: 1
+            Rectangle{
+                id: iconContainer;
+                anchors.left: parent.left;
+                height: parent.height;
+                width: parent.height;
+                color: "transparent";
+                anchors.margins: 5;
+                Image
+                {
+                    anchors.fill: parent;
+                    anchors.margins: 5;
+                    source:{
+                       if(printerOne_.printerStateText == "IDLE"){
+                       source = "okIcon.png";
+                       } else if(printerOne_.printerStateText == "PRINTING"){
+                       source = "printerIcon.png";
+                       } else if(printerOne_.printerStateText == "WARNING"){
+                       source = "warningIcon.png";
+                       } else if(printerOne_.printerStateText == "ERROR"){
+                       source = "errorIcon.png";
+                       }
+                    }
+                }
+            }
 
             Text{
                 //text: "Printer Status"
-                text: printerOne_.printerState;
+                text: printerOne_.printerStateText;
                 anchors.centerIn: parent
                 font.pixelSize: 20
             }
