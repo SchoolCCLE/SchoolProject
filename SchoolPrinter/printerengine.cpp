@@ -6,20 +6,20 @@ PrinterEngine::PrinterEngine(int type, QObject *parent) :
 
     m_printerType = type;
     if (m_printerType == 0){
-    m_cartridges.append(new Cartridge("Cyan"));
-    m_cartridges.append(new Cartridge("Magenta"));
-    m_cartridges.append(new Cartridge("Yellow"));
-    m_cartridges.append(new Cartridge("Black"));
+    m_cartridges.append(new Cartridge("Cyan",30,200));
+    m_cartridges.append(new Cartridge("Magenta",30,200));
+    m_cartridges.append(new Cartridge("Yellow",30,200));
+    m_cartridges.append(new Cartridge("Black",30,200));
     }
     if (m_printerType == 1){
-    m_cartridges.append(new Cartridge("Cyan"));
-    m_cartridges.append(new Cartridge("Magenta"));
-    m_cartridges.append(new Cartridge("Yellow"));
-    m_cartridges.append(new Cartridge("Black"));
-    m_cartridges.append(new Cartridge("Cyan"));
-    m_cartridges.append(new Cartridge("Magenta"));
-    m_cartridges.append(new Cartridge("Yellow"));
-    m_cartridges.append(new Cartridge("Black"));
+    m_cartridges.append(new Cartridge("Cyan",30,200));
+    m_cartridges.append(new Cartridge("Magenta",30,200));
+    m_cartridges.append(new Cartridge("Yellow",30,200));
+    m_cartridges.append(new Cartridge("Black",30,200));
+    m_cartridges.append(new Cartridge("Cyan",30,200));
+    m_cartridges.append(new Cartridge("Magenta",30,200));
+    m_cartridges.append(new Cartridge("Yellow",30,200));
+    m_cartridges.append(new Cartridge("Black",30,200));
     }
 
 }
