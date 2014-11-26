@@ -13,10 +13,9 @@ class PrinterEngine : public QObject
     Q_PROPERTY(int tiempo READ getTiempo WRITE setTiempo NOTIFY tiempoChanged);
     int m_tiempo;
 
-    QString tipo;
-
 public:
     explicit PrinterEngine(int tipoImpresora, QObject* parent=0);
+    QString tipo;
 
 int getStateNum() const
 {

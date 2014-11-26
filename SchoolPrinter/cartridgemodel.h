@@ -1,6 +1,6 @@
 #ifndef CARTRIDGEMODEL_H
 #define CARTRIDGEMODEL_H
-
+#include <QtQml>
 #include <QObject>
 #include <QTime>
 
@@ -9,6 +9,7 @@ class CartridgeModel : public QObject
     Q_OBJECT
 
     Q_PROPERTY(Status status READ status WRITE setStatus NOTIFY statusChanged)
+    Q_PROPERTY(int numberStatus READ getNumberStatus WRITE setNumberStatus NOTIFY numberStatusChanged)
     Q_PROPERTY(QString idColor READ idcolor WRITE setIdColor NOTIFY idColorChanged)
     Q_PROPERTY(QString color READ color WRITE setColor NOTIFY colorChanged)
     Q_PROPERTY(int level READ level WRITE setLevel NOTIFY levelChanged)
@@ -25,7 +26,12 @@ public:
     };
 
     explicit CartridgeModel(QString color, QObject *parent = 0);
-
+/*
+    static void declareQML()
+    {
+        qmlRegisterType<CartridgeModel>("MyQMLEnums",1,0,"Status");
+    }
+*/
     Status status() const;
 
     QString color() const;
@@ -43,6 +49,11 @@ public:
 
     int capacity() const { return m_capacity; }
 
+    int getNumberStatus() const
+    {
+        return m_numberStatus;
+    }
+
 signals:
 
     void statusChanged(Status arg);
@@ -56,6 +67,8 @@ signals:
     void idColorChanged(QString arg);
 
     void capacityChanged(int arg);
+
+    void numberStatusChanged(int arg);
 
 public slots:
 
@@ -84,6 +97,15 @@ public slots:
         emit capacityChanged(arg);
     }
 
+    void setNumberStatus(int arg)
+    {
+        if (m_numberStatus == arg)
+            return;
+
+        m_numberStatus = arg;
+        emit numberStatusChanged(arg);
+    }
+
 private:
     Status m_status;
 
@@ -95,6 +117,7 @@ private:
 
     QString m_idColor;
     int m_capacity;
+    int m_numberStatus;
 };
 
 #endif // CARTRIDGEMODEL_H

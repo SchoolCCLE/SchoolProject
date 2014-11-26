@@ -7,6 +7,7 @@
 #include <QQuickItem>
 #include <QDebug>
 #include <QTime>
+#include <QtQml>
 #include "usercontroller.h"
 #include "showqml.h"
 #include "printerengine.h"
@@ -41,6 +42,9 @@ int main(int argc, char *argv[])
              << "Tiempo activa:" << pe->getTiempo() << endl;
 
     CartridgeController* cc = new CartridgeController();
+    //CartridgeModel::declareQML();
+
+    engine.rootContext()->setContextProperty("cartridges", QVariant::fromValue(cc->cartridges()));
 
     engine.rootContext()->setContextProperty("pe_",pe);
 

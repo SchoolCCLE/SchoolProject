@@ -4,6 +4,7 @@ CartridgeModel::CartridgeModel(QString color, QObject *parent) : QObject(parent)
 {
     m_color = color;
     m_status = OK;
+    m_numberStatus = 0;
     m_installDate = QDateTime::currentDateTime();
 }
 
