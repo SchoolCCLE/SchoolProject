@@ -15,7 +15,7 @@ public:
 
     explicit PrinterEngine(PrinterType type, QObject *parent = 0);
 
-    int getStartTime() const;
+    int getTimeWorking() const;
     QString getPrinterStateText();
 
     PrinterType getPrinterType() const;

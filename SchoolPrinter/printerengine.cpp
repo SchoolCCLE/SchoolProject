@@ -8,11 +8,9 @@ PrinterEngine::PrinterEngine(PrinterType type, QObject *parent) :
     printerType = type;
     startTime = QDateTime::currentDateTime();
 }
-int PrinterEngine::getStartTime() const
+int PrinterEngine::getTimeWorking() const
 {
     QDateTime timeWorking = QDateTime::currentDateTime();
-    qDebug() << startTime.time().msecsTo(timeWorking.time());
-    //timeWorking = (QDateTime)startTime.time().msecsTo(timeWorking.time());
     return startTime.time().msecsTo(timeWorking.time());
 }
 
