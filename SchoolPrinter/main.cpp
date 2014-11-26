@@ -1,3 +1,4 @@
+#include <QQmlApplicationEngine>
 #include <QGuiApplication>
 #include <QQuickView>
 #include <QQmlEngine>
@@ -8,28 +9,24 @@
 #include "usercontroller.h"
 #include "showqml.h"
 
+#include "Printheads/PrintheadsController.h"
+
 
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
+    QQmlApplicationEngine engine;
 
     UserController* uc = UserController::getInstance();
     uc->setParent(&app);
 
-    ShowQml * qmlView = new ShowQml();
+    PrintheadsController* phController = new PrintheadsController();
 
-    qmlView->getContext()->setContextProperty("userModel_",uc);
+    engine.rootContext()->setContextProperty("printheads", QVariant::fromValue(phController->printheads()));
 
-    QObject::connect(qmlView->getEngine(),SIGNAL(quit()),&app,SLOT(quit()));
-    qmlView->setQml("login.qml");
+    engine.rootContext()->setContextProperty("userModel_", uc);
 
-    QObject::connect(qmlView->getRootItem() ,SIGNAL(dataInput(QString,QString)),uc,SLOT(checkLoging(QString,QString)));
-    QObject::connect(qmlView->getRootItem() ,SIGNAL(cancel()),&app,SLOT(quit()));
-    QObject::connect(uc ,SIGNAL(accessGranted(bool)),qmlView,SLOT(accessGranted(bool)));
-
-
-    qmlView->show();
-
+    engine.load(QUrl(QStringLiteral("qrc:///main.qml")));
 
     return app.exec();
 }
