@@ -46,6 +46,47 @@ Window {
             height: 100
             border.color: "black"
             border.width: 1
+//            Connections
+//                   {
+//                       target: _myModel;
+//                       stateNumberChanged:
+//                       {
+//                           if (_myModel.stateNumber == 1)
+//                           {
+//                               imageHeader.source="..//images/11-128.png";
+//                           }
+//                           if (_myModel.stateNumber == 2)
+//                           {
+//                               imageHeader.source="..//images/printer-128.png";
+//                           }
+//                           if (_myModel.stateNumber == 3)
+//                           {
+//                               imageHeader.source="..//images/Warning.png";
+//                           }
+//                           if (_myModel.stateNumber == 4)
+//                           {
+//                               imageHeader.source="..//images/678069-sign-error-128.png";
+//                           }else
+//                           {
+//                               imageHeader.source="..//images/678069-sign-error-128.png";
+//                           }
+//                       }
+//                   }
+            Image
+                    {
+
+                        id:imageHeader;
+                        anchors.left: parent.left;
+                        anchors.top:parent.top;
+                        anchors.bottom: parent.bottom;
+
+                        source:"..//images/11-128.png";
+
+                        fillMode:Image.PreserveAspectFit;
+
+                    }
+
+
             Text{
                 text: "Printer Status"
                 anchors.centerIn: parent
@@ -121,7 +162,7 @@ Window {
                 Layout.fillWidth: true
 
                 Text{
-                    text: "App 3"
+                    text: "Cartridges"
                     anchors.centerIn: parent
                     font.pixelSize: 20
                 }
