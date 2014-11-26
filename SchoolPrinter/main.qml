@@ -121,7 +121,7 @@ Window {
                 Layout.fillWidth: true
 
                 Text{
-                    text: "App 3"
+                    text: "Cartridges"
                     anchors.centerIn: parent
                     font.pixelSize: 20
                 }
@@ -178,8 +178,8 @@ Window {
     }
 
     property Component white :
-        Rectangle{
-        color: "white"
+        Cartridges{
+
 
         MouseArea
         {
