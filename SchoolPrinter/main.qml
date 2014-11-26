@@ -46,8 +46,10 @@ Window {
             height: 100
             border.color: "black"
             border.width: 1
+
             Text{
-                text: "Printer Status"
+                //text: "Printer Status"
+                text: printerOne_.printerState;
                 anchors.centerIn: parent
                 font.pixelSize: 20
             }

@@ -3,8 +3,7 @@
 #include <QDateTime>
 #include <QObject>
 #include <QString>
-enum PrinterType {HIGH_CAPACITY, LOW_CAPACITY};
-enum StateType {IDLE, PRINTING, WARNING, ERROR};
+
 
 class PrinterEngine : public QObject
 {
@@ -12,6 +11,8 @@ class PrinterEngine : public QObject
 
     Q_OBJECT
 public:
+    enum PrinterType {HIGH_CAPACITY, LOW_CAPACITY};
+    enum StateType {IDLE, PRINTING, WARNING, ERROR};
 
     explicit PrinterEngine(PrinterType type, QObject *parent = 0);
 

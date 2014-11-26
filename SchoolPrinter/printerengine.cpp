@@ -7,6 +7,7 @@ PrinterEngine::PrinterEngine(PrinterType type, QObject *parent) :
 {
     printerType = type;
     startTime = QDateTime::currentDateTime();
+    setPrinterState(IDLE);
 }
 int PrinterEngine::getTimeWorking() const
 {
@@ -34,7 +35,7 @@ QString PrinterEngine::getPrinterStateText()
     }
 }
 
-PrinterType PrinterEngine::getPrinterType() const
+PrinterEngine::PrinterType PrinterEngine::getPrinterType() const
 {
     return printerType;
 }
