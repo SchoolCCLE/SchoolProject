@@ -4,5 +4,11 @@
         <file>main.qml</file>
         <file>Printheads/Printheads.qml</file>
         <file>Printheads/Printhead.qml</file>
+        <file>Cartridges.qml</file>
+        <file>Cartridge.qml</file>
+        <file>errorIcon.png</file>
+        <file>okIcon.png</file>
+        <file>printerIcon.png</file>
+        <file>warningIcon.png</file>
     </qresource>
 </RCC>

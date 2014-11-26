@@ -32,8 +32,6 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("printerOne_", printerOne);
 
     CartridgesController* caController = new CartridgesController(printerOne->getPrinterType());
-
-    engine.rootContext()->setContextProperty("cartridgesNumber", printerOne->getPrinterType());
     engine.rootContext()->setContextProperty("cartridges", QVariant::fromValue(caController->cartridges()));
 
     engine.load(QUrl(QStringLiteral("qrc:///main.qml")));

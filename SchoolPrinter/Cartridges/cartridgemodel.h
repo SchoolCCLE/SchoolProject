@@ -1,6 +1,6 @@
 #ifndef CARTRIDGEMODEL_H
 #define CARTRIDGEMODEL_H
-
+#include <QDateTime>
 #include <QObject>
 
 class CartridgeModel: public QObject
@@ -9,7 +9,7 @@ class CartridgeModel: public QObject
     Q_PROPERTY(int idColor READ idColor WRITE setIdColor NOTIFY idColorChanged)
     Q_PROPERTY(int inkLevel READ inkLevel WRITE setInkLevel NOTIFY inkLevelChanged)
     Q_PROPERTY(int inkCapacity READ inkCapacity WRITE setInkCapacity NOTIFY inkCapacityChanged)
-    Q_PROPERTY(QDateTime * installationDate READ installationDate WRITE setInstallationDate NOTIFY installationDateChanged)
+    Q_PROPERTY(QDateTime installationDate READ installationDate WRITE setInstallationDate NOTIFY installationDateChanged)
 
 public:
     explicit CartridgeModel(QObject *parent = 0);
@@ -31,7 +31,7 @@ public:
         return m_inkCapacity;
     }
 
-    QDateTime * installationDate() const
+    QDateTime installationDate() const
     {
         return m_installationDate;
     }
@@ -64,7 +64,7 @@ public slots:
         emit inkCapacityChanged(arg);
     }
 
-    void setInstallationDate(QDateTime * arg)
+    void setInstallationDate(QDateTime arg)
     {
         if (m_installationDate == arg)
             return;
@@ -80,14 +80,14 @@ signals:
 
     void inkCapacityChanged(int arg);
 
-    void installationDateChanged(QDateTime * arg);
+    void installationDateChanged(QDateTime arg);
 
 private:
 
     int m_inkLevel;
     int m_idColor;
     int m_inkCapacity;
-    QDateTime * m_installationDate;
+    QDateTime m_installationDate;
 };
 
 #endif // CARTRIDGEMODEL_H

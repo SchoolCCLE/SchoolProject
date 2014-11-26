@@ -7,6 +7,7 @@ Rectangle {
     width: 80;
     height: 400;
     color: "black";
+    radius: 3;
 
     ColumnLayout
     {
@@ -24,8 +25,13 @@ Rectangle {
             fillMode: Image.PreserveAspectFit;
             Layout.alignment: Qt.AlignCenter;
             source: {
-                console.log(model.inkLevel);
-                source = "okIcon.png";
+                if(model.inkLevel == 0){
+                    source =  "errorIcon.png";
+                }else if(model.inkLevel < (model.inkCapacity*0.05)){
+                    source = "warningIcon.png";
+                }else {
+                    source = "okIcon.png";
+                }
             }
         }
 
@@ -36,7 +42,17 @@ Rectangle {
             Layout.maximumHeight: 120;
             Layout.maximumWidth: 60;
             Layout.alignment: Qt.AlignCenter;
-            color: "white";
+            color: "transparent";
+
+
+            Text{
+                text: {
+                    text = "Color id:\n"+
+                    model.idColor +
+                    "\nInstallation\ndate:\n"+
+                    model.installationDate}
+                color: "white"
+            }
         }
 
         Rectangle
@@ -47,6 +63,21 @@ Rectangle {
             Layout.maximumWidth: 60;
             Layout.alignment: Qt.AlignCenter;
             color: "white";
+
+            Rectangle
+            {
+                anchors.bottom: parent.bottom;
+                anchors.left: parent.left;
+                anchors.right: parent.right;
+                anchors.margins: 2;
+                height: {
+                    height = (150 - 4) * (model.inkLevel / model.inkCapacity);
+                }
+
+                color:{
+                    color = "#"+model.idColor;
+                }
+            }
         }
     }
 }
