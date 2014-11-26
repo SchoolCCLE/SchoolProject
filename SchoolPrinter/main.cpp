@@ -17,6 +17,7 @@ int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
     QQmlApplicationEngine engine;
+    Cartridge* cat = new Cartridge("",0,0);
 
     UserController* uc = UserController::getInstance();
     uc->setParent(&app);
@@ -31,6 +32,9 @@ int main(int argc, char *argv[])
 
     engine.load(QUrl(QStringLiteral("qrc:///main.qml")));
 
-    QObject::connect(pe, SIGNAL(cartridgeStatusChanged(int)), pe , SLOT(changeState(int)));
+    QObject::connect(cat, SIGNAL(cartridgeStatusChanged(int)), pe , SLOT(changeState(int)));
+
+
+
     return app.exec();
 }
