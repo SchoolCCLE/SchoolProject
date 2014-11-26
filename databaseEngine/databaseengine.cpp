@@ -348,6 +348,11 @@ bool Printheads::setPrinthead(Printheads::BBDDPrinthead data)
                            .arg(data.at(4).toString()));
 }
 
+bool Printheads::deletePrinthead(Printheads::BBDDPrinthead data)
+{
+    return sqlQuery_->exec(QString("DELETE FROM Printheads WHERE PrintheadID = %1").arg(data.at(0).toInt()));
+}
+
 Printheads::Printheads(QObject *parent) : QObject(parent),sqlQuery_(NULL)
 {
 
@@ -376,3 +381,79 @@ bool Printheads::createTables()
 
     return result;
 }
+
+////////////////////////////// Cartridges //////////////////////////////
+Cartridges *Cartridges::getInstance()
+{
+    static Cartridges *instance = new Cartridges();
+    return instance;
+}
+
+datamap Cartridges::getCartridges()
+{
+    datamap data;
+    QList<QVariant> value;
+    sqlQuery_->exec("SELECT * FROM Cartridges");
+    while (sqlQuery_->next())
+    {
+        value.clear();
+        value << QVariant(sqlQuery_->value(1).toInt()) <<
+                 QVariant(sqlQuery_->value(2).toInt()) <<
+                 QVariant(sqlQuery_->value(3).toInt()) <<
+                 QVariant(sqlQuery_->value(4).toDateTime());
+
+        data.insert(sqlQuery_->value(0).toInt(),value);
+
+        qDebug() << "CartridgeID " << sqlQuery_->value(0).toInt() <<
+                    "color " << QVariant(sqlQuery_->value(1).toInt()) <<
+                    "inkLevel " << QVariant(sqlQuery_->value(2).toInt()) <<
+                    "inkCapacity " << QVariant(sqlQuery_->value(3).toInt()) <<
+                    "installation " << QVariant(sqlQuery_->value(4).toDateTime());
+    }
+    return data;
+}
+
+bool Cartridges::setCartridges(Cartridges::BBDDCartridges data)
+{
+    return sqlQuery_->exec(QString("INSERT OR REPLACE INTO Cartridges VALUES (%1,'%2','%3','%4','%5')") \
+                           .arg(data.at(0).toInt()) \
+                           .arg(data.at(1).toInt()) \
+                           .arg(data.at(2).toInt()) \
+                           .arg(data.at(3).toInt()) \
+                           .arg(data.at(4).toString()));
+}
+
+bool Cartridges::deleteCartridge(Cartridges::BBDDCartridges data)
+{
+    return sqlQuery_->exec(QString("DELETE FROM Cartridges WHERE PrintheadID = %1").arg(data.at(0).toInt()));
+}
+
+Cartridges::Cartridges(QObject *parent) : QObject(parent),sqlQuery_(NULL)
+{
+
+}
+
+void Cartridges::setDatabase(QSqlDatabase dataBase)
+{
+    dataBase_ = dataBase;
+    sqlQuery_ = new QSqlQuery(dataBase_);
+    qDebug () << "Created table cartridges" << createTables();
+}
+
+bool Cartridges::createTables()
+{
+    assert( dataBase_.isOpen() );
+    assert(sqlQuery_);
+
+    bool result = true;
+
+    result |= sqlQuery_->exec("CREATE TABLE IF NOT EXISTS 'Cartridges'"
+                              "('CartrigesID'  INTEGER PRIMARY KEY,"
+                              "'color' INTEGER,"
+                              "'health' INTEGER,"
+                              "'warranty' INTEGER,"
+                              "'installation' TEXT)");
+
+    return result;
+}
+

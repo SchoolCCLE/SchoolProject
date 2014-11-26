@@ -71,10 +71,35 @@ public:
     bool setPrinthead(BBDDPrinthead p);
 
 
-    //void deletePrinthead(int printheadID); //ONly for superhumans.
+    bool deletePrinthead(BBDDPrinthead data);
 
 private:
     Printheads(QObject* parent = 0);
+    void setDatabase(QSqlDatabase dataBase);
+    QSqlDatabase dataBase_;
+    QSqlQuery* sqlQuery_;
+
+    bool createTables();
+
+};
+
+class Cartridges : public QObject
+{
+    Q_OBJECT
+    friend class DatabaseEngine;
+
+public:
+    typedef QList<QVariant> BBDDCartridges;
+
+    static Cartridges *getInstance();
+    datamap getCartridges();
+    bool setCartridges(BBDDCartridges p);
+
+
+    bool deleteCartridge(QList<QVariant> data);
+
+private:
+    Cartridges(QObject* parent = 0);
     void setDatabase(QSqlDatabase dataBase);
     QSqlDatabase dataBase_;
     QSqlQuery* sqlQuery_;
