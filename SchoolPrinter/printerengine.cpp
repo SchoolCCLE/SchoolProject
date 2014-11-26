@@ -3,12 +3,11 @@
 PrinterEngine::PrinterEngine(PrinterType type, QObject *parent) : QObject(parent)
 {
     if ((int)type == (int) this->HighCapacity)
-        this->m_type = "High Capacity";
+        this->setType("High Capacity");
     else
-        this->m_type = "Low Capacity";
-    this->m_status = "IDLE";
-    this->m_image = "idle.png";
-    this->m_statusNumber = 0;
+        this->setType("Low Capacity");
+    this->setStatus("ERROR");
+    this->setStatusNumber(0);
     this->timeStr = QDateTime::currentDateTime();
 
 }
@@ -45,14 +44,20 @@ void PrinterEngine::setStatus(QString arg)
 
     m_status = arg;
 
-    if (arg == "IDLE")
-        emit imageChanged("idle.png");
-    else if (arg == "PRINTING")
-        emit imageChanged("printing.jpg");
-    else if (arg == "WARNING")
-        emit imageChanged("Stop.jpg");
-    else if (arg == "ERROR")
-        emit imageChanged("Error.jpg");
+    //Update status number and associated image
+    if (arg == "IDLE" || arg == "OK") {
+        this->setStatusNumber(0);
+        emit setImage("idle.png");
+    } else if (arg == "PRINTING") {
+        this->setStatusNumber(1);
+        emit setImage("printing.jpg");
+    } else if (arg == "WARNING") {
+        this->setStatusNumber(2);
+        emit setImage("Stop.png");
+    } else if (arg == "ERROR") {
+        this->setStatusNumber(3);
+        emit setImage("error.png");
+    }
 
     emit statusChanged(arg);
 }

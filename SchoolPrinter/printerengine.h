@@ -4,6 +4,10 @@
 #include <QObject>
 #include <QDateTime>
 
+/**
+ * @brief The PrinterEngine class
+ * author Roberto de Castro
+ */
 class PrinterEngine  : public QObject
 {
     Q_OBJECT

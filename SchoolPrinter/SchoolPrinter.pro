@@ -8,7 +8,8 @@ SOURCES += main.cpp \
     ../databaseEngine/databaseengine.cpp \
     Printheads/PrintheadModel.cpp \
     Printheads/PrintheadsController.cpp \
-    printerengine.cpp
+    printerengine.cpp \
+    cartuchomodel.cpp
 
 RESOURCES += qml.qrc
 
@@ -24,7 +25,8 @@ HEADERS += \
     ../databaseEngine/databaseengine.h \
     Printheads/PrintheadModel.h \
     Printheads/PrintheadsController.h \
-    printerengine.h
+    printerengine.h \
+    cartuchomodel.h
 
 OTHER_FILES += \
     printing.jpg \
