@@ -8,7 +8,7 @@
 #include <QDebug>
 #include "usercontroller.h"
 #include "showqml.h"
-
+#include "printerengine.h"
 #include "Printheads/PrintheadsController.h"
 
 
@@ -27,6 +27,12 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("userModel_", uc);
 
     engine.load(QUrl(QStringLiteral("qrc:///main.qml")));
+
+
+    PrinterEngine *p = new PrinterEngine(PrinterEngine::HIGH_CAPACITY);
+    p->getPrinterCapacity();
+    p->setStatus(0);
+    engine.rootContext()->setContextProperty("_model", p);
 
     return app.exec();
 }
