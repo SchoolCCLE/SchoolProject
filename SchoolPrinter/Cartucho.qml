@@ -3,13 +3,19 @@ import QtQuick.Controls 1.2
 import QtQuick.Layouts 1.1
 Rectangle {
     id:rootCartucho;
-    width: 800;
-    height: 600;
-    property string idColor: textIdColor.text;
-    property string colorCmyk: textColorCmyk.text;
-    property string inkLevel: textInkLevel.text;
-    property string colorCapInk: textCapInk.text;
-    property string myDate: textDate.text;
+    width: 100;
+    height: 130;
+    property alias idColor: textIdColor.text;
+    property alias colorCmyk: textColorCmyk.text;
+    property alias inkLevel: textInkLevel.text;
+    property alias colorCapInk: textCapInk.text;
+    property alias myDate: textDate.text;
+    property alias source: imageHeader.source;
+    property alias levelImg: capacidadCartucho.value;
+    onInkLevelChanged: {
+        console.log(inkLevel);
+    }
+
     color:"lightsteelblue";
     RowLayout
     {
@@ -18,18 +24,12 @@ Rectangle {
         ColumnLayout
         {
             id: columnData;
-            RowLayout
-            {
-                id: rowImagen;
-                Layout.fillWidth: true;
-                Image
-                {
-                    id: imageCartucho;
-                    height:60;
-                    width:60;
-                    source:"idle.png";
-                    fillMode:Image.PreserveAspectFit;
-                }
+            Image{
+                id:imageHeader;
+                Layout.fillHeight: true;
+                height: 100;
+                fillMode:Image.PreserveAspectFit;
+
             }
             RowLayout
             {
@@ -86,12 +86,13 @@ Rectangle {
         ColumnLayout
         {
             id: columnCartucho;
-            Rectangle
+            ProgressBar
             {
                 id:capacidadCartucho;
-                anchors.fill: parent;
-                anchors.margins: 10;
-                color:"blue";
+                Layout.fillHeight: true;
+                orientation: Qt.Vertical;
+                maximumValue: 750;
+                minimumValue: 0;
             }
         }
     }

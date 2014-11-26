@@ -43,6 +43,18 @@ void CartuchoModel::setStatus(QString arg)
     if (m_status == arg)
         return;
 
+
+    //Update status number and associated image
+    if (arg == "IDLE" || arg == "OK") {
+        emit setImage("idle.png");
+    } else if (arg == "PRINTING") {
+        emit setImage("printing.jpg");
+    } else if (arg == "WARNING") {
+        emit setImage("Stop.png");
+    } else if (arg == "ERROR") {
+        emit setImage("error.png");
+    }
+
     m_status = arg;
     emit statusChanged(arg);
 }
@@ -90,4 +102,18 @@ void CartuchoModel::setInstallDate(QDateTime arg)
 
     m_installDate = arg;
     emit installDateChanged(arg);
+}
+
+QString CartuchoModel::image() const
+{
+    return m_image;
+}
+
+void CartuchoModel::setImage(QString arg)
+{
+    if (m_image == arg)
+        return;
+
+    m_image = arg;
+    emit imageChanged(arg);
 }

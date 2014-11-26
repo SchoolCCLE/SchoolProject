@@ -18,6 +18,7 @@ class CartuchoModel : public QObject
     Q_PROPERTY(int level READ level WRITE setLevel NOTIFY levelChanged)
     Q_PROPERTY(int capacity READ capacity WRITE setCapacity NOTIFY capacityChanged)
     Q_PROPERTY(QDateTime installDate READ installDate WRITE setInstallDate NOTIFY installDateChanged)
+    Q_PROPERTY(QString image READ image WRITE setImage NOTIFY imageChanged)
 
 public:
     explicit CartuchoModel(QString color, QObject *parent = 0);
@@ -27,6 +28,7 @@ public:
     int level() const;
     int capacity() const;
     QDateTime installDate() const;
+    QString image() const;
 
 signals:
     void statusChanged(QString arg);
@@ -34,14 +36,16 @@ signals:
     void levelChanged(int arg);
     void capacityChanged(int arg);
     void installDateChanged(QDateTime arg);
+    void imageChanged(QString arg);
 
 public slots:
 
-void setStatus(QString arg);
-void setColor(QString arg);
-void setLevel(int arg);
-void setCapacity(int arg);
-void setInstallDate(QDateTime arg);
+    void setStatus(QString arg);
+    void setColor(QString arg);
+    void setLevel(int arg);
+    void setCapacity(int arg);
+    void setInstallDate(QDateTime arg);
+    void setImage(QString arg);
 
 private:
     static int id;
@@ -50,6 +54,7 @@ private:
     int m_level;
     int m_capacity;
     QDateTime m_installDate;
+    QString m_image;
 };
 
 #endif // CARTUCHOMODEL_H

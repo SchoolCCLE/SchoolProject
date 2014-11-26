@@ -8,28 +8,29 @@ Rectangle
     width: 800;
     height: 600;
 
+    color: "#BDBDBD";
+
     GridLayout
     {
         id:gridCartuchos;
         anchors.fill:parent;
 
+        columns: 4;
+
         Repeater
         {
-            //model:_model.listaEnteracartuchos;
+            model:cartuchos_;
 
-            delegate:
-                Cartucho
-            {
-            id:infoCartuchoN;
-            height: 100;
-            width: 100;
+            delegate:      Cartucho{
 
-//            idColor:
-//            colorCmyk:
-//            inkLevel:
-//            colorCapInk:
-//            myDate:
-//            }
-       }
+                idColor: modelData.status ;
+                colorCmyk: modelData.color;
+                inkLevel: modelData.level;
+                colorCapInk: modelData.capacity;
+                myDate: modelData.installDate;
+                levelImg: modelData.level;
+                source: modelData.image;
+            }
+        }
     }
 }

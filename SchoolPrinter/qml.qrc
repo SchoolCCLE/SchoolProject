@@ -10,5 +10,6 @@
         <file>Stop.png</file>
         <file>Cartucho.qml</file>
         <file>InfoCartuchos.qml</file>
+        <file>Fake.qml</file>
     </qresource>
 </RCC>

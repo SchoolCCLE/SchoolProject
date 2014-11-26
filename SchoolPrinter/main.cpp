@@ -15,7 +15,7 @@
 #include "cartuchocontroller.h"
 #include "cartuchomodel.h"
 
-void initializeCartucho(QList<QObject*> list, PrinterEngine* printer){
+void initializeCartucho(QList<QObject*> &list, PrinterEngine* printer){
     if (printer->type() == "High Capacity") {
         //Create 2 cartdriges for each color
         for(int i = 0; i < 4; i++) {
@@ -67,7 +67,7 @@ int main(int argc, char *argv[])
     UserController* uc = UserController::getInstance();
     uc->setParent(&app);
 
-    PrinterEngine* pe = new PrinterEngine(PrinterEngine::LowCapacity);
+    PrinterEngine* pe = new PrinterEngine(PrinterEngine::HighCapacity);
 
     PrintheadsController* phController = new PrintheadsController();
     CartuchoController* cartController = new CartuchoController();

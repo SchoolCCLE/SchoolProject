@@ -187,8 +187,7 @@ Window {
     }
 
     property Component white :
-        Cartucho{
-        //color: "white"
+        InfoCartuchos{
 
         MouseArea
         {
