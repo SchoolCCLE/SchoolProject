@@ -10,6 +10,8 @@
 #include "showqml.h"
 #include "printerengine.h"
 #include "Printheads/PrintheadsController.h"
+#include "cartridgecontroller.h"
+#include "cartridges.h"
 
 
 int main(int argc, char *argv[])
@@ -21,8 +23,12 @@ int main(int argc, char *argv[])
     uc->setParent(&app);
 
     PrintheadsController* phController = new PrintheadsController();
+    CartridgeController* ctController = new CartridgeController();
+
 
     engine.rootContext()->setContextProperty("printheads", QVariant::fromValue(phController->printheads()));
+
+    engine.rootContext()->setContextProperty("cartridges_", QVariant::fromValue(ctController->cartridge()));
 
     engine.rootContext()->setContextProperty("userModel_", uc);
 

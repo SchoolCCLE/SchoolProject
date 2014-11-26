@@ -128,7 +128,7 @@ Window {
                 MouseArea
                 {
                     anchors.fill: parent
-                    onClicked: stack.push(red);
+                    onClicked: stack.push(white);
                 }
             }
 
@@ -158,7 +158,7 @@ Window {
                 Layout.fillWidth: true
 
                 Text{
-                    text: "App 3"
+                    text: "Cartridges"
                     anchors.centerIn: parent
                     font.pixelSize: 20
                 }
@@ -166,7 +166,7 @@ Window {
                 MouseArea
                 {
                     anchors.fill: parent
-                    onClicked: stack.push(white);
+                    onClicked: stack.push(red);
                 }
             }
 
@@ -204,8 +204,8 @@ Window {
     }
 
     property Component red :
-        Rectangle{
-        color: "red"
+        Cartridges {
+        //color: "red"
 
         MouseArea
         {
