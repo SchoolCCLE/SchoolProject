@@ -46,6 +46,10 @@ Window {
             height: 100
             border.color: "black"
             border.width: 1
+//            Connections{
+//                target: _
+//            }
+
 //            Connections
 //                   {
 //                       target: _myModel;
@@ -53,22 +57,22 @@ Window {
 //                       {
 //                           if (_myModel.stateNumber == 1)
 //                           {
-//                               imageHeader.source="..//images/11-128.png";
+//                               imageHeader.source="qrc:ok.png";
 //                           }
 //                           if (_myModel.stateNumber == 2)
 //                           {
-//                               imageHeader.source="..//images/printer-128.png";
+//                               imageHeader.source="qrc:printer.png";
 //                           }
 //                           if (_myModel.stateNumber == 3)
 //                           {
-//                               imageHeader.source="..//images/Warning.png";
+//                               imageHeader.source="qrc:/Warning.png";
 //                           }
 //                           if (_myModel.stateNumber == 4)
 //                           {
-//                               imageHeader.source="..//images/678069-sign-error-128.png";
+//                               imageHeader.source="qrc:/error.png";
 //                           }else
 //                           {
-//                               imageHeader.source="..//images/678069-sign-error-128.png";
+//                               imageHeader.source="qrc:/error.png";
 //                           }
 //                       }
 //                   }
@@ -80,7 +84,7 @@ Window {
                         anchors.top:parent.top;
                         anchors.bottom: parent.bottom;
 
-                        source:"..//images/11-128.png";
+                        source:"qrc:/images/ok.png";
 
                         fillMode:Image.PreserveAspectFit;
 
@@ -219,8 +223,8 @@ Window {
     }
 
     property Component white :
-        Rectangle{
-        color: "white"
+        Cartridges{
+        //color: "white"
 
         MouseArea
         {

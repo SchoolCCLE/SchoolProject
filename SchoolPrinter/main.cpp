@@ -23,8 +23,7 @@ int main(int argc, char *argv[])
     PrintheadsController* phController = new PrintheadsController();
 
     engine.rootContext()->setContextProperty("printheads", QVariant::fromValue(phController->printheads()));
-
-    engine.rootContext()->setContextProperty("userModel_", uc);
+    engine.rootContext()->setContextProperty("cartridges_",QVariant::fromValue(phController->printheads()));//NECESITAMOS CLASE CARTRIDGES QUE DEFINA NUMERO DE CARTRIDGES.
 
     engine.load(QUrl(QStringLiteral("qrc:///main.qml")));
 
