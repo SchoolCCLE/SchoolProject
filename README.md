@@ -89,9 +89,10 @@ A partir del projecto ya creado se requiere
         Nivel Tinta
         Cpacidad de tinta
         Fecha de instalacion
-      El Estado del Cartridges puede ser ok, warning, o error, y se tiene que representar con un icono dentro del printhead
+      El Estado del Cartridges puede ser ok, warning, o error, y se tiene que representar con un icono dentro del cartridge
       Sera Warning cuando la tinta este a menos de 5%
       Sera error cuando la tinta esta al 0%
       El resto de los casos sera ok
       El estado del cartridge, modifica el estado de la impresora.
+      E nivel de tinta se representara graficamente.
   
