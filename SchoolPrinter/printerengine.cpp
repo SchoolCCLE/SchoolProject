@@ -26,7 +26,7 @@ PrinterEngine::PrinterEngine(QObject *parent) :
 
 void PrinterEngine::startJobs()
 {
-    Job* job1 = new Job(NULL);
+    Job* job1 = new Job();
     job1->changeJobId(1234);
     job1->changeType(2);
     job1->changeName("Fichero 1");
