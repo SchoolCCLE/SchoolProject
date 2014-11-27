@@ -12,7 +12,7 @@
 
 #include "Printheads/PrintheadsController.h"
 #include <job.h>
-
+#include <jobcontroller.h>
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
@@ -32,8 +32,9 @@ int main(int argc, char *argv[])
     engine.load(QUrl(QStringLiteral("qrc:///main.qml")));
     //QObject::connect(pe, SIGNAL(cartridgeStatusChanged(int)), pe , SLOT(changeState(int)));
 
-    Job * myJob = new Job("/gut/icon.ico.png");
-
+    JobController * myJobController = new JobController();
+    //Job * myJob = new Job("/gut/icon.ico.png");
+    //QObject::connect(myJob, SIGNAL(printEnd()), myJobController, SLOT(executeJob()));
 
     return app.exec();
 }

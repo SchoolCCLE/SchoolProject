@@ -38,11 +38,11 @@ class Job : public QObject
     int m_magentaInk;
     int m_yellowInk;
     int m_blackInk;
-
-public:
-    explicit Job(QString fileURL, QObject *parent = 0);
 private:
     QTimer *timer;
+public:
+    explicit Job(QString fileURL, QObject *parent = 0);
+
 
 int getJobId() const
 {
@@ -108,6 +108,8 @@ void magentaInkChanged(int arg);
 void yellowInkChanged(int arg);
 
 void blackInkChanged(int arg);
+
+void printEnd();
 
 public slots:
 
@@ -189,6 +191,7 @@ void updatePrintingTime()
         if (m_printingTime == 0){
             timer->stop();
             setJobStatus("PRINTED");
+            emit printEnd();
         }else{
             setPrintingTime(m_printingTime-1);
         }
