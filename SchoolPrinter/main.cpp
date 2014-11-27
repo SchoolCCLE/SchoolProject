@@ -11,7 +11,7 @@
 #include "printerengine.h"
 
 #include "Printheads/PrintheadsController.h"
-
+#include <job.h>
 
 int main(int argc, char *argv[])
 {
@@ -31,5 +31,6 @@ int main(int argc, char *argv[])
 
     engine.load(QUrl(QStringLiteral("qrc:///main.qml")));
     //QObject::connect(pe, SIGNAL(cartridgeStatusChanged(int)), pe , SLOT(changeState(int)));
+    Job * myJob = new Job();
     return app.exec();
 }
