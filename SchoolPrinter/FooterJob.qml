@@ -6,7 +6,6 @@ import QtQuick.Layouts 1.1
 
 Rectangle {
     id:footer;
-    property alias width: footer.width;
     property alias visibleDialog: dialogFile.visible;
     property var archive: "";
     height:100;
@@ -15,7 +14,7 @@ Rectangle {
     RowLayout{
         anchors.fill:parent;
         Button{
-            text: "Exit"
+            text: "Chosse a file"
             anchors.right: parent.right
             height: parent.height
             style:ButtonStyle {

@@ -225,7 +225,7 @@ Window {
                         Layout.fillWidth: true
 
                         Text{
-                            text: "App 4"
+                            text: "Jobs queue"
                             anchors.centerIn: parent
                             font.pixelSize: 20
                         }
@@ -274,7 +274,7 @@ Window {
                 }
 
                 property Component green :
-                Rectangle{
+                JobWindow{
                     color: "green"
 
                     MouseArea
