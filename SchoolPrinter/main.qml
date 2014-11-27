@@ -67,38 +67,6 @@ Window {
                 }
 
             ]
-
-
-                    //            Connections{
-                    //                target: _
-                    //            }
-
-                    //            Connections
-                    //                   {
-                    //                       target: _myModel;
-                    //                       stateNumberChanged:
-                    //                       {
-                    //                           if (_myModel.stateNumber == 1)
-                    //                           {
-                    //                               imageHeader.source="qrc:ok.png";
-                    //                           }
-                    //                           if (_myModel.stateNumber == 2)
-                    //                           {
-                    //                               imageHeader.source="qrc:printer.png";
-                    //                           }
-                    //                           if (_myModel.stateNumber == 3)
-                    //                           {
-                    //                               imageHeader.source="qrc:/Warning.png";
-                    //                           }
-                    //                           if (_myModel.stateNumber == 4)
-                    //                           {
-                    //                               imageHeader.source="qrc:/error.png";
-                    //                           }else
-                    //                           {
-                    //                               imageHeader.source="qrc:/error.png";
-                    //                           }
-                    //                       }
-                    //                   }
                     Image
                     {
 
@@ -275,12 +243,7 @@ Window {
 
                 property Component green :
                 JobWindow{
-                    color: "green"
+                    //color: "green"
 
-                    MouseArea
-                    {
-                        anchors.fill: parent
-                        onClicked: stack.pop();
-                    }
                 }
         }

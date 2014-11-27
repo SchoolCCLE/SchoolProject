@@ -15,12 +15,13 @@ Rectangle {
         anchors.fill:parent;
         Button{
             text: "Chosse a file"
-            anchors.right: parent.right
-            height: parent.height
+            anchors.top:parent.top
+            anchors.bottom: parent.bottom
+            height: 100
+
             style:ButtonStyle {
                 background: Rectangle {
                     implicitWidth: 100
-                    implicitHeight: 25
                     border.width: control.activeFocus ? 2 : 1
                     border.color: "#888"
                     radius: 6
@@ -35,6 +36,11 @@ Rectangle {
                 visibleDialog=true;
             }
         }
+    }
+    Rectangle{
+        height: 4
+        color:"black"
+        width:parent.width
     }
 
 

@@ -9,79 +9,33 @@ Rectangle {
 
     id: jobList;
 
-    width: 500;
-    height: 500;
+    width: 600;
+    height: 600;
 
-    color: "blue";
-
+    color: "darkgrey";
+    border.color:"black"
+    radius:6
 
     Item {
 
         id: listaDeJobs;
         anchors.fill: parent;
 
-        //Layout.fillHeight: true;
-        //Layout.fillWidth: true;
-
-//        ListModel {
-
-//            id: modelo;
-//            ListElement {
-//                    jobId:_myModel.jobs[index].jobId;
-//                    type:_myModel.jobs[index].type;
-//                    name:_myModel.jobs[index].name;
-//                    printingTime:_myModel.jobs[index].printingTime;
-//                    state:_myModel.jobs[index].state;
-//                    cyan:_myModel.jobs[index].cyan;
-//                    magenta:_myModel.jobs[index].magenta;
-//                    yellow:_myModel.jobs[index].yellow;
-//                    black:_myModel.jobs[index].black;
-//                }
-
-//        }
-
-//        Rectangle {
-
-//            width: 180;
-//            height: 200;
-
-//            Component {
-
-//                id: contactDelegate;
-
-//                Item {
-//                    width: 180;
-//                    height: 80;
-
-//                    Column {
-//                        Text { text: '<b>Job ID: </b> ' + jobId }
-//                        Text { text: '<b>Type: </b> ' + type }
-//                        Text { text: '<b>Name: </b>' + name }
-//                        Text { text: '<b>Printing time: </b> ' + printingTime }
-//                        Text { text: '<b>State: </b> ' + state }
-//                        Text { text: '<b>Cyan: </b>' + cyan }
-//                        Text { text: '<b>Magenta: </b> ' + magenta }
-//                        Text { text: '<b>Yellow: </b> ' + yellow }
-//                        Text { text: '<b>Black: </b>' + black }
-//                    }
-//                }
-//            }
-
             Component {
                 id: jobDelegate
                 Item {
-                    width: 180; height: 40
+                    width: 480; height: 150
 
                     Column {
-                    Text { text: '<b>Job ID: </b> ' + _myModel.jobs[index].jobId }
-                    Text { text: '<b>Type: </b> ' + _myModel.jobs[index].type }
-                    Text { text: '<b>Name: </b>' + _myModel.jobs[index].name }
-                    Text { text: '<b>Printing time: </b> ' + _myModel.jobs[index].printingTime }
-                    Text { text: '<b>State: </b> ' + _myModel.jobs[index].state }
-                    Text { text: '<b>Cyan: </b>' + _myModel.jobs[index].cyan }
-                    Text { text: '<b>Magenta: </b> ' + _myModel.jobs[index].magenta }
-                    Text { text: '<b>Yellow: </b> ' + _myModel.jobs[index].yellow }
-                    Text { text: '<b>Black: </b>' + _myModel.jobs[index].black }
+                    Text { text: '<b>Job ID: </b> ' + modelData.jobId }
+                    Text { text: '<b>Type: </b> ' +  modelData.type }
+                    Text { text: '<b>Name: </b>' +  modelData.name }
+                    Text { text: '<b>Printing time: </b> ' +  modelData.printingTime }
+                    Text { text: '<b>State: </b> ' +  modelData.state }
+                    Text { text: '<b>Cyan: </b>' +  modelData.cyan }
+                    Text { text: '<b>Magenta: </b> ' +  modelData.magenta }
+                    Text { text: '<b>Yellow: </b> ' +  modelData.yellow }
+                    Text { text: '<b>Black: </b>' +  modelData.black }
                                         }
                 }
             }
