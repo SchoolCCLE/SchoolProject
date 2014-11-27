@@ -225,7 +225,7 @@ Window {
                         Layout.fillWidth: true
 
                         Text{
-                            text: "App 4"
+                            text: "Jobs"
                             anchors.centerIn: parent
                             font.pixelSize: 20
                         }
@@ -274,13 +274,12 @@ Window {
                 }
 
                 property Component green :
-                Rectangle{
-                    color: "green"
+                JobsQueue{
 
-                    MouseArea
-                    {
-                        anchors.fill: parent
-                        onClicked: stack.pop();
-                    }
+//                    MouseArea
+//                    {
+//                        anchors.fill: parent
+//                        onClicked: stack.pop();
+//                    }
                 }
         }
