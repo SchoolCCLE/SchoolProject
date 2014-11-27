@@ -73,7 +73,7 @@ A partir del projecto ya creado se requiere
   Enjoy
   
   
-  Day 3
+Day 3
   Crearemos de nuevo los branch, ahora los llamaremos Day3_TeamX
 
 A partir del projecto ya creado se requiere
@@ -95,4 +95,49 @@ A partir del projecto ya creado se requiere
       El resto de los casos sera ok
       El estado del cartridge, modifica el estado de la impresora.
       E nivel de tinta se representara graficamente.
+  
+Dia 4
+  Crearemos de nuevo el branch a partir del master.
+  Tendremos el codigo de vuestros compañeros de Team 4, con algunos retoques que hice.
+  
+  El proyecto consta de crear un Gestor de jobs. Los jobs son archivos que se envian para imprimir.
+  
+  Se requiere de una pantalla que contenga dos pestañas (Tabs) una con una lista de los jobs que se estan imprimiendo, y otra con una lista de los jobs impresos
+    Un Job Consta de 
+        Int JobId
+        Int Type //Tipo del fichero (pdf,jpg.....)
+        Name     //Nombre del fichero sin extension
+        Tiempo de impresion //El tiempo necesario para imprimirlo, al crearlo sera u numero aleatorio entre 15 y 180 segundos)
+        Estado //Estado del Job(solo puede ser,,, Esperando a imprimir, imprimiendo, impreso)
+        C //Tinta Cyan consumida en mm (Sera un aleatorio entre 100 y 1000
+        M //Tinta Magenta consumida en mm (Sera un aleatorio entre 100 y 1000
+        Y //Tinta Yellow consumida en mm (Sera un aleatorio entre 100 y 1000
+        K //Tinta Black consumida en mm (Sera un aleatorio entre 100 y 1000
+  
+    Tendremos un footer con un boton que mostrara un dialogo, donde podras escoger un fichero del sistema, solo ficheros pdf, jpg, png, tiff.
+    El fichero pasara a la lista de jobs.  
+  
+  En la pestaña de jobs imprimiendose tendremos un boton(PLAY/PAUSE) que detendra los jobs pendientes de imprimir(el job que se esta imprimiendo se terminara de imprimir), o reanudara otra vez la impresora.
+  Solo se permite usar una palabra en el boton, o play o pause. Podeis usar otro tipo de controloles, como RAdio Buttons o lo que considereis mas apropiados.
+  
+  En la pestaña de jobs impresos tendremos un boton (Delete All) que borrara todos los jobs impresos(Solo los impresos), PEro antes nos pedira confirmacion para hacerlo con un dialogo.
+  
+  
+  Las listas contendran por lo menos la siguiente informacion
+    Un icono pequeñito con el estado(un relog si esta esperando a imprimir, una flecha verde de "PLAY" si se esta imprimiendo, Un tick verde si esta impreso
+    El nombre del Job
+    El tiempo del job(si esta esperando a imprimir o si esta impreso) el tiempo restante de impresion(Si se esta imprimiendo)
+    
+    Al pulsar en un Job de la lista se mostrara una pantalla con toda la informacion, y un boton de borrado, que borrara el job, previo dialogo de confirmacion.
+  
+  Pistas:::::::
+  Necesitais una clase Job, con toda la informacion que considereis oportuna
+  Necesitareis refrescar el estado de los jobs, cada segundo esta bien, para que se decremente el tiempo restante de impresion y el estado del job cuando se imprime.
+  Por Favor, Por Favor, Por Favor, Leer la documentaciond e QTimer, y de como se empieza el el timer y cuando se apaga.
+  Y si, vuestros temores son ciertos, cada Job necesita su propio QTimer, y hay que pararlo alguna vez.
+  
+  
+  Otra Pista:::::::: TabView. Ahi lo dejamos.
+  
+  Enjoy.
   
