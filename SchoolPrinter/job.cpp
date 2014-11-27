@@ -2,7 +2,7 @@
 #include <QTime>
 #include <QTimer>
 
-Job::Job(QObject *parent) :
+Job::Job(QString fileURL, QObject *parent) :
     QObject(parent)
 {
     //Un Job Consta de Int JobId
@@ -22,19 +22,27 @@ Job::Job(QObject *parent) :
 
     m_jobId = 0;
 
-//    setFileType();
-//    setFileName();
+    QStringList fileNameListType = fileURL.split('.');
+    setFileType(fileNameListType.last());
 
-    setJobStatus("PRINTING");
+    QStringList fileNameListName = fileURL.split('/');
+    QString fileCompleteName = fileNameListName.last();
+    QStringList fileNameListCompleteName = fileCompleteName.split('.');
+    setFileName(fileNameListCompleteName.first());
+
+    setJobStatus("WAITING TO PRINT");
+
     setPrintingTime(qrand() % ((180 + 1) - 15) + 15);
+
     setCyanInk(qrand() % ((1000 + 1) - 100) + 100);
     setMagentaInk(qrand() % ((1000 + 1) - 100) + 100);
     setYellowInk(qrand() % ((1000 + 1) - 100) + 100);
     setBlackInk(qrand() % ((1000 + 1) - 100) + 100);
-
 
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(updatePrintingTime()));
     timer->start(1000);
 
 }
+
+

@@ -40,7 +40,7 @@ class Job : public QObject
     int m_blackInk;
 
 public:
-    explicit Job(QObject *parent = 0);
+    explicit Job(QString fileURL, QObject *parent = 0);
 private:
     QTimer *timer;
 
