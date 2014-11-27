@@ -1,8 +1,11 @@
-import QtQuick 2.3
+import QtQuick 2.0
 import QtQuick.Controls 1.2
+import QtQuick.Controls.Styles 1.2
+import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.1
 
 Rectangle {
+    property var index:0;
 
     id: jobList;
 
@@ -15,71 +18,81 @@ Rectangle {
     Item {
 
         id: listaDeJobs;
-
         anchors.fill: parent;
 
         //Layout.fillHeight: true;
         //Layout.fillWidth: true;
 
-        ListModel {
+//        ListModel {
 
-            id: modelo;
+//            id: modelo;
+//            ListElement {
+//                    jobId:_myModel.jobs[index].jobId;
+//                    type:_myModel.jobs[index].type;
+//                    name:_myModel.jobs[index].name;
+//                    printingTime:_myModel.jobs[index].printingTime;
+//                    state:_myModel.jobs[index].state;
+//                    cyan:_myModel.jobs[index].cyan;
+//                    magenta:_myModel.jobs[index].magenta;
+//                    yellow:_myModel.jobs[index].yellow;
+//                    black:_myModel.jobs[index].black;
+//                }
 
-            Repeater {
+//        }
 
-                model: _myModel.jobs;
-                delegate: ListElement {
+//        Rectangle {
 
-                    jobId;
-                    type;
-                    name;
-                    printingTime;
-                    state;
-                    cyan;
-                    magenta;
-                    yellow;
-                    black;
-                }
+//            width: 180;
+//            height: 200;
 
-            }
+//            Component {
 
-        }
+//                id: contactDelegate;
 
-        Rectangle {
+//                Item {
+//                    width: 180;
+//                    height: 80;
 
-            width: 180;
-            height: 200;
+//                    Column {
+//                        Text { text: '<b>Job ID: </b> ' + jobId }
+//                        Text { text: '<b>Type: </b> ' + type }
+//                        Text { text: '<b>Name: </b>' + name }
+//                        Text { text: '<b>Printing time: </b> ' + printingTime }
+//                        Text { text: '<b>State: </b> ' + state }
+//                        Text { text: '<b>Cyan: </b>' + cyan }
+//                        Text { text: '<b>Magenta: </b> ' + magenta }
+//                        Text { text: '<b>Yellow: </b> ' + yellow }
+//                        Text { text: '<b>Black: </b>' + black }
+//                    }
+//                }
+//            }
 
             Component {
-
-                id: contactDelegate;
-
+                id: jobDelegate
                 Item {
-                    width: 180;
-                    height: 80;
+                    width: 180; height: 40
 
                     Column {
-                        Text { text: '<b>Job ID: </b> ' + jobId }
-                        Text { text: '<b>Type: </b> ' + type }
-                        Text { text: '<b>Name: </b>' + name }
-                        Text { text: '<b>Printing time: </b> ' + printingTime }
-                        Text { text: '<b>State: </b> ' + state }
-                        Text { text: '<b>Cyan: </b>' + cyan }
-                        Text { text: '<b>Magenta: </b> ' + magenta }
-                        Text { text: '<b>Yellow: </b> ' + yellow }
-                        Text { text: '<b>Black: </b>' + black }
-                    }
+                    Text { text: '<b>Job ID: </b> ' + _myModel.jobs[index].jobId }
+                    Text { text: '<b>Type: </b> ' + _myModel.jobs[index].type }
+                    Text { text: '<b>Name: </b>' + _myModel.jobs[index].name }
+                    Text { text: '<b>Printing time: </b> ' + _myModel.jobs[index].printingTime }
+                    Text { text: '<b>State: </b> ' + _myModel.jobs[index].state }
+                    Text { text: '<b>Cyan: </b>' + _myModel.jobs[index].cyan }
+                    Text { text: '<b>Magenta: </b> ' + _myModel.jobs[index].magenta }
+                    Text { text: '<b>Yellow: </b> ' + _myModel.jobs[index].yellow }
+                    Text { text: '<b>Black: </b>' + _myModel.jobs[index].black }
+                                        }
                 }
             }
 
             ListView {
                 anchors.fill: parent;
-                model: modelo;
-                delegate: contactDelegate;
+                model: _myModel.jobs;
+                delegate:jobDelegate
+                highlight: Rectangle { color: "lightsteelblue"; radius: 5 }
                 focus: true;
             }
         }
-
-    }
 
 }
