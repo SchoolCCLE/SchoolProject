@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QString>
 #include <cartridge.h>
+#include <job.h>
 
 class PrinterEngine : public QObject
 {
@@ -13,6 +14,8 @@ class PrinterEngine : public QObject
     Q_PROPERTY(int printerType READ getPrinterType WRITE setPrinterType NOTIFY printerTypeChanged)//Entero que nos dice el tipo de impresora 1=Alta Capacidad 0=Baja Capacidad
     Q_PROPERTY(int timeStarted READ getTimeStarted WRITE setTimeStarted NOTIFY timeStartedChanged)
     Q_PROPERTY(QList<QObject*> cartridges READ getCartridges WRITE setCartridges NOTIFY cartridgesChanged)
+    Q_PROPERTY(QList<QObject*> jobs READ getJobs WRITE setJobs NOTIFY jobsChanged)
+
     int m_stateNumber;
 
     int m_printerType;
@@ -20,6 +23,8 @@ class PrinterEngine : public QObject
     int m_timeStarted;
 
     QList<QObject*> m_cartridges;
+
+    QList<QObject*> m_jobs;
 
 public:
     explicit PrinterEngine(QObject *parent = 0);
@@ -63,6 +68,10 @@ public:
         return m_cartridges;
     }
 
+    QList<QObject*> getJobs() const { return m_jobs; }
+
+    void createJobs();
+
 signals:
 
     void stateNumberChanged(int arg);
@@ -74,6 +83,8 @@ signals:
     void timeStartedChanged(int arg);
 
     void cartridgesChanged(QList<QObject*> arg);
+
+    void jobsChanged(QList<QObject*> arg);
 
 public slots:
 
@@ -111,6 +122,15 @@ public slots:
 
         m_cartridges = arg;
         emit cartridgesChanged(arg);
+    }
+
+    void setJobs(QList<QObject*> arg)
+    {
+        if (m_jobs == arg)
+            return;
+
+        m_jobs = arg;
+        emit jobsChanged(arg);
     }
 };
 
