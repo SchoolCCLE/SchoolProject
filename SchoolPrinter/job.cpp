@@ -3,11 +3,11 @@
 
 int Job::id = 0;
 
-Job::Job(QString name, JobType type, QObject *parent) : QObject(parent)
+Job::Job(QString name, int type, QObject *parent) : QObject(parent)
 {
     this->jobId = id;
     this->setName(name);
-    this->setType((int) type);
+    this->setType(type);
     this->setStatus("WAITING TO PRINT");
     this->setTime(this->randomNumber(30,330)*1000);
     this->setInkBlack(this->randomNumber(100,1000));
@@ -19,7 +19,7 @@ Job::Job(QString name, JobType type, QObject *parent) : QObject(parent)
     this->printTime = new QTimer(this);
     this->printTime->setInterval(this->time());
 
-    connect(this->printTime, SIGNAL(timeout()), this, SLOT(setStatus("PRINTED")));
+    connect(this->printTime, SIGNAL(timeout()), this, SLOT(endPrint()));
 
     id++;
 }
@@ -102,6 +102,13 @@ void Job::changeTimer()
         emit changeStatusPrinter(2);
     }
 }
+
+void Job::endPrint()
+{
+    this->setStatus("PRINTED");
+    emit endPrinting();
+}
+
 int Job::getInitialTime() const
 {
     return initialTime;

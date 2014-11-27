@@ -18,7 +18,7 @@ public:
     enum JobType {PDF=0, JPG, PNG, TIFF};
     enum JobStatus {PRINTING=0, WAITINGPRINT, PRINTED};
 
-    Job(QString name, JobType type, QObject *parent = 0);
+    Job(QString name, int type, QObject *parent = 0);
     ~Job();
     int type() const;
     QString name() const;
@@ -33,7 +33,6 @@ public:
     void setInkYellow(int value);
     int getInkBlack() const;
     void setInkBlack(int value);
-
     int getInitialTime() const;
     void setInitialTime(int value);
 
@@ -43,6 +42,7 @@ public slots:
     void setTime(int arg);
     void setStatus(QString arg);
     void changeTimer();
+    void endPrint();
 
 signals:
     void typeChanged(int arg);
@@ -50,6 +50,7 @@ signals:
     void timeChanged(int arg);
     void statusChanged(QString arg);
     void changeStatusPrinter(int);
+    void endPrinting();
 
 private:
     static int id;
