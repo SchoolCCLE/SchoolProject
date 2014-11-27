@@ -1,6 +1,14 @@
 #include "job.h"
 
-Job::Job(QObject *parent) : QObject(parent) {}
+Job::Job(QObject *parent) : QObject(parent) {
+
+    changePrintingTime(generateRandomNumber(180 ,15));
+
+    changeCyan(generateRandomNumber(1000, 100) );
+    changeMagenta(generateRandomNumber(1000, 100) );
+    changeYellow(generateRandomNumber(1000, 100) );
+    changeBlack(generateRandomNumber(1000, 100) );
+}
 
 QString Job::convertType() //pdf jpg png tiff
 {

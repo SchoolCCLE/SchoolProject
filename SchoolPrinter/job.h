@@ -64,42 +64,21 @@ public:
 
     void changeJobId( int new_jobId ) { m_jobId = new_jobId; }
 
-    void changType( int new_type ) { m_type = new_type; }
+    void changeType( int new_type ) { m_type = new_type; }
 
     void changeName( QString new_name ) { m_name = new_name; }
 
-    void setPrintingTime( new_time ) { m_printingTime = time; }
+    void changePrintingTime( int new_time ) { m_printingTime = new_time; }
 
-    void setState( QString new_state ) { m_state = new_state; }
+    void changeState( QString new_state ) { m_state = new_state; }
 
-    void setCyan( int new_cyan ) { return m_cyan = new_cyan; }
+    void changeCyan( int new_cyan ) { m_cyan = new_cyan; }
 
-    void setMagenta(int arg)
-    {
-        if (m_magenta == arg)
-            return;
+    void changeMagenta( int new_magenta ) { m_magenta = new_magenta; }
 
-        m_magenta = arg;
-        emit magentaChanged(arg);
-    }
+    void changeYellow( int new_yellow ) { m_yellow = new_yellow; }
 
-    void setYellow(int arg)
-    {
-        if (m_yellow == arg)
-            return;
-
-        m_yellow = arg;
-        emit yellowChanged(arg);
-    }
-
-    void setBlack(int arg)
-    {
-        if (m_black == arg)
-            return;
-
-        m_black = arg;
-        emit blackChanged(arg);
-    }
+    void changeBlack(int new_black ) { m_black = new_black; }
 
 signals:
 
