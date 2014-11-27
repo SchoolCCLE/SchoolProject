@@ -1,4 +1,5 @@
 #include "jobcontroller.h"
+#include <QDebug>
 
 JobController::JobController(QObject *parent) : QObject(parent)
 {
@@ -7,7 +8,7 @@ JobController::JobController(QObject *parent) : QObject(parent)
 
     connect(this,SIGNAL(deleteAll()),this, SLOT(deleteJobs()));
     connect(this,SIGNAL(createJob(QString,int)),this,SLOT(addJob(QString,int)));
-    connect(this,SIGNAL(statusChange(bool)), this, SLOT(changeStatus(bool)));
+    connect(this,SIGNAL(statusChanged(bool)), this, SLOT(changeStatus(bool)));
 
 }
 
@@ -29,7 +30,7 @@ void JobController::addJob(QString name, int type)
 {
     Job* jb = new Job(name,type);
     m_jobs.push_back(jb);
-
+    qDebug() << "add job";
     connect(jb,SIGNAL(endPrinting()), this, SLOT(nextJob()));
 
     emit jobsChanged(m_jobs);

@@ -8,7 +8,6 @@ import JobQml 1.0
 Rectangle {
 
     id: root;
-    signal createJob(string fileName,int fileType);
     anchors.fill: parent;
 
     ColumnLayout
@@ -71,14 +70,17 @@ Rectangle {
                                 text: "Play";
                                 onClicked: {
                                     if(text == "Play"){
+                                        jobs.statusChanged(true);
                                         text = "Pause";
                                     }else{
+                                        jobs.statusChanged(false);
                                         text = "Play";
                                     }
                                 }
                             }
 
                             Rectangle{
+                                id: printingList;
                                 Layout.fillHeight: true;
                                 Layout.fillWidth: true;
                                 color: "transparent";
@@ -90,7 +92,6 @@ Rectangle {
                                     contentHeight: printingList.height
 
                                     ListView{
-                                        id: printingList;
                                         anchors.margins: 2;
                                         // Falta meter el modelo
                                         model: jobs.jobs
@@ -194,19 +195,19 @@ Rectangle {
         title: "Please choose a file"
         nameFilters: [ "Image files (*.jpg *.png *.tiff *.pdf)" ];
         onAccepted: {
-            root.createJob("Job1",0);
+            jobs.createJob("Job1",0);
         }
         onRejected: {
             console.log("Canceled")
         }
     }
 
-
     Component {
         id: printComponent
         Item {
-            width: 180; height: 20
+            width: 500 ; height: 20
             Row {
+                spacing: 5;
                 Text { text: '<b> Tipo:</b> ' + modelData.type }
                 Text { text: '<b> Name:</b> ' + modelData.name }
                 Text { text: '<b> PrintingTime:</b> ' + modelData.time }

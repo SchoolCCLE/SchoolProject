@@ -276,10 +276,12 @@ Window {
                 property Component green :
                 JobsQueue{
 
-//                    MouseArea
-//                    {
-//                        anchors.fill: parent
-//                        onClicked: stack.pop();
-//                    }
+                    MouseArea
+                    {
+                        anchors.top : parent.top;
+                        height: 200;
+                        width: 200;
+                        onClicked: stack.pop();
+                    }
                 }
         }
