@@ -10,5 +10,6 @@
         <file>../images/ok.png</file>
         <file>../images/printer.png</file>
         <file>../images/Warning.png</file>
+        <file>JobsQueue.qml</file>
     </qresource>
 </RCC>
