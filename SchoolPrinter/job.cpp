@@ -3,7 +3,7 @@
 
 Job::Job(QObject *parent) : QObject(parent) {
 
-    changePrintingTime(generateRandomNumber(180 ,15));
+    changePrintingTime(generateRandomNumber(20 ,15));
 
     changeCyan(generateRandomNumber(1000, 100) );
     changeMagenta(generateRandomNumber(1000, 100) );
@@ -12,7 +12,9 @@ Job::Job(QObject *parent) : QObject(parent) {
 
     timer_ = new QTimer(this);
 
-    QObject::connect( timer_, SIGNAL(timeout()), this, SLOT(updateTime()) );
+    QObject::connect( timer_, SIGNAL(timeout()), this , SLOT(updateTime()) );
+
+    timer_->start(1000);
 }
 
 QString Job::convertType() //pdf jpg png tiff
@@ -47,10 +49,16 @@ int Job::generateRandomNumber(int high, int low)
 
 void Job::updateTime()
 {
-    if (m_printingTime == 0)
+    if (m_printingTime == 0) {
+        qDebug() << "Hemos llegado a cero";
         emit timeFinished();
-    else {
+        m_state = "printed";
+        emit stateChanged( "printed" );
+
+        timer_->stop();
+    } else {
         m_printingTime -= 1;
         qDebug() << m_printingTime;
+        emit printingTimeChanged( m_printingTime );
     }
 }

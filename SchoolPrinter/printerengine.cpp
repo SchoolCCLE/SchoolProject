@@ -35,6 +35,7 @@ void PrinterEngine::startJobs()
 
     Job* job2 = new Job();
     job2->changeJobId(2345);
+    job2->changePrintingTime(0);
     job2->changeType(2);
     job2->changeName("Fichero 2");
     job2->changeState("printed");
@@ -47,6 +48,7 @@ void PrinterEngine::startJobs()
 
     Job* job4 = new Job();
     job4->changeJobId(4567);
+    job4->changePrintingTime(0);
     job4->changeType(1);
     job4->changeName("Fichero 4");
     job4->changeState("printed");
@@ -55,7 +57,7 @@ void PrinterEngine::startJobs()
     job5->changeJobId(5678);
     job5->changeType(0);
     job5->changeName("Fichero 5");
-    job5->changeState("printed");
+    job5->changeState("waitting to print");
 
     Job* job6 = new Job();
     job6->changeJobId(6789);
