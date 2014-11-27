@@ -20,11 +20,13 @@ public slots:
     void addJob(QString name, int type);
     void changeStatus(bool status);
     void nextJob();
+    void deleteJobs();
 
 signals:
     void jobsChanged(QList<QObject*> arg);
     Q_INVOKABLE void createJob(QString,int);
     Q_INVOKABLE void statusChanged(bool);
+    Q_INVOKABLE void deleteAll();
 
 private:
     QList<QObject*> m_jobs;
