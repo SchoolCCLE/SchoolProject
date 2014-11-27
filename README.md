@@ -124,9 +124,10 @@ Dia 4
   
   
   Las listas contendran por lo menos la siguiente informacion
-    Un icono pequeñito con el estado(un relog si esta esperando a imprimir, una flecha verde de "PLAY" si se esta imprimiendo, Un tick verde si esta impreso
+    Un icono con el tipo de fichero
     El nombre del Job
     El tiempo del job(si esta esperando a imprimir o si esta impreso) el tiempo restante de impresion(Si se esta imprimiendo)
+    Un icono pequeñito con el estado(un relog si esta esperando a imprimir, una flecha verde de "PLAY" si se esta imprimiendo, Un tick verde si esta impreso
     
     Al pulsar en un Job de la lista se mostrara una pantalla con toda la informacion, y un boton de borrado, que borrara el job, previo dialogo de confirmacion.
   
