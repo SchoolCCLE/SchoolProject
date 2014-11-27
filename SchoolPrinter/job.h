@@ -2,6 +2,7 @@
 #define JOB_H
 
 #include <QObject>
+#include <QTime>
 
 class Job : public QObject
 {
@@ -25,6 +26,8 @@ int m_jobState;
 
 public:
     explicit Job(QObject *parent = 0);
+
+    void generateTime();
 
 int jobType() const
 {

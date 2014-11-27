@@ -11,6 +11,7 @@ Window {
     height: 720
     color:"darkgrey"
 
+
     StackView
     {
         id: stack
@@ -233,7 +234,7 @@ Window {
                         MouseArea
                         {
                             anchors.fill: parent
-                            onClicked: stack.push(green);
+                            onClicked:stack.push(green);
                         }
                     }
                 }
@@ -274,13 +275,13 @@ Window {
                 }
 
                 property Component green :
-                Rectangle{
-                    color: "green"
+                Jobs{
+                    //color: "green"
 
-                    MouseArea
-                    {
-                        anchors.fill: parent
-                        onClicked: stack.pop();
-                    }
+//                    MouseArea
+//                    {
+//                        anchors.fill: parent
+//                       // onClicked: stack.pop();
+//                    }
                 }
         }

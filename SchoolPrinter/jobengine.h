@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QList>
 #include <job.h>
+#include <QTime>
 
 class JobEngine : public QObject
 {
