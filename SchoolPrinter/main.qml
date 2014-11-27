@@ -236,7 +236,7 @@ Window {
                         Layout.fillWidth: true
 
                         Text{
-                            text: "App 4"
+                            text: "Job Manager"
                             anchors.centerIn: parent
                             font.pixelSize: 20
                         }

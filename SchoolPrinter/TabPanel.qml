@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import QtQuick.Controls 1.2
+import QtQuick.Layouts 1.1
 
 Rectangle {
     id: rootTabPanel;
@@ -7,6 +8,8 @@ Rectangle {
     height: 500;
 
     TabView {
+
+        anchors.fill: parent;
         Tab {
             title: "Printing";
             ListView{
@@ -14,7 +17,28 @@ Rectangle {
                 anchors.fill: rootTabPanel;
 
                 model: _jobs.jobs;
-                delegate: JobItem {
+                delegate: RowLayout{
+                    id:rowJob
+
+                    Text{
+                        id:type
+                        text: _jobs.jobs[index].jobType;
+                    }
+
+                    Text{
+                        id: name
+                        text: _jobs.jobs[index].jobName;
+                    }
+
+                    Text{
+                        id:time
+                        text: _jobs.jobs[index].timePrinting;
+                    }
+
+                    Text{
+                        id:status
+                        text: _jobs.jobs[index].jobState;
+                    }
 
                 }
             }

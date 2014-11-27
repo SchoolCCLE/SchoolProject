@@ -19,7 +19,21 @@ Rectangle {
         anchors.right: parent.right;
 
     }
+    Header{
+        id: myHeader
+        anchors.top:parent.top;
+        anchors.right: parent.right;
+        anchors.left: parent.left;
 
+    }
+    TabPanel{
+        id: myTabPanel
+        anchors.top:myHeader.bottom;
+        anchors.right: parent.right;
+        anchors.left: parent.left;
+        anchors.bottom: myFooter.top;
+
+    }
 
 
 
