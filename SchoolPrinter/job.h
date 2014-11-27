@@ -61,6 +61,46 @@ public:
 
     int getBlack() const { return m_black; }
 
+
+    void changeJobId( int new_jobId ) { m_jobId = new_jobId; }
+
+    void changType( int new_type ) { m_type = new_type; }
+
+    void changeName( QString new_name ) { m_name = new_name; }
+
+    void setPrintingTime( new_time ) { m_printingTime = time; }
+
+    void setState( QString new_state ) { m_state = new_state; }
+
+    void setCyan( int new_cyan ) { return m_cyan = new_cyan; }
+
+    void setMagenta(int arg)
+    {
+        if (m_magenta == arg)
+            return;
+
+        m_magenta = arg;
+        emit magentaChanged(arg);
+    }
+
+    void setYellow(int arg)
+    {
+        if (m_yellow == arg)
+            return;
+
+        m_yellow = arg;
+        emit yellowChanged(arg);
+    }
+
+    void setBlack(int arg)
+    {
+        if (m_black == arg)
+            return;
+
+        m_black = arg;
+        emit blackChanged(arg);
+    }
+
 signals:
 
     void jobIdChanged(int arg);

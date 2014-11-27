@@ -29,6 +29,8 @@ class PrinterEngine : public QObject
 public:
     explicit PrinterEngine(QObject *parent = 0);
 
+    void startJobs();
+
     int getStateNumber() const
     {
         return m_stateNumber;
@@ -69,8 +71,6 @@ public:
     }
 
     QList<QObject*> getJobs() const { return m_jobs; }
-
-    void createJobs();
 
 signals:
 
