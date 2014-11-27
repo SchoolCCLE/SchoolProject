@@ -22,6 +22,7 @@ PrinterEngine::PrinterEngine(QObject *parent) :
         m_cartridges.append(new Cartridge("Black",30,200));
     }
 
+    startJobs();
 }
 
 void PrinterEngine::startJobs()
