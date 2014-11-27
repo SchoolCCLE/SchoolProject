@@ -274,12 +274,12 @@ Window {
                 }
 
                 property Component green :
-                Rectangle{
-                    color: "green"
+                TareaManager{
+                    //color: "green"
 
                     MouseArea
                     {
-                        anchors.fill: parent
+                        //anchors.fill: parent
                         onClicked: stack.pop();
                     }
                 }
