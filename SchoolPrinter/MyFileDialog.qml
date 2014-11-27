@@ -4,12 +4,12 @@ import QtQuick.Controls 1.2
 
 
 FileDialog {
-    id: fileDialog
-    signal addJob(string ruta);
+    id: fileDia
+    signal callAddJob(string ruta);
     title: "Please choose a file"
     onAccepted: {
         console.log("You chose: " + fileDialog.fileUrls)
-        fileDialog.addJob(fileDialog.fileUrl);
+        fileDia.callAddJob(fileDialog.fileUrl);
     }
     onRejected: {
         console.log("Canceled")

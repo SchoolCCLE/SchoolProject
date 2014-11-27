@@ -25,9 +25,10 @@ int m_timePrinting;
 int m_jobState;
 
 public:
-    explicit Job(QObject *parent = 0);
+    explicit Job(int type, QString name, QObject *parent = 0);
 
     void generateTime();
+    static int ids_jobs;
 
 int jobType() const
 {

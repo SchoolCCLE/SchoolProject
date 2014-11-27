@@ -3,11 +3,16 @@ import QtQuick.Controls 1.2
 
 Rectangle {
     id: footerRoot;
+    signal callAddJob (string ruta);
     width: 500;
     height: 100;
 
     MyFileDialog{
         id:fileDialog
+        onCallAddJob:
+        {
+            footerRoot.callAddJob(ruta);
+        }
 
     }
 

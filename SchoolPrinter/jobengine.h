@@ -9,11 +9,13 @@
 class JobEngine : public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(QList<QObject*> jobs READ jobs WRITE setJobs NOTIFY jobsChanged)
+
     QList<QObject*> m_jobs;
 
 public:
     explicit JobEngine(QObject *parent = 0);
-    Q_PROPERTY(QList<QObject*> jobs READ jobs WRITE setJobs NOTIFY jobsChanged)
+    QStringList nombreFichero(QString _url);
 
 
 QList<QObject*> jobs() const
@@ -26,6 +28,8 @@ signals:
 void jobsChanged(QList<QObject*> arg);
 
 public slots:
+
+void addNewJob(QString url);
 
 void setJobs(QList<QObject*> arg)
 {

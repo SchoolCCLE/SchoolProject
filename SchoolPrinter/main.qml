@@ -6,10 +6,20 @@ import QtQuick.Controls.Styles 1.2
 import "Printheads"
 
 Window {
+    id: rootWindow
+    signal addJob(string ruta);
     visible: true
     width: 920
     height: 720
     color:"darkgrey"
+
+    Connections{
+        target: fileDia
+        onCallAddJob:{
+            rootWindow.addJob();
+        }
+
+    }
 
 
     StackView
@@ -276,6 +286,11 @@ Window {
 
                 property Component green :
                 Jobs{
+                 onCallAddJob:
+                      {
+                      rootWindow.addJob(ruta);
+                         }
+
                     //color: "green"
 
 //                    MouseArea
@@ -283,5 +298,6 @@ Window {
 //                        anchors.fill: parent
 //                       // onClicked: stack.pop();
 //                    }
+
                 }
         }
