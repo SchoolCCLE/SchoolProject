@@ -33,7 +33,7 @@ Rectangle
                 id:tipo
                 width:40
                 height:40
-                source: "JPG.png"
+                source: "JPG-icon.png"
             }
 
             Label

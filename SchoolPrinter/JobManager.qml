@@ -7,6 +7,7 @@ Rectangle
 {
     width: 800
     height: 600
+    signal addJob(var url);
 
     FileDialog
     {
@@ -15,6 +16,7 @@ Rectangle
         nameFilters: [ "JPG file (*.jpg)", "PNG file (*.png)", "TIFF file (*.tiff)", "PDF file (*.pdf)" ]
         onAccepted:
         {
+            addJob(fileDialog.fileUrls)
             console.log("Fichero: " + fileDialog.fileUrls);
             fileDialog.close();
         }

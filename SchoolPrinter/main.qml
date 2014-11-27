@@ -225,7 +225,7 @@ Window {
                         Layout.fillWidth: true
 
                         Text{
-                            text: "App 4"
+                            text: "Job Manager"
                             anchors.centerIn: parent
                             font.pixelSize: 20
                         }
@@ -274,13 +274,6 @@ Window {
                 }
 
                 property Component green :
-                Rectangle{
-                    color: "green"
+                JobManager {}
 
-                    MouseArea
-                    {
-                        anchors.fill: parent
-                        onClicked: stack.pop();
-                    }
-                }
         }

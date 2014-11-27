@@ -9,10 +9,11 @@
 #include "usercontroller.h"
 #include "showqml.h"
 #include "printerengine.h"
-
+#include "jobcontroller.h"
+#include "job.h"
 #include "Printheads/PrintheadsController.h"
-#include <job.h>
-#include <jobcontroller.h>
+
+
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
@@ -32,9 +33,8 @@ int main(int argc, char *argv[])
     engine.load(QUrl(QStringLiteral("qrc:///main.qml")));
     //QObject::connect(pe, SIGNAL(cartridgeStatusChanged(int)), pe , SLOT(changeState(int)));
 
-    JobController * myJobController = new JobController();
-    //Job * myJob = new Job("/gut/icon.ico.png");
-    //QObject::connect(myJob, SIGNAL(printEnd()), myJobController, SLOT(executeJob()));
+    JobController* jc = new JobController();
+    QObject::connect(engine.rootObjects().at(0),SIGNAL(addJob(QString)),jc,SLOT(addJob(QString)));
 
     return app.exec();
 }
