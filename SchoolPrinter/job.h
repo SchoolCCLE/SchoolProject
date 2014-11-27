@@ -18,7 +18,8 @@ public:
     enum JobType {PDF=0, JPG, PNG, TIFF};
     enum JobStatus {PRINTING=0, WAITINGPRINT, PRINTED};
 
-    Job(QString name, int type, QObject *parent = 0);
+
+    Job(QString name="", int type=0, QObject *parent = 0);
     ~Job();
     int type() const;
     QString name() const;

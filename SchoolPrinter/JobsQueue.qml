@@ -3,9 +3,12 @@ import QtQuick.Layouts 1.1
 import QtQuick.Controls 1.2
 import QtQuick.Dialogs 1.2
 import QtQuick.Window 2.2
+import JobQml 1.0
 
 Rectangle {
 
+    id: root;
+    signal createJob(string fileName,int fileType);
     anchors.fill: parent;
 
     ColumnLayout
@@ -88,11 +91,11 @@ Rectangle {
 
                                     ListView{
                                         id: printingList;
-                                        anchors.fill: parent;
+                                        anchors.margins: 2;
                                         // Falta meter el modelo
-                                        model:  {}
+                                        model: jobs.jobs
                                         delegate: printComponent;
-                                        highlight: Rectangle { color: "lightsteelblue"; radius: 5 }
+                                        highlight: Rectangle { color: "lightsteelblue"; radius: 3 }
                                         focus: true;
                                     }
                                 }
@@ -131,7 +134,6 @@ Rectangle {
 
                                     ListView{
                                         id: printedList;
-                                        anchors.fill: parent;
                                         // Falta meter el modelo
                                         model:  {}
                                         delegate: printComponent;
@@ -192,8 +194,7 @@ Rectangle {
         title: "Please choose a file"
         nameFilters: [ "Image files (*.jpg *.png *.tiff *.pdf)" ];
         onAccepted: {
-            console.log("You chose: " + fileDialog.fileUrls)
-            console.log()
+            root.createJob("Job1",0);
         }
         onRejected: {
             console.log("Canceled")
@@ -204,12 +205,12 @@ Rectangle {
     Component {
         id: printComponent
         Item {
-            width: 180; height: 40
+            width: 180; height: 20
             Row {
-                Text { text: '<b> Tipo:</b> ' + type }
-                Text { text: '<b> Name:</b> ' + name }
-                Text { text: '<b> PrintingTime:</b> ' + printingTime }
-                Text { text: '<b> Status:</b> ' + status }
+                Text { text: '<b> Tipo:</b> ' + modelData.type }
+                Text { text: '<b> Name:</b> ' + modelData.name }
+                Text { text: '<b> PrintingTime:</b> ' + modelData.time }
+                Text { text: '<b> Status:</b> ' + modelData.status }
 
             }
         }

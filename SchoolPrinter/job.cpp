@@ -3,6 +3,7 @@
 
 int Job::id = 0;
 
+
 Job::Job(QString name, int type, QObject *parent) : QObject(parent)
 {
     this->jobId = id;

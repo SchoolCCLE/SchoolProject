@@ -9,6 +9,7 @@
 #include "usercontroller.h"
 #include "showqml.h"
 #include "printerengine.h"
+#include "jobcontroller.h"
 
 #include "Printheads/PrintheadsController.h"
 
@@ -28,6 +29,14 @@ int main(int argc, char *argv[])
     //engine.rootContext()->setContextProperty("printheads", QVariant::fromValue(phController->printheads()));
     //engine.rootContext()->setContextProperty("cartridges_",QVariant::fromValue(phController->printheads()));//NECESITAMOS CLASE CARTRIDGES QUE DEFINA NUMERO DE CARTRIDGES.
     engine.rootContext()->setContextProperty("_myModel",pe);
+
+    //qmlRegisterType(const char *uri, int versionMajor, int versionMinor, const char *qmlName);
+    qmlRegisterType<Job>("JobQml", 1, 0, "Job");
+
+    JobController * jc = new JobController();
+    jc->addJob("Juan",0);
+
+    engine.rootContext()->setContextProperty("jobs", jc);
 
     engine.load(QUrl(QStringLiteral("qrc:///main.qml")));
     //QObject::connect(pe, SIGNAL(cartridgeStatusChanged(int)), pe , SLOT(changeState(int)));
