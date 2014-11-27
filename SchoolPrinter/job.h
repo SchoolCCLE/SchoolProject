@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QTime>
+#include <QTimer>
 
 class Job : public QObject
 {
@@ -39,9 +40,14 @@ class Job : public QObject
 public:
     explicit Job(QObject *parent = 0);
 
+
+    QTimer *timer_;
+
+
     QString convertType();
 
     int generateRandomNumber(int high, int low);
+
 
     int getJobId() const { return m_jobId; }
 
@@ -99,6 +105,8 @@ signals:
     void yellowChanged(int arg);
 
     void blackChanged(int arg);
+
+    void timeFinished();
 
 public slots:
 
@@ -182,15 +190,9 @@ public slots:
         m_black = arg;
         emit blackChanged(arg);
     }
+
+    void updateTime();
 };
 
 #endif // JOB_H
 
-/*
- * Tiempo de impresion //El tiempo necesario para imprimirlo, al crearlo sera u numero aleatorio entre 15 y 180 segundos)
- * Estado //Estado del Job(solo puede ser,,, Esperando a imprimir, imprimiendo, impreso)
- * C //Tinta Cyan consumida en mm (Sera un aleatorio entre 100 y 1000
- * M //Tinta Magenta consumida en mm (Sera un aleatorio entre 100 y 1000
- * Y //Tinta Yellow consumida en mm (Sera un aleatorio entre 100 y 1000
- * K //Tinta Black consumida en mm (Sera un aleatorio entre 100 y 1000
- */

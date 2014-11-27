@@ -1,4 +1,5 @@
 #include "job.h"
+#include "QDebug"
 
 Job::Job(QObject *parent) : QObject(parent) {
 
@@ -8,6 +9,10 @@ Job::Job(QObject *parent) : QObject(parent) {
     changeMagenta(generateRandomNumber(1000, 100) );
     changeYellow(generateRandomNumber(1000, 100) );
     changeBlack(generateRandomNumber(1000, 100) );
+
+    timer_ = new QTimer(this);
+
+    QObject::connect( timer_, SIGNAL(timeout()), this, SLOT(updateTime()) );
 }
 
 QString Job::convertType() //pdf jpg png tiff
@@ -38,4 +43,14 @@ int Job::generateRandomNumber(int high, int low)
     vuelta = qrand() % ( ( (high + 1) - low) + low );
 
     return vuelta;
+}
+
+void Job::updateTime()
+{
+    if (m_printingTime == 0)
+        emit timeFinished();
+    else {
+        m_printingTime -= 1;
+        qDebug() << m_printingTime;
+    }
 }

@@ -64,11 +64,12 @@ void PrinterEngine::startJobs()
     job6->changeState("waitting to print");
 
     m_jobs.append(job1);
-    m_jobs.append(job2);
     m_jobs.append(job3);
-    m_jobs.append(job4);
     m_jobs.append(job5);
     m_jobs.append(job6);
+
+    m_jobsPrinted.append(job2);
+    m_jobsPrinted.append(job4);
 }
 
 void PrinterEngine::changeState(int state)

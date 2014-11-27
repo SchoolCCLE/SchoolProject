@@ -15,6 +15,7 @@ class PrinterEngine : public QObject
     Q_PROPERTY(int timeStarted READ getTimeStarted WRITE setTimeStarted NOTIFY timeStartedChanged)
     Q_PROPERTY(QList<QObject*> cartridges READ getCartridges WRITE setCartridges NOTIFY cartridgesChanged)
     Q_PROPERTY(QList<QObject*> jobs READ getJobs WRITE setJobs NOTIFY jobsChanged)
+    Q_PROPERTY(QList<QObject*> jobsPrinted READ getJobsPrinted WRITE setJobsPrinted NOTIFY jobsPrintedChanged)
 
     int m_stateNumber;
 
@@ -25,6 +26,8 @@ class PrinterEngine : public QObject
     QList<QObject*> m_cartridges;
 
     QList<QObject*> m_jobs;
+
+    QList<QObject*> m_jobsPrinted;
 
 public:
     explicit PrinterEngine(QObject *parent = 0);
@@ -72,6 +75,8 @@ public:
 
     QList<QObject*> getJobs() const { return m_jobs; }
 
+    QList<QObject*> getJobsPrinted() const { return m_jobsPrinted; }
+
 signals:
 
     void stateNumberChanged(int arg);
@@ -85,6 +90,8 @@ signals:
     void cartridgesChanged(QList<QObject*> arg);
 
     void jobsChanged(QList<QObject*> arg);
+
+    void jobsPrintedChanged(QList<QObject*> arg);
 
 public slots:
 
@@ -131,6 +138,15 @@ public slots:
 
         m_jobs = arg;
         emit jobsChanged(arg);
+    }
+
+    void setJobsPrinted(QList<QObject*> arg)
+    {
+        if (m_jobsPrinted == arg)
+            return;
+
+        m_jobsPrinted = arg;
+        emit jobsPrintedChanged(arg);
     }
 };
 
