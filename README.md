@@ -129,6 +129,7 @@ Dia 4
     El tiempo del job(si esta esperando a imprimir o si esta impreso) el tiempo restante de impresion(Si se esta imprimiendo)
     Un icono pequeñito con el estado(un relog si esta esperando a imprimir, una flecha verde de "PLAY" si se esta imprimiendo, Un tick verde si esta impreso
     
+    Si se acaba todo lo anterior entonces
     Al pulsar en un Job de la lista se mostrara una pantalla con toda la informacion, y un boton de borrado, que borrara el job, previo dialogo de confirmacion.
   
   Pistas:::::::
@@ -138,7 +139,7 @@ Dia 4
   Y si, vuestros temores son ciertos, cada Job necesita su propio QTimer, y hay que pararlo alguna vez.
   
   
-  Otra Pista:::::::: TabView. Ahi lo dejamos.
+  Otra Pista:::::::: TabView, ListView y TableView. Ahi lo dejamos.
   
   Enjoy.
   
