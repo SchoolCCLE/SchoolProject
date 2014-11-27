@@ -5,10 +5,11 @@ import QtQuick.Controls 1.2
 
 
 Rectangle {
-    signal buttonOk (int number, string fileName);
     id: tareaManager
+    signal buttonOk (int number, string fileName);
     width: 100
     height: 450
+
     FileDialog
     {
         id:ficheroDialog
@@ -18,6 +19,7 @@ Rectangle {
             tareaManager.buttonOk(3, "asdf");
         }
     }
+
     RowLayout
     {
         width:parent.width
