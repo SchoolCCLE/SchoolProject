@@ -10,6 +10,10 @@ Window {
     width: 920
     height: 720
     color:"darkgrey"
+    id:rootWindow;
+    signal conectador(int n, string f);
+
+
 
     StackView
     {
@@ -282,5 +286,9 @@ Window {
                         //anchors.fill: parent
                         onClicked: stack.pop();
                     }
+                    onButtonOk: {
+                        rootWindow.conectador(number,fileName)
+                    }
                 }
+
         }

@@ -5,76 +5,63 @@ import QtQuick.Controls 1.2
 
 
 Rectangle {
-    id: tareaManager
     signal buttonOk (int number, string fileName);
+    id: tareaManager
     width: 100
     height: 450
 
-    FileDialog
+    TabView
     {
-        id:ficheroDialog
-        nameFilters: [ "Image files (*.jpg *.png *.tiff *.pdf)"]
-        onAccepted:
+        anchors.right: parent.right;
+        anchors.left: parent.left;
+        Tab
         {
-            tareaManager.buttonOk(3, "asdf");
-        }
-    }
-
-    RowLayout
-    {
-        width:parent.width
-        RowLayout
-        {
-            Image
+            title: "Printing"
+            ListView
             {
-                id: fileIcon
-                width:60
-                height: 60
-                fillMode: Image.PreserveAspectFit
-                source:ficheroDialog.fileUrl
+                anchors.fill: parent;
+                model: TareaManagerItem {}
+                    delegate: tareaItem
+                TareaManagerItem
+                {
+
+                }
+            }
+
+        }
+
+        Tab
+        {
+            title: "Printed"
+        }
+
+        FileDialog
+        {
+            id:ficheroDialog
+            nameFilters: [ "Printable files (*.jpg *.png *.tiff *.pdf)"]
+            onAccepted:
+            {
+                tareaManager.buttonOk(3, ficheroDialog.fileUrl);
             }
         }
 
 
-        RowLayout
-        {
-            id: nameRect
-            anchors.top: parent.top;
-            Text {
-                id: name
-                text: qsTr("Name")
-            }
-        }
-        RowLayout
-        {
-            id: pTimeRect;
-
-                Text {
-                id: pTime
-                text: qsTr("Time")
-            }
-        }
-        RowLayout
-        {
-            Text {
-                id: status
-                text: qsTr("Estado")
-            }
-        }
     }
     Button
                 {
 
                     id:boton;
-                    anchors.centerIn: parent
-                    width:200
-                    height:100;
-                    text: "Boton"
+                    anchors.bottom: parent.bottom
+                    anchors.right: parent.right
+                    width:60
+                    height:30;
+                    text: "Print"
                     onClicked:
                     {
                         ficheroDialog.open();
                     }
                 }
+
 
 
 }
