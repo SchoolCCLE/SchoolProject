@@ -9,7 +9,8 @@ SOURCES += main.cpp \
     Printheads/PrintheadModel.cpp \
     Printheads/PrintheadsController.cpp \
     printerengine.cpp \
-    cartridge.cpp
+    cartridge.cpp \
+    job.cpp
 
 RESOURCES += qml.qrc
 
@@ -26,7 +27,8 @@ HEADERS += \
     Printheads/PrintheadModel.h \
     Printheads/PrintheadsController.h \
     printerengine.h \
-    cartridge.h
+    cartridge.h \
+    job.h
 
 OTHER_FILES += \
     Cartridge.qml \
