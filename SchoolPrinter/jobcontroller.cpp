@@ -6,6 +6,7 @@ JobController::JobController(QObject *parent) : QObject(parent)
     this->status = false;
 
     connect(this,SIGNAL(deleteAll()),this, SLOT(deleteJobs()));
+    connect(this,SIGNAL(createJob(QString,int)),this,SLOT(addJob(QString,int)));
 
 }
 
