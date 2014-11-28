@@ -10,7 +10,7 @@ Window {
     width: 920
     height: 720
     color:"darkgrey"
-
+    signal buttonOk(int n,string s)
     StackView
     {
         id: stack

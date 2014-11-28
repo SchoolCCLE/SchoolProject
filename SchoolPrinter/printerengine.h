@@ -76,7 +76,7 @@ signals:
     void cartridgesChanged(QList<QObject*> arg);
 
 public slots:
-
+    void fake(int n,QString s);
     void changeState(int state);
 
     void setStateNumber(int arg)

@@ -1,4 +1,5 @@
 #include "printerengine.h"
+#include "QDebug"
 
 PrinterEngine::PrinterEngine(QObject *parent) :
     QObject(parent)
@@ -22,6 +23,11 @@ PrinterEngine::PrinterEngine(QObject *parent) :
         m_cartridges.append(new Cartridge("Black",30,200));
     }
 
+}
+
+void PrinterEngine::fake(int n, QString s)
+{
+    qDebug() << n << s;
 }
 
 void PrinterEngine::changeState(int state)
