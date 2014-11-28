@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/">
+        <file>JobView.qml</file>
+        <file>jpg.png</file>
+        <file>PDF.png</file>
+        <file>tiff.png</file>
+        <file>JobDelegate.qml</file>
+        <file>CustomTabViewStyle.qml</file>
+    </qresource>
+</RCC>
