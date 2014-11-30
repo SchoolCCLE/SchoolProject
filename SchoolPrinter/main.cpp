@@ -33,10 +33,14 @@ int main(int argc, char *argv[])
     //qmlRegisterType(const char *uri, int versionMajor, int versionMinor, const char *qmlName);
     qmlRegisterType<Job>("JobQml", 1, 0, "Job");
 
-    JobController * jc = new JobController();
+    // ANGEL: Pass the context to job controller to update the context
+    JobController * jc = new JobController(engine.rootContext());
     jc->addJob("Juan",0);
 
     engine.rootContext()->setContextProperty("jobs", jc);
+
+    // ANGEL: Test to add a job and check if job list is updated
+    jc->addJob("Angel",0);
 
     engine.load(QUrl(QStringLiteral("qrc:///main.qml")));
     //QObject::connect(pe, SIGNAL(cartridgeStatusChanged(int)), pe , SLOT(changeState(int)));

@@ -1,15 +1,19 @@
 #include "jobcontroller.h"
 #include <QDebug>
 
-JobController::JobController(QObject *parent) : QObject(parent)
+JobController::JobController(QQmlContext* context, QObject *parent) : QObject(parent)
 {
 
     this->status = false;
 
+    // ANGEL: Store the context
+    this->context_ = context;
+
     connect(this,SIGNAL(deleteAll()),this, SLOT(deleteJobs()));
     connect(this,SIGNAL(createJob(QString,int)),this,SLOT(addJob(QString,int)));
     connect(this,SIGNAL(statusChanged(bool)), this, SLOT(changeStatus(bool)));
-
+    // ANGEL: Connect each job list change to slot to update the context
+    connect(this,SIGNAL(jobsChanged(QList<QObject*>)), this, SLOT(updateContext()), Qt::UniqueConnection);
 }
 
 QList<QObject*> JobController::jobs() const
@@ -71,4 +75,11 @@ void JobController::deleteJobs()
         }
     }
 
+}
+
+void JobController::updateContext()
+{
+    // ANGEL: This will update the context. This is a fix to use your list.
+    // A better solution should be use QAbstractListModel Class http://qt-project.org/doc/qt-5/qabstractlistmodel.html
+    context_->setContextProperty("jobs", this);
 }

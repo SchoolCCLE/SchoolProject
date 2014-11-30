@@ -3,6 +3,8 @@
 
 #include <QObject>
 #include <QList>
+// ANGEL: Include context dependency
+#include <QQmlContext>
 #include <job.h>
 
 class JobController: public QObject
@@ -12,7 +14,8 @@ class JobController: public QObject
     Q_PROPERTY(QList<QObject*> jobs READ jobs WRITE setJobs NOTIFY jobsChanged)
 
 public:
-    JobController(QObject *parent = 0);
+    // ANGEL: Modify the constructor to pass the context
+    JobController(QQmlContext* context, QObject *parent = 0);
     QList<QObject*> jobs() const;
 
 public slots:
@@ -21,6 +24,8 @@ public slots:
     void changeStatus(bool status);
     void nextJob();
     void deleteJobs();
+    // ANGEL: New slot to update context
+    void updateContext();
 
 signals:
     void jobsChanged(QList<QObject*> arg);
@@ -31,6 +36,8 @@ signals:
 private:
     QList<QObject*> m_jobs;
     bool status;
+    // ANGEL: Store the context
+    QQmlContext* context_;
 };
 
 #endif // JOBCONTROLLER_H

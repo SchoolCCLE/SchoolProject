@@ -87,19 +87,26 @@ Rectangle {
                                 border.color: "black";
                                 radius: 3;
 
-                                Flickable {
-                                    contentWidth: printingList.width;
-                                    contentHeight: printingList.height
-
                                     ListView{
+                                        anchors.fill: parent
                                         anchors.margins: 2;
                                         // Falta meter el modelo
                                         model: jobs.jobs
-                                        delegate: printComponent;
-                                        highlight: Rectangle { color: "lightsteelblue"; radius: 3 }
+                                        // ANGEL: To delegate in a component you have to use a loader
+                                        delegate:  Loader {
+                                            // ANGEL: Set the width to parent width
+                                            width: parent.width
+                                            sourceComponent: printComponent;
+
+                                            // ANGEL: Set the model when loaded
+                                            onLoaded: {
+                                                item.model = modelData;
+                                            }
+                                        }
+                                        // ANGEL: Highlight was animated because no width was set
+                                        highlight: Rectangle { width: parent.width; color: "lightsteelblue"; radius: 3 }
                                         focus: true;
                                     }
-                                }
                             }
                         }
                     }
@@ -128,20 +135,16 @@ Rectangle {
                                 color: "transparent";
                                 border.color: "black";
                                 radius: 3;
-
-                                Flickable {
-                                    contentWidth: printedList.width;
-                                    contentHeight: printedList.height
-
                                     ListView{
                                         id: printedList;
+                                        anchors.fill: parent
                                         // Falta meter el modelo
                                         model:  {}
                                         delegate: printComponent;
                                         highlight: Rectangle { color: "lightsteelblue"; radius: 5 }
                                         focus: true;
                                     }
-                                }
+
                             }
                         }
                     }
@@ -205,13 +208,15 @@ Rectangle {
     Component {
         id: printComponent
         Item {
-            width: 500 ; height: 20
+            // ANGEL: Added a variable to store the model
+            property QtObject model;
+            width: parent.width ; height: 20
             Row {
                 spacing: 5;
-                Text { text: '<b> Tipo:</b> ' + modelData.type }
-                Text { text: '<b> Name:</b> ' + modelData.name }
-                Text { text: '<b> PrintingTime:</b> ' + modelData.time }
-                Text { text: '<b> Status:</b> ' + modelData.status }
+                Text { text: '<b> Tipo:</b> ' + model.type }
+                Text { text: '<b> Name:</b> ' + model.name }
+                Text { text: '<b> PrintingTime:</b> ' + model.time }
+                Text { text: '<b> Status:</b> ' + model.status }
 
             }
         }
